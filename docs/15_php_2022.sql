@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 21, 2022 at 03:06 AM
+-- Generation Time: May 22, 2022 at 04:13 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.0.13
 
@@ -31,6 +31,16 @@ CREATE TABLE `categories` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `categories`
+--
+
+INSERT INTO `categories` (`id`, `name`) VALUES
+(1, 'laptop'),
+(2, 'pc'),
+(3, 'mobile'),
+(4, 'tablet');
 
 -- --------------------------------------------------------
 
@@ -99,8 +109,7 @@ CREATE TABLE `products` (
   `image` char(255) NOT NULL,
   `description` text NOT NULL,
   `id_category` int(11) NOT NULL,
-  `id_manufacturer` int(11) NOT NULL,
-  `id_rate` int(11) NOT NULL
+  `id_manufacturer` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -113,7 +122,8 @@ CREATE TABLE `rates` (
   `id` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
   `comment` varchar(255) NOT NULL,
-  `point` float NOT NULL
+  `point` float NOT NULL,
+  `id_product` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -188,8 +198,7 @@ ALTER TABLE `order_product`
 ALTER TABLE `products`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_category` (`id_category`),
-  ADD KEY `id_manufacturer` (`id_manufacturer`),
-  ADD KEY `id_rate` (`id_rate`);
+  ADD KEY `id_manufacturer` (`id_manufacturer`);
 
 --
 -- Indexes for table `rates`
@@ -219,7 +228,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `manufacturers`
@@ -260,8 +269,7 @@ ALTER TABLE `users`
 --
 ALTER TABLE `products`
   ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`id_category`) REFERENCES `categories` (`id`),
-  ADD CONSTRAINT `products_ibfk_2` FOREIGN KEY (`id_manufacturer`) REFERENCES `manufacturers` (`id`),
-  ADD CONSTRAINT `products_ibfk_3` FOREIGN KEY (`id_rate`) REFERENCES `rates` (`id`);
+  ADD CONSTRAINT `products_ibfk_2` FOREIGN KEY (`id_manufacturer`) REFERENCES `manufacturers` (`id`);
 
 --
 -- Constraints for table `users`
