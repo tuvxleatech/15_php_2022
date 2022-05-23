@@ -129,6 +129,21 @@
                             </li>
                         </ul>
                     </li>
+                    <li class="side-nav-item">
+                        <a href="javascript: void(0);" class="side-nav-link">
+                            <i class="uil-store"></i>
+                            <span> Quản lý loại hàng </span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <ul class="side-nav-second-level" aria-expanded="false">
+                            <li>
+                                <a href="../admin/category">Loại hàng</a>
+                            </li>
+                            <li>
+                                <a href="../admin/category/add_category.php">Thêm mới loại hàng </a>
+                            </li>
+                        </ul>
+                    </li>
 
                 </ul>
                 <div class="clearfix"></div>
