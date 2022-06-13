@@ -1,9 +1,3 @@
-<?php
-require('../connect.php');
-$sql = "SELECT * FROM `manufacturers` WHERE 1";
-$result = mysqli_query($connect, $sql);
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -86,7 +80,7 @@ $result = mysqli_query($connect, $sql);
                                 <a href="./manufacturer">Tất cả nhà sản xuất</a>
                             </li>
                             <li>
-                                <a href="./add_manufacturer.php">Thêm nhà sản xuất mới</a>
+                                <a href="./manufacturer/add_manufacturer.php">Thêm nhà sản xuất mới</a>
                             </li>
                         </ul>
                     </li>

@@ -62,10 +62,10 @@
                         </a>
                         <ul class="side-nav-second-level" aria-expanded="false">
                             <li>
-                                <a href="./product">Tất cả sản phẩm</a>
+                                <a href="product/index.php">Tất cả sản phẩm</a>
                             </li>
                             <li>
-                                <a href="./product/add_product.php">Thêm sản phẩm mới</a>
+                                <a href="product/add_product.php">Thêm sản phẩm mới</a>
                             </li>
                         </ul>
                     </li>
@@ -126,21 +126,6 @@
                             </li>
                             <li>
                                 <a href="apps-ecommerce-products-details.html">Products Details</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="side-nav-item">
-                        <a href="javascript: void(0);" class="side-nav-link">
-                            <i class="uil-store"></i>
-                            <span> Quản lý loại hàng </span>
-                            <span class="menu-arrow"></span>
-                        </a>
-                        <ul class="side-nav-second-level" aria-expanded="false">
-                            <li>
-                                <a href="../admin/category">Loại hàng</a>
-                            </li>
-                            <li>
-                                <a href="../admin/category/add_category.php">Thêm mới loại hàng </a>
                             </li>
                         </ul>
                     </li>
