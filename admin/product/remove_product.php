@@ -1,5 +1,5 @@
 <?php
-    include("../connect.php");
+    include("../../connect.php");
     $id = $_POST['id'];
     $sql ="DELETE FROM products WHERE id = '$id'";
     $rs = mysqli_query($connect,$sql);
