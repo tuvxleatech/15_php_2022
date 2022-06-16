@@ -228,27 +228,9 @@
         <div class="container-fluid">
             <div class="furniture-bottom-wrapper">
                 <div class="furniture-login">
-                    <ul>
+                    <ul class="mt-3">
                         <li>Truy cập: <a href="login.php">Đăng nhập</a></li>
                         <li><a href="register.php">Đăng kí</a></li>
-                    </ul>
-                </div>
-                <div class="furniture-search">
-                    <form action="#">
-                        <input placeholder="I am Searching for . . ." type="text" />
-                        <button>
-                            <i class="ti-search"></i>
-                        </button>
-                    </form>
-                </div>
-                <div class="furniture-wishlist">
-                    <ul>
-                        <li>
-                            <a data-toggle="modal" data-target="#exampleCompare" href="#"><i class="ti-reload"></i> Compare</a>
-                        </li>
-                        <li>
-                            <a href="wishlist.html"><i class="ti-heart"></i> Wishlist</a>
-                        </li>
                     </ul>
                 </div>
             </div>

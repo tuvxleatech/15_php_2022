@@ -1,5 +1,5 @@
 <?php
-require('../../connect.php');
+require('../../services/connect.php');
 $id = $_GET['id'];
 $sql = "SELECT * FROM `products` WHERE id = $id";
 $result = mysqli_query($connect, $sql);
@@ -43,14 +43,10 @@ $product = mysqli_fetch_array($result);
   <!-- header start -->
   <?php include('auth/header.php') ?>
   <!-- header end -->
-  <div class="breadcrumb-area pt-205 pb-210" style="background-image: url(assets/img/bg/breadcrumb.jpg)">
+  <div class="breadcrumb-area">
     <div class="container">
       <div class="breadcrumb-content text-center">
-        <h2>Chi tiết sản phẩm</h2>
-        <ul>
-          <li><a href="#">home</a></li>
-          <li>product details</li>
-        </ul>
+        <h2 class="text-dark">Chi tiết sản phẩm</h2>
       </div>
     </div>
   </div>

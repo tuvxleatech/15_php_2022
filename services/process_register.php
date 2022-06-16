@@ -1,5 +1,5 @@
 <?php
-require('admin/connect.php');
+require('connect.php');
 
 $name = $_POST['name'];
 $email = $_POST['email'];

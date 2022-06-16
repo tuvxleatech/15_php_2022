@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 
@@ -35,14 +38,14 @@
   <!-- header start -->
   <?php include('auth/header.php') ?>
   <!-- header end -->
-  <div class="breadcrumb-area pt-205 pb-210" style="background-image: url(assets/img/bg/breadcrumb.jpg)">
+  <div class="breadcrumb-area">
     <div class="container">
       <div class="breadcrumb-content text-center">
-        <h2>Đăng kí</h2>
-        <ul>
-          <li><a href="#">home</a></li>
-          <li>register</li>
-        </ul>
+        <h2 class="text-dark">Đăng kí tài khoản</h2>
+        <?php if (isset($_SESSION['error_register'])) { ?>
+          <p class="text-danger"><?php echo $_SESSION['error_register'];
+                                  unset($_SESSION['error_register']);  ?></p>
+        <?php } ?>
       </div>
     </div>
   </div>
@@ -54,9 +57,10 @@
           <div class="login">
             <div class="login-form-container">
               <div class="login-form">
-                <form action="#" method="post">
-                  <input name="user-email" placeholder="Email" type="email" />
-                  <input type="password" name="user-password" placeholder="Mật khẩu" />
+                <form action="process_register.php" method="post">
+                  <input name="name" placeholder="Tên của bạn" type="text" require />
+                  <input name="email" placeholder="Email" type="email" require />
+                  <input type="password" name="password" placeholder="Mật khẩu" require />
                   <div class="button-box">
                     <button type="submit" class="default-btn floatright">Đăng kí</button>
                   </div>

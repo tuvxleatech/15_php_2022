@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 
@@ -35,14 +38,14 @@
   <!-- header start -->
   <?php include('auth/header.php') ?>
   <!-- header end -->
-  <div class="breadcrumb-area pt-205 pb-210" style="background-image: url(assets/img/bg/breadcrumb.jpg)">
+  <div class="breadcrumb-area">
     <div class="container">
       <div class="breadcrumb-content text-center">
-        <h2>Đăng nhập</h2>
-        <ul>
-          <li><a href="#">home</a></li>
-          <li>login</li>
-        </ul>
+        <h2 class="text-dark">Đăng nhập hệ thống</h2>
+        <?php if (isset($_SESSION['login_failed'])) { ?>
+          <p class="text-danger"><?php echo $_SESSION['login_failed'];
+                                  unset($_SESSION['login_failed']); ?></p>
+        <?php } ?>
       </div>
     </div>
   </div>
@@ -54,9 +57,9 @@
           <div class="login">
             <div class="login-form-container">
               <div class="login-form">
-                <form action="#" method="post">
-                  <input type="text" name="user-name" placeholder="Email" />
-                  <input type="password" name="user-password" placeholder="Mật khẩu" />
+                <form action="process_login.php" method="post">
+                  <input type="email" name="email" placeholder="Email" />
+                  <input type="password" name="password" placeholder="Mật khẩu" />
                   <div class="button-box">
                     <div class="login-toggle-btn">
                       <input type="checkbox" />
