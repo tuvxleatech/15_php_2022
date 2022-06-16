@@ -55,8 +55,8 @@
                 </div>
                 <div class="header-login">
                     <ul>
-                        <li><a href="login.html">Đăng nhập</a></li>
-                        <li><a href="register.html">Đăng ký</a></li>
+                        <li><a href="login.php">Đăng nhập</a></li>
+                        <li><a href="register.php">Đăng ký</a></li>
                     </ul>
                 </div>
                 <div class="header-cart cart-res">
