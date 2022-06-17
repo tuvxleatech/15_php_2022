@@ -1,16 +1,8 @@
-<?php
-session_start();
-$actual_link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-$url_logo = "index.php";
-if (str_contains($actual_link, "profile.php")) {
-    $url_logo = "./index.php";
-}
-?>
 <header>
     <div class="header-area">
         <div class="header-left-sidebar">
             <div class="logo">
-                <a href="<?php echo $url_logo ?>"><img src="assets/img/logo/logo.png" alt=""></a>
+                <a href="index.html"><img src="assets/img/logo/logo.png" alt=""></a>
             </div>
             <div class="main-menu menu-hover">
                 <nav>
@@ -62,16 +54,10 @@ if (str_contains($actual_link, "profile.php")) {
                     </form>
                 </div>
                 <div class="header-login">
-                    <?php if ($_SESSION['user']) { ?>
-                        <ul>
-                            <li><a href="profile.php">Xin chào, <?php echo $_SESSION['user']['name'] ?></a></li>
-                        </ul>
-                    <?php } else { ?>
-                        <ul>
-                            <li><a href="login.php">Đăng nhập</a></li>
-                            <li><a href="register.php">Đăng ký</a></li>
-                        </ul>
-                    <?php } ?>
+                    <ul>
+                        <li><a href="login.php">Đăng nhập</a></li>
+                        <li><a href="register.php">Đăng ký</a></li>
+                    </ul>
                 </div>
                 <div class="header-cart cart-res">
                     <a class="icon-cart" href="#">
@@ -92,43 +78,18 @@ if (str_contains($actual_link, "profile.php")) {
                                 <a href="#"><i class="ti-trash"></i></a>
                             </div>
                         </li>
-                        <li class="single-product-cart">
-                            <div class="cart-img">
-                                <a href="#"><img src="assets/img/cart/2.jpg" alt=""></a>
-                            </div>
-                            <div class="cart-title">
-                                <h5><a href="#"> Bits Headphone</a></h5>
-                                <h6><a href="#">Black</a></h6>
-                                <span>$80.00 x 1</span>
-                            </div>
-                            <div class="cart-delete">
-                                <a href="#"><i class="ti-trash"></i></a>
-                            </div>
-                        </li>
-                        <li class="single-product-cart">
-                            <div class="cart-img">
-                                <a href="#"><img src="assets/img/cart/3.jpg" alt=""></a>
-                            </div>
-                            <div class="cart-title">
-                                <h5><a href="#"> Bits Headphone</a></h5>
-                                <h6><a href="#">Black</a></h6>
-                                <span>$80.00 x 1</span>
-                            </div>
-                            <div class="cart-delete">
-                                <a href="#"><i class="ti-trash"></i></a>
-                            </div>
-                        </li>
+                        
                         <li class="cart-space">
                             <div class="cart-sub">
-                                <h4>Subtotal</h4>
+                                <h4>Tổng</h4>
                             </div>
                             <div class="cart-price">
                                 <h4>$240.00</h4>
                             </div>
                         </li>
                         <li class="cart-btn-wrapper">
-                            <a class="cart-btn btn-hover" href="#">view cart</a>
-                            <a class="cart-btn btn-hover" href="#">checkout</a>
+                            <a class="cart-btn btn-hover" href="showcart.php">giỏ hàng</a>
+                            <a class="cart-btn btn-hover" href="checkout.php">thanh toán</a>
                         </li>
                     </ul>
                 </div>
@@ -198,7 +159,6 @@ if (str_contains($actual_link, "profile.php")) {
                     </nav>
                 </div>
             </div>
-
             <div class="slider-area ">
                 <div class="slider-active owl-carousel">
                     <div class="single-slider single-slider-hm1 bg-img height-100vh" style="background-image: url(assets/img/slider/Slider2.jpg);background-size:60% 60%;background-repeat : no-repeat;background-position:10px;">
