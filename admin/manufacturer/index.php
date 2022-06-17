@@ -1,3 +1,8 @@
+<?php
+require('../../services/connect.php');
+$sql = "SELECT * FROM `manufacturers`";
+$result = mysqli_query($connect, $sql);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
