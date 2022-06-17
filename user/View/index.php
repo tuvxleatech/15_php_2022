@@ -237,7 +237,7 @@ include("../../services/connect.php");
                                                 <a href="product-details.html" style="display:block;">
                                                     <h4><?= $r2['name'] ?></h4>
                                                     <div style=" text-decoration: line-through;"><?= number_format($r2['price']) ?><span style="text-decoration: underline;"><sup>đ</sup></span></div>
-                                                    <div style="color:red;font-weight: bold;font-size: 18px;"><?= number_format($r2['price'] * ($r2['discount'] / 100)) ?><span style="text-decoration: underline;"><sup>đ</sup></span></div>
+                                                    <div style="color:red;font-weight: bold;font-size: 18px;"><?= number_format($r2['price'] - ($r2['price'] * ($r2['discount'] / 100))) ?><span style="text-decoration: underline;"><sup>đ</sup></span></div>
                                                 </a>
                                             </div>
                                         </div>
