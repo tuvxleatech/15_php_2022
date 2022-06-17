@@ -1,5 +1,5 @@
 <?php
-include("../../connect.php");
+include("../../services/connect.php");
 ?>
 <!doctype html>
 <html class="no-js" lang="en">
@@ -7,7 +7,7 @@ include("../../connect.php");
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Fashion - eCommerce HTML5 Template</title>
+    <title>ABC SHOP</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon -->
@@ -30,104 +30,105 @@ include("../../connect.php");
 <body>
     <!-- header start -->
     <?php include('header.php') ?>
-    <div id="content">
-        <?php
-        $cate_id = $_GET['cate_id'];
-        $manu_id = $_GET['manu_id'];
-        $sql =  "SELECT * FROM categories WHERE id =  '$cate_id'";
-        $rs  = mysqli_query($connect, $sql);
-        $r = mysqli_fetch_assoc($rs);
-        if (empty($manu_id)) {
-        ?>
-            <h4><?= $r['name'] ?> / <a href="index.php">TRANG CHỦ</a></h4>
-            <div class="tab-content">
-                <div class="tab-pane active show fade" id="home1" role="tabpanel">
-                    <div class="custom-row">
-                        <?php
-                        $sql3 =  "SELECT * FROM products WHERE id_category =  '$cate_id'";
-                        $rs3  = mysqli_query($connect, $sql3);
-                        while ($r3 = mysqli_fetch_assoc($rs3)) {
-                        ?>
-                            <div class="custom-col-5 custom-col-style mb-65">
-                                <div class="product-wrapper" style="text-align: center;">
-                                    <div class="product-img">
-                                        <a href="#" style="display:block;">
-                                            <img style="width:90%; height:90%;" src="<?= $r3['image'] ?>" alt="">
-                                        </a>
-                                        <span><?= -$r3['discount'] ?>%</span>
-                                        <div class="product-action">
-                                            <a class="animate-left" title="Add To Cart" href="#">
-                                                <i class="pe-7s-cart"></i>
+    <div class="container">
+        <div id="content">
+            <?php
+            $cate_id = $_GET['cate_id'];
+            $manu_id = $_GET['manu_id'];
+            $sql =  "SELECT * FROM categories WHERE id =  '$cate_id'";
+            $rs  = mysqli_query($connect, $sql);
+            $r = mysqli_fetch_assoc($rs);
+            if (empty($manu_id)) {
+            ?>
+                <h4><?= $r['name'] ?> / <a href="index.php">TRANG CHỦ</a></h4>
+                <div class="tab-content">
+                    <div class="tab-pane active show fade" id="home1" role="tabpanel">
+                        <div class="custom-row">
+                            <?php
+                            $sql3 =  "SELECT * FROM products WHERE id_category =  '$cate_id'";
+                            $rs3  = mysqli_query($connect, $sql3);
+                            while ($r3 = mysqli_fetch_assoc($rs3)) {
+                            ?>
+                                <div class="custom-col-5 custom-col-style mb-65">
+                                    <div class="product-wrapper" style="text-align: center;">
+                                        <div class="product-img">
+                                            <a href="#" style="display:block;">
+                                                <img style="width:90%; height:90%;" src="<?= $r3['image'] ?>" alt="">
                                             </a>
-                                            <a class="animate-right" title="Quick View" data-toggle="modal" data-target="#exampleModal" href="#">
-                                                <i class="pe-7s-look"></i>
+                                            <span><?= -$r3['discount'] ?>%</span>
+                                            <div class="product-action">
+                                                <a class="animate-left" title="Add To Cart" href="#">
+                                                    <i class="pe-7s-cart"></i>
+                                                </a>
+                                                <a class="animate-right" title="Quick View" data-toggle="modal" data-target="#exampleModal" href="#">
+                                                    <i class="pe-7s-look"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="product-content">
+                                            <a href="product-details.html" style="display:block;">
+                                                <h4><?= $r3['name'] ?></h4>
+                                                <div style=" text-decoration: line-through;"><?= number_format($r3['price']) ?><span style="text-decoration: underline;"><sup>đ</sup></span></div>
+                                                <div style="color:red;font-weight: bold;font-size: 18px;"><?= number_format($r3['price'] * (1 - $r3['discount'] / 100)) ?><span style="text-decoration: underline;"><sup>đ</sup></span></div>
                                             </a>
                                         </div>
                                     </div>
-                                    <div class="product-content">
-                                        <a href="product-details.html" style="display:block;">
-                                            <h4><?= $r3['name'] ?></h4>
-                                            <div style=" text-decoration: line-through;"><?= number_format($r3['price']) ?><span style="text-decoration: underline;"><sup>đ</sup></span></div>
-                                            <div style="color:red;font-weight: bold;font-size: 18px;"><?= number_format($r3['price'] * (1 - $r3['discount'] / 100)) ?><span style="text-decoration: underline;"><sup>đ</sup></span></div>
-                                        </a>
-                                    </div>
                                 </div>
-                            </div>
-                        <?php
-                        }
-                        ?>
+                            <?php
+                            }
+                            ?>
+                        </div>
                     </div>
                 </div>
-            </div>
-        <?php
-        } else {
-            $sql2 =  "SELECT * FROM manufacturers WHERE id =  '$manu_id'";
-            $rs2  = mysqli_query($connect, $sql2);
-            $r2 = mysqli_fetch_assoc($rs2);
-        ?>
-            <h4><?= $r['name'] ?> : <?= $r2['name'] ?> / <a href="index.php">TRANG CHỦ</a></h4>
-            <div class="tab-content">
-                <div class="tab-pane active show fade" id="home1" role="tabpanel">
-                    <div class="custom-row">
-                        <?php
-                        $sql3 =  "SELECT * FROM products WHERE id_category =  '$cate_id' AND id_manufacturer  = '$manu_id'";
-                        $rs3  = mysqli_query($connect, $sql3);
-                        while ($r3 = mysqli_fetch_assoc($rs3)) {
-                        ?>
-                            <div class="custom-col-5 custom-col-style mb-65">
-                                <div class="product-wrapper" style="text-align: center;">
-                                    <div class="product-img">
-                                        <a href="#" style="display:block;">
-                                            <img style="width:90%; height:90%;" src="<?= $r3['image'] ?>" alt="">
-                                        </a>
-                                        <span><?= -$r3['discount'] ?>%</span>
-                                        <div class="product-action">
-                                            <a class="animate-left" title="Add To Cart" href="#">
-                                                <i class="pe-7s-cart"></i>
+            <?php
+            } else {
+                $sql2 =  "SELECT * FROM manufacturers WHERE id =  '$manu_id'";
+                $rs2  = mysqli_query($connect, $sql2);
+                $r2 = mysqli_fetch_assoc($rs2);
+            ?>
+                <h4><?= $r['name'] ?> : <?= $r2['name'] ?> / <a href="index.php">TRANG CHỦ</a></h4>
+                <div class="tab-content">
+                    <div class="tab-pane active show fade" id="home1" role="tabpanel">
+                        <div class="custom-row">
+                            <?php
+                            $sql3 =  "SELECT * FROM products WHERE id_category =  '$cate_id' AND id_manufacturer  = '$manu_id'";
+                            $rs3  = mysqli_query($connect, $sql3);
+                            while ($r3 = mysqli_fetch_assoc($rs3)) {
+                            ?>
+                                <div class="custom-col-5 custom-col-style mb-65">
+                                    <div class="product-wrapper" style="text-align: center;">
+                                        <div class="product-img">
+                                            <a href="#" style="display:block;">
+                                                <img style="width:90%; height:90%;" src="<?= $r3['image'] ?>" alt="">
                                             </a>
-                                            <a class="animate-right" title="Quick View" data-toggle="modal" data-target="#exampleModal" href="#">
-                                                <i class="pe-7s-look"></i>
+                                            <span><?= -$r3['discount'] ?>%</span>
+                                            <div class="product-action">
+                                                <a class="animate-left" title="Add To Cart" href="#">
+                                                    <i class="pe-7s-cart"></i>
+                                                </a>
+                                                <a class="animate-right" title="Quick View" data-toggle="modal" data-target="#exampleModal" href="#">
+                                                    <i class="pe-7s-look"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="product-content">
+                                            <a href="product-details.html" style="display:block;">
+                                                <h4><?= $r3['name'] ?></h4>
+                                                <div style=" text-decoration: line-through;"><?= number_format($r3['price']) ?><span style="text-decoration: underline;"><sup>đ</sup></span></div>
+                                                <div style="color:red;font-weight: bold;font-size: 18px;"><?= number_format($r3['price'] * (1 - $r3['discount'] / 100)) ?><span style="text-decoration: underline;"><sup>đ</sup></span></div>
                                             </a>
                                         </div>
                                     </div>
-                                    <div class="product-content">
-                                        <a href="product-details.html" style="display:block;">
-                                            <h4><?= $r3['name'] ?></h4>
-                                            <div style=" text-decoration: line-through;"><?= number_format($r3['price']) ?><span style="text-decoration: underline;"><sup>đ</sup></span></div>
-                                            <div style="color:red;font-weight: bold;font-size: 18px;"><?= number_format($r3['price'] * (1 - $r3['discount'] / 100)) ?><span style="text-decoration: underline;"><sup>đ</sup></span></div>
-                                        </a>
-                                    </div>
                                 </div>
-                            </div>
-                    <?php
+                        <?php
+                            }
                         }
-                    }
-                    ?>
+                        ?>
+                        </div>
                     </div>
                 </div>
-            </div>
+        </div>
     </div>
-
     <!-- insta feed end -->
     <footer class="footer-area">
         <div class="footer-top-area bg-img pt-105 pb-65" data-overlay="9">

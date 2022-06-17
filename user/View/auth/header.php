@@ -1,3 +1,8 @@
+<?php
+if (!isset($_SESSION)) {
+    session_start();
+}
+?>
 <header>
     <div class="header-top-furniture wrapper-padding-2 res-header-sm">
         <div class="container-fluid">
@@ -224,16 +229,18 @@
             </div>
         </div>
     </div>
-    <div class="header-bottom-furniture wrapper-padding-2 border-top-3">
-        <div class="container-fluid">
-            <div class="furniture-bottom-wrapper">
-                <div class="furniture-login">
-                    <ul class="mt-3">
-                        <li>Truy cập: <a href="login.php">Đăng nhập</a></li>
-                        <li><a href="register.php">Đăng kí</a></li>
-                    </ul>
+    <?php if (!isset($_SESSION['user'])) { ?>
+        <div class="header-bottom-furniture wrapper-padding-2 border-top-3">
+            <div class="container-fluid">
+                <div class="furniture-bottom-wrapper">
+                    <div class="furniture-login">
+                        <ul class="mt-3">
+                            <li>Truy cập: <a href="login.php">Đăng nhập</a></li>
+                            <li><a href="register.php">Đăng kí</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    <?php } ?>
 </header>

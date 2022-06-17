@@ -1,8 +1,11 @@
+<?php
+session_start(); ?>
+
 <header>
     <div class="header-area">
         <div class="header-left-sidebar">
             <div class="logo">
-                <a href="index.html"><img src="assets/img/logo/logo.png" alt=""></a>
+                <a href="index.php"><img src="assets/img/logo/logo.png" alt=""></a>
             </div>
             <div class="main-menu menu-hover">
                 <nav>
@@ -54,10 +57,17 @@
                     </form>
                 </div>
                 <div class="header-login">
-                    <ul>
-                        <li><a href="login.php">Đăng nhập</a></li>
-                        <li><a href="register.php">Đăng ký</a></li>
-                    </ul>
+                    <?php if (!isset($_SESSION['user'])) { ?>
+                        <ul>
+                            <li><a href="login.php">Đăng nhập</a></li>
+                            <li><a href="register.php">Đăng ký</a></li>
+                        </ul>
+                    <?php } else { ?>
+                        <ul>
+                            <li><a href="profile.php">Xin Chào, <?php echo $_SESSION['user']['name'] ?></a></li>
+                            <li><a href="logout.php">Đăng xuất</a></li>
+                        </ul>
+                    <?php } ?>
                 </div>
                 <div class="header-cart cart-res">
                     <a class="icon-cart" href="#">
@@ -78,7 +88,7 @@
                                 <a href="#"><i class="ti-trash"></i></a>
                             </div>
                         </li>
-                        
+
                         <li class="cart-space">
                             <div class="cart-sub">
                                 <h4>Tổng</h4>

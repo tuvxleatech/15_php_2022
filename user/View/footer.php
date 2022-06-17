@@ -36,7 +36,7 @@
                     <div class="footer-widget mb-40">
                         <h3 class="footer-widget-title">Liên hệ</h3>
                         <div class="footer-newsletter">
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is dummy.</p>
+                            <p>Mọi thông tin chi tiết xin vui lòng liên hệ sđt: <b>0912 345 678</b></p>
                             <div id="mc_embed_signup" class="subscribe-form pr-40">
                                 <form action="http://devitems.us11.list-manage.com/subscribe/post?u=6bbb9b6f5827bd842d9640c82&amp;id=05d85f18ef" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
                                     <div id="mc_embed_signup_scroll" class="mc-form">
