@@ -13,28 +13,38 @@ $related_products = mysqli_query($connect, $sql);
 <html class="no-js" lang="en">
 
 <head>
-  <meta charset="utf-8" />
-  <meta http-equiv="x-ua-compatible" content="ie=edge" />
-  <title>ABC SHOP</title>
-  <meta name="description" content="" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <!-- Favicon -->
-  <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png" />
+  <?php include('components/head.php') ?>
+  <style>
+    .notifyjs-foo-base {
+      opacity: 0.85;
+      width: 200px;
+      background: #F5F5F5;
+      padding: 5px;
+      border-radius: 10px;
+    }
 
-  <!-- all css here -->
-  <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="assets/css/magnific-popup.css" />
-  <link rel="stylesheet" href="assets/css/animate.css" />
-  <link rel="stylesheet" href="assets/css/owl.carousel.min.css" />
-  <link rel="stylesheet" href="assets/css/themify-icons.css" />
-  <link rel="stylesheet" href="assets/css/pe-icon-7-stroke.css" />
-  <link rel="stylesheet" href="assets/css/icofont.css" />
-  <link rel="stylesheet" href="assets/css/meanmenu.min.css" />
-  <link rel="stylesheet" href="assets/css/easyzoom.css" />
-  <link rel="stylesheet" href="assets/css/bundle.css" />
-  <link rel="stylesheet" href="assets/css/style.css" />
-  <link rel="stylesheet" href="assets/css/responsive.css" />
-  <script src="assets/js/vendor/modernizr-2.8.3.min.js"></script>
+    .notifyjs-foo-base .title {
+      width: 100px;
+      float: left;
+      margin: 10px 0 0 10px;
+      text-align: right;
+    }
+
+    .notifyjs-foo-base .buttons {
+      width: 70px;
+      float: right;
+      font-size: 9px;
+      padding: 5px;
+      margin: 2px;
+    }
+
+    .notifyjs-foo-base button {
+      font-size: 9px;
+      padding: 5px;
+      margin: 2px;
+      width: 60px;
+    }
+  </style>
 </head>
 
 <body>
@@ -45,12 +55,14 @@ $related_products = mysqli_query($connect, $sql);
       </p>
     <![endif]-->
   <!-- header start -->
-  <?php include('auth/header.php') ?>
+  <?php include('components/header.php') ?>
   <!-- header end -->
   <div class="breadcrumb-area">
     <div class="container">
       <div class="breadcrumb-content text-center">
         <h2 class="text-dark">Chi tiết sản phẩm</h2>
+        <button class="btn btn-success btn-test"></button>
+
       </div>
     </div>
   </div>
@@ -461,6 +473,15 @@ $related_products = mysqli_query($connect, $sql);
   <script src="assets/js/owl.carousel.min.js"></script>
   <script src="assets/js/plugins.js"></script>
   <script src="assets/js/main.js"></script>
+  <script src="/scripts/js/jquery.min.js"></script>
+  <script src="/bootstrap/js/notify.js"></script>
+  <script>
+    $(document).ready(function() {
+      $(".btn-test").click(function() {
+        $.notify("Hello World");
+      })
+    });
+  </script>
 </body>
 
 </html>

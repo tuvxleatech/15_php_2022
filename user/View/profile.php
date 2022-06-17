@@ -34,7 +34,7 @@
       </p>
     <![endif]-->
     <!-- header start -->
-    <?php include('auth/header.php') ?>
+    <?php include('components/header.php') ?>
     <!-- header end -->
     <div class="about-story pt-95 pb-100">
         <div class="container">

@@ -5,26 +5,7 @@ include("../../services/connect.php");
 <html class="no-js" lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>ABC SHOP</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
-
-    <!-- all css here -->
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/magnific-popup.css">
-    <link rel="stylesheet" href="assets/css/animate.css">
-    <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="assets/css/themify-icons.css">
-    <link rel="stylesheet" href="assets/css/pe-icon-7-stroke.css">
-    <link rel="stylesheet" href="assets/css/meanmenu.min.css">
-    <link rel="stylesheet" href="assets/css/bundle.css">
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/responsive.css">
-    <script src="assets/js/vendor/modernizr-2.8.3.min.js"></script>
+    <?php include('components/head.php') ?>
 </head>
 
 <body>
@@ -83,7 +64,7 @@ include("../../services/connect.php");
                                         </a>
                                         <span><?= -$r['discount'] ?>%</span>
                                         <div class="product-action">
-                                            <a class="animate-left" title="Add To Cart" href="cart.php?id=<?=$r['id']?>&name=<?=$r['name']?>&price=<?=$r['price']*(100-$r['discount'])/100?>">
+                                            <a class="animate-left" title="Add To Cart" href="cart.php?id=<?= $r['id'] ?>&name=<?= $r['name'] ?>&price=<?= $r['price'] * (100 - $r['discount']) / 100 ?>">
                                                 <i class="pe-7s-cart"></i>
                                             </a>
                                             <a class="animate-right" title="Quick View" data-toggle="modal" data-target="#exampleModal" href="#">
@@ -151,7 +132,7 @@ include("../../services/connect.php");
                                                 </a>
                                                 <span><?= -$r2['discount'] ?>%</span>
                                                 <div class="product-action">
-                                                    <a class="animate-left" title="Add Laptop To Cart" href="cart.php?id=<?=$r['id']?>&name=<?=$r['name']?>&price=<?=$r['price']*(100-$r['discount'])*0.01?>">
+                                                    <a class="animate-left" title="Add Laptop To Cart" href="cart.php?id=<?= $r['id'] ?>&name=<?= $r['name'] ?>&price=<?= $r['price'] * (100 - $r['discount']) * 0.01 ?>">
                                                         <i class="pe-7s-cart"></i>
                                                     </a>
                                                     <a class="animate-right" title="Quick View" data-toggle="modal" data-target="#exampleModal" href="#">
@@ -188,7 +169,7 @@ include("../../services/connect.php");
                                                 </a>
                                                 <span><?= -$r2['discount'] ?>%</span>
                                                 <div class="product-action">
-                                                    <a class="animate-left" title="Add To Cart" href="cart.php?id=<?=$r2['id']?>&name=<?=$r2['name']?>&price=<?=$r['price']*(100-$r['discount'])*0.01?>">
+                                                    <a class="animate-left" title="Add To Cart" href="cart.php?id=<?= $r2['id'] ?>&name=<?= $r2['name'] ?>&price=<?= $r['price'] * (100 - $r['discount']) * 0.01 ?>">
                                                         <i class="pe-7s-cart"></i>
                                                     </a>
                                                     <a class="animate-right" title="Quick View" data-toggle="modal" data-target="#exampleModal" href="#">
@@ -225,7 +206,7 @@ include("../../services/connect.php");
                                                 </a>
                                                 <span><?= -$r2['discount'] ?>%</span>
                                                 <div class="product-action">
-                                                    <a class="animate-left" title="Add To Cart" href="cart.php?id=<?=$r2['id']?>&name=<?=$r2['name']?>&price=<?=$r['price']*(100-$r['discount'])*0.01?>">
+                                                    <a class="animate-left" title="Add To Cart" href="cart.php?id=<?= $r2['id'] ?>&name=<?= $r2['name'] ?>&price=<?= $r['price'] * (100 - $r['discount']) * 0.01 ?>">
                                                         <i class="pe-7s-cart"></i>
                                                     </a>
                                                     <a class="animate-right" title="Quick View" data-toggle="modal" data-target="#exampleModal" href="#">
@@ -237,7 +218,7 @@ include("../../services/connect.php");
                                                 <a href="product-details.html" style="display:block;">
                                                     <h4><?= $r2['name'] ?></h4>
                                                     <div style=" text-decoration: line-through;"><?= number_format($r2['price']) ?><span style="text-decoration: underline;"><sup>đ</sup></span></div>
-                                                    <div style="color:red;font-weight: bold;font-size: 18px;"><?= number_format($r2['price'] * ( 1 - $r2['discount'] / 100)) ?><span style="text-decoration: underline;"><sup>đ</sup></span></div>
+                                                    <div style="color:red;font-weight: bold;font-size: 18px;"><?= number_format($r2['price'] * (1 - $r2['discount'] / 100)) ?><span style="text-decoration: underline;"><sup>đ</sup></span></div>
                                                 </a>
                                             </div>
                                         </div>
@@ -262,7 +243,7 @@ include("../../services/connect.php");
                                                 </a>
                                                 <span><?= -$r2['discount'] ?>%</span>
                                                 <div class="product-action">
-                                                    <a class="animate-left" title="Add To Cart" href="cart.php?id=<?=$r2['id']?>&name=<?=$r2['name']?>&price=<?=$r['price']*(100-$r['discount'])*0.01?>">
+                                                    <a class="animate-left" title="Add To Cart" href="cart.php?id=<?= $r2['id'] ?>&name=<?= $r2['name'] ?>&price=<?= $r['price'] * (100 - $r['discount']) * 0.01 ?>">
                                                         <i class="pe-7s-cart"></i>
                                                     </a>
                                                     <a class="animate-right" title="Quick View" data-toggle="modal" data-target="#exampleModal" href="#">
@@ -299,7 +280,7 @@ include("../../services/connect.php");
                                                 </a>
                                                 <span><?= -$r2['discount'] ?>%</span>
                                                 <div class="product-action">
-                                                    <a class="animate-left" title="Add To Cart" href="cart.php?id=<?=$r2['id']?>&name=<?=$r2['name']?>&price=<?=$r['price']*(100-$r['discount'])*0.01?>">
+                                                    <a class="animate-left" title="Add To Cart" href="cart.php?id=<?= $r2['id'] ?>&name=<?= $r2['name'] ?>&price=<?= $r['price'] * (100 - $r['discount']) * 0.01 ?>">
                                                         <i class="pe-7s-cart"></i>
                                                     </a>
                                                     <a class="animate-right" title="Quick View" data-toggle="modal" data-target="#exampleModal" href="#">
@@ -449,7 +430,7 @@ include("../../services/connect.php");
                                     <input type="text" value="02" name="qtybutton" class="cart-plus-minus-box">
                                 </div>
                                 <div class="quickview-btn-cart">
-                                    <a class="btn-hover-black" href="cart.php?id=<?=$r2['id']?>&name=<?=$r2['name']?>&price=<?=$r['price']*(100-$r['discount'])/100?>">add to cart</a>
+                                    <a class="btn-hover-black" href="cart.php?id=<?= $r2['id'] ?>&name=<?= $r2['name'] ?>&price=<?= $r['price'] * (100 - $r['discount']) / 100 ?>">add to cart</a>
                                 </div>
                                 <div class="quickview-btn-wishlist">
                                     <a class="btn-hover" href="#"><i class="pe-7s-like"></i></a>
