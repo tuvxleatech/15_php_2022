@@ -1,5 +1,5 @@
 <?php
-    include("../../connect.php");
+    require("../../services/connect.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -62,87 +62,9 @@
             <div class="h-100" id="left-side-menu-container" data-simplebar>
 
                 <!--- Sidemenu -->
-                <ul class="metismenu side-nav">
-
-                    <li class="side-nav-title side-nav-item">Trang chủ</li>
-
-                    <li class="side-nav-item">
-                        <a href="javascript: void(0);" class="side-nav-link">
-                            <i class="uil-store"></i>
-                            <span> Quản lý sản phẩm </span>
-                            <span class="menu-arrow"></span>
-                        </a>
-                        <ul class="side-nav-second-level" aria-expanded="false">
-                            <li>
-                                <a href="index.php">Tất cả sản phẩm</a>
-                            </li>
-                            <li>
-                                <a href="add_product.php">Thêm sản phẩm mới</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="side-nav-item">
-                        <a href="javascript: void(0);" class="side-nav-link">
-                            <i class="uil-store"></i>
-                            <span> Quản lý nhà sản xuất </span>
-                            <span class="menu-arrow"></span>
-                        </a>
-                        <ul class="side-nav-second-level" aria-expanded="false">
-                            <li>
-                                <a href="./manufacturer">Tất cả nhà sản xuất</a>
-                            </li>
-                            <li>
-                                <a href="./manufacturer/add_manufacturer.php">Thêm nhà sản xuất mới</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="side-nav-item">
-                        <a href="javascript: void(0);" class="side-nav-link">
-                            <i class="uil-store"></i>
-                            <span> Quản lý nhân viên </span>
-                            <span class="menu-arrow"></span>
-                        </a>
-                        <ul class="side-nav-second-level" aria-expanded="false">
-                            <li>
-                                <a href="apps-ecommerce-products.html">Products</a>
-                            </li>
-                            <li>
-                                <a href="apps-ecommerce-products-details.html">Products Details</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="side-nav-item">
-                        <a href="javascript: void(0);" class="side-nav-link">
-                            <i class="uil-store"></i>
-                            <span> Quản lý khách hàng </span>
-                            <span class="menu-arrow"></span>
-                        </a>
-                        <ul class="side-nav-second-level" aria-expanded="false">
-                            <li>
-                                <a href="apps-ecommerce-products.html">Products</a>
-                            </li>
-                            <li>
-                                <a href="apps-ecommerce-products-details.html">Products Details</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="side-nav-item">
-                        <a href="javascript: void(0);" class="side-nav-link">
-                            <i class="uil-store"></i>
-                            <span> Quản lý đơn hàng </span>
-                            <span class="menu-arrow"></span>
-                        </a>
-                        <ul class="side-nav-second-level" aria-expanded="false">
-                            <li>
-                                <a href="apps-ecommerce-products.html">Products</a>
-                            </li>
-                            <li>
-                                <a href="apps-ecommerce-products-details.html">Products Details</a>
-                            </li>
-                        </ul>
-                    </li>
-
-                </ul>
+                <?php
+                include("../../components/sidemenu.php");
+                ?>
                 <div class="clearfix"></div>
 
             </div>
@@ -442,8 +364,8 @@
                                         <th>Giá</th>
                                         <th>Giảm giá</th>
                                         <th>Số Lượng</th>
-                                        <th>Mô Tả</th>
-                                        <th>Hành động</th>
+                                        <th>Sửa</th>
+                                        <th>Xóa</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -463,8 +385,15 @@
                                         <td><?=number_format($r['price'])?></td>
                                         <td><?=$r['discount']?>%</td>
                                         <td><?=$r['quantity']?></td>
-                                        <td><?=$r['description']?></td>
-                                        <td><button onclick="xoa(<?=$r['id']?>)">Xóa</button><a href="edit_product.php?id=<?=$r['id']?>"><button style = "margin-top:2px;">Sửa</button></a></td>
+                                        <td>
+                                            <a href="edit_product.php?id=<?=$r['id']?>">
+                                            <button class="btn btn-warning" style = "margin-top:2px;">Sửa</button>
+                                            </a>
+                                    </td>
+                                        <td>
+                                            <button class="btn btn-danger" onclick="xoa(<?=$r['id']?>)">Xóa</button>
+                                          
+                                    </td>
                                     </tr>
                                 <?php  	
                                     }

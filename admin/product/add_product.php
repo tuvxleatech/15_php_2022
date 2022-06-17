@@ -428,7 +428,7 @@
                                             <td>
                                                 <select name="id_category">
                                                     <?php
-                                                        include("../../connect.php");
+                                                        include("../../services/connect.php");
                                                         $sql = "SELECT * FROM categories";
                                                         $rs = mysqli_query($connect,$sql);                    
                                                         while($r = mysqli_fetch_assoc($rs)){
@@ -445,7 +445,7 @@
                                             <td>
                                                 <select name="id_manufacturer">
                                                     <?php
-                                                        include("../connect.php");
+                                                        include("../../services/connect.php");
                                                         $sql2 = "SELECT * FROM manufacturers";
                                                         $rs2 = mysqli_query($connect,$sql2);                    
                                                         while($r2 = mysqli_fetch_assoc($rs2)){
