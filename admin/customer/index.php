@@ -1,3 +1,8 @@
+<?php
+require("../../services/connect.php");
+$sql = "SELECT `name`, `email`, `password`, `address`, `phone`, `gender`, `image` FROM `users` WHERE id_role = 2";
+$result = mysqli_query($connect, $sql);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -50,7 +55,7 @@
             <div class="h-100" id="left-side-menu-container" data-simplebar>
 
                 <!--- Sidemenu -->
-               <?php include("../../components/sidemenu.php"); ?>
+                <?php include("../../components/sidemenu.php"); ?>
                 <div class="clearfix"></div>
 
             </div>
@@ -389,45 +394,53 @@
                         <div class="col-12">
                             <div class="page-title-box">
                                 <div class="page-title-right">
-
-
                                 </div>
                                 <h4 class="page-title">Tất cả nhà sản xuất</h4>
                             </div>
                         </div>
                     </div>
+
                     <!-- end page title -->
                     <div class="row justify-content-center">
                         <div class="col-xl-10 col-lg-10 ">
                             <table class="table table-striped table-centered mb-0">
                                 <thead>
                                     <tr>
-                                        <th>Mã</th>
-                                        <th>Tên </th>
-                                        <th>Số điện thoại</th>
-                                        <th>Địa chỉ</th>
-                                        <th>Hình ảnh</th>
-                                        <th>Hành động</th>
+                                        <th>STT</th>
+                                        <th>Name </th>
+                                        <th>Email</th>
+                                        <th>Address</th>
+                                        <th>Phone</th>
+                                        <th>Gender</th>
+                                        <th>Avatar</th>
+                                        <th>Repair</th>
+                                        <th>Delete</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach ($result as $each) { ?>
+                                    <?php
+                                    $count = 0;
+                                    foreach ($result as $each) {
+                                        $count++;
+                                        ?>
                                         <tr>
-                                            <td><?php echo $each['id'] ?></td>
+                                            <td><?php echo $count ?></td>
                                             <td><?php echo $each['name'] ?></td>
-                                            <td><?php echo $each['phone'] ?></td>
+                                            <td><?php echo $each['email'] ?></td>
                                             <td><?php echo $each['address'] ?></td>
-
-                                            <td class="table-user">
-                                                <img src="../../assets/images/users/avatar-2.jpg" alt="table-user" class="mr-2 rounded-circle" />
+                                            <td>
+                                                <?php echo $each['phone']?>
                                             </td>
-                                            <td class="table-action">
-                                                <a href="./edit_manufacturer.php?id=<?php echo $each['id'] ?>" class="action-icon text-warning">
-                                                    <i class="mdi mdi-pencil"></i>
-                                                </a>
-                                                <a href="./delete_manufacturer.php?id=<?php echo $each['id'] ?>" class="action-icon text-danger">
-                                                    <i class="mdi mdi-delete"></i>
-                                                </a>
+                                            <td>
+                                                <?php echo $each['gender']?>
+                                            </td><td>
+                                                <?php echo $each['image']?>
+                                            </td>
+                                            <td>
+                                                <a href="#" class="btn btn-outline-warning">Repair</a>
+                                            </td>
+                                            <td>
+                                                <a href="#" class="btn btn-outline-danger">Delete</a>
                                             </td>
                                         </tr>
                                     <?php } ?>
