@@ -44,13 +44,13 @@
         </a>
         <ul class="side-nav-second-level" aria-expanded="false">
             <li>
-                <a href="apps-ecommerce-products.html">Danh sách nhân viên</a>
+                <a href="../../admin/employee">Danh sách nhân viên</a>
             </li>
             <li>
-                <a href="apps-ecommerce-products-details.html">Thêm mới nhân viên</a>
+                <a href="../admin/add_employee.php">Thêm mới nhân viên</a>
             </li>
         </ul>
-    </li>
+    </li>   
     <li class="side-nav-item">
         <a href="javascript: void(0);" class="side-nav-link">
             <i class="uil-store"></i>

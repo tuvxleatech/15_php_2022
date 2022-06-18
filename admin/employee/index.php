@@ -1,9 +1,7 @@
 <?php
 session_start();
 require("../../services/connect.php");
-$sql = "SELECT  users.name, users.email, users.address, products.name, products.image,order_product.quantity,(products.price*(1-products.discount)) 
-as currentPrice, (products.quantity*(products.price*(1-products.discount))) as totalPrice  FROM `products` INNER JOIN order_product ON products.id =
- order_product.id_product INNER JOIN orders ON orders.id = order_product.id_order INNER JOIN users ON users.id = orders.id_user";
+$sql = "SELECT `id`, `name`, `email`, `password`, `address`, `phone`, `gender`, `image` FROM `users` WHERE id_role = 2";
 $result = mysqli_query($connect, $sql);
 ?>
 <!DOCTYPE html>
@@ -11,7 +9,7 @@ $result = mysqli_query($connect, $sql);
 
 <head>
     <meta charset="utf-8" />
-    <title>Danh sách đơn hàng</title>
+    <title>Danh sách khách hàng</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
     <meta content="Coderthemes" name="author" />
@@ -398,7 +396,7 @@ $result = mysqli_query($connect, $sql);
                             <div class="page-title-box">
                                 <div class="page-title-right">
                                 </div>
-                                <h4 class="page-title">Danh sách đơn hàng</h4>
+                                <h4 class="page-title">Danh sách khách hàng</h4>
                             </div>
                         </div>
                     </div>
@@ -412,14 +410,12 @@ $result = mysqli_query($connect, $sql);
                                         <th>STT</th>
                                         <th>Tên khách hàng </th>
                                         <th>Email</th>
-                                        <th>Địa chỉ nhận hàng</th>
-                                        <th>Tên hàng</th>
-                                        <th></th>
-                                        <th>Số lượng</th>
-                                        <th>Đơn giá</th>
-                                        <th>Tổng tiền</th>
-                                        <th>Repair</th>
-                                        <th>Delete</th>
+                                        <th>Địa chỉ</th>
+                                        <th>Số điện thoại</th>
+                                        <th>Giới tính</th>
+                                        <th>Ảnh đại diện</th>
+                                        <th>Sửa</th>
+                                        <th>Xóa</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -430,29 +426,23 @@ $result = mysqli_query($connect, $sql);
                                     ?>
                                         <tr>
                                             <td><?php echo $count ?></td>
-                                            <td><?php echo $each['users.name'] ?></td>
-                                            <td><?php echo $each['users.email'] ?></td>
-                                            <td><?php echo $each['users.address'] ?></td>
+                                            <td><?php echo $each['name'] ?></td>
+                                            <td><?php echo $each['email'] ?></td>
+                                            <td><?php echo $each['address'] ?></td>
                                             <td>
-                                                <?php echo $each['products.name'] ?>
+                                                <?php echo $each['phone'] ?>
                                             </td>
                                             <td>
-                                                <img src=" <?php echo $each['products.image'] ?>" class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt="product">
+                                                <?php echo $each['gender'] ?>
                                             </td>
                                             <td>
-                                                <?php echo $each['products.quantity'] ?>
+                                                <?php echo $each['image'] ?>
                                             </td>
                                             <td>
-                                                <?php echo $each['currentPrice'] ?>
+                                                <a href="./edit_customer.php?id=<?php echo $each['id'] ?>" class="btn btn-outline-warning">Repair</a>
                                             </td>
                                             <td>
-                                                <?php echo $each['totalPrice'] ?>
-                                            </td>
-                                            <td>
-                                                <a href="./edit_customer.php?id=<?php echo $each['id'] ?>" class="btn btn-outline-warning">Sửa</a>
-                                            </td>
-                                            <td>
-                                                <button onclick="remove(<?php echo $each['id'] ?>)" class="btn btn-outline-danger">Xóa</button>
+                                                <button onclick="remove(<?php echo $each['id'] ?>)" class="btn btn-outline-danger">Delete</button>
                                             </td>
                                         </tr>
 
