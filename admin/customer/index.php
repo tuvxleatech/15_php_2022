@@ -408,14 +408,14 @@ $result = mysqli_query($connect, $sql);
                                 <thead>
                                     <tr>
                                         <th>STT</th>
-                                        <th>Name </th>
+                                        <th>Tên khách hàng </th>
                                         <th>Email</th>
-                                        <th>Address</th>
-                                        <th>Phone</th>
-                                        <th>Gender</th>
-                                        <th>Avatar</th>
-                                        <th>Repair</th>
-                                        <th>Delete</th>
+                                        <th>Địa chỉ</th>
+                                        <th>Số điện thoại</th>
+                                        <th>Giới tính</th>
+                                        <th>Ảnh đại diện</th>
+                                        <th>Sửa</th>
+                                        <th>Xóa</th>
                                     </tr>
                                 </thead>
                                 <tbody>
