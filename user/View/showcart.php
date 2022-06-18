@@ -34,8 +34,6 @@ session_start();
                             //lấy giỏ hàng
                             if (isset($_SESSION['cart'])) {
                                 $cart = $_SESSION['cart'];
-                                var_dump($cart);
-                                die();
                             ?>
                                 <table class="table table-hover">
                                     <thead>
@@ -50,19 +48,19 @@ session_start();
                                     </thead>
                                     <tbody>
                                         <?php $count = 0; ?>
-                                        <?php foreach ($cart as $item) : ?>
+                                        <?php var_dump($cart) ?>
+                                        <?php foreach ($cart as $id => $item) : ?>
                                             <?php
                                             $count++;
                                             ?>
                                             <tr>
                                                 <td><?= $count ?></td>
                                                 <td><?= $item['name'] ?></td>
-                                                <td><img src="<?= $item['image'] ?>" class="cart-image" alt=""></td>
+                                                <td><img src="<?php $item['image'] ?>" class="cart-image" alt=""></td>
                                                 <td class="product-quantity">
-                                                    <form action="update_cart.php" id="suasl" method="post">
-                                                        <input type="number" value="<?= $item['quantity'] ?>" min="0" id="newamount" onchange="suasoluong($item['id'])">
-                                                        <input type="hidden" id="id" name="id">
-                                                    </form>
+                                                    <button class="btn btn-secondary btn-update-quantity" data-id="<?php echo $id ?>" data-type="0">-</button>
+                                                    <span class="span-quantity"><?php echo $item['quantity'] ?></span>
+                                                    <button class="btn btn-secondary btn-update-quantity" data-id="<?php echo $id ?>" data-type="1">+</button>
                                                 </td>
                                                 <td><?= number_format($item['price']) ?></td>
                                                 <td><?= number_format($item['quantity'] * $item['price']) ?></td>
@@ -226,18 +224,44 @@ session_start();
 
 
     <!-- all js here -->
-    <script src="assets/js/vendor/jquery-1.12.0.min.js"></script>
-    <script src="assets/js/popper.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-    <script src="assets/js/jquery.magnific-popup.min.js"></script>
-    <script src="assets/js/isotope.pkgd.min.js"></script>
-    <script src="assets/js/imagesloaded.pkgd.min.js"></script>
-    <script src="assets/js/jquery.counterup.min.js"></script>
-    <script src="assets/js/waypoints.min.js"></script>
-    <script src="assets/js/ajax-mail.js"></script>
-    <script src="assets/js/owl.carousel.min.js"></script>
-    <script src="assets/js/plugins.js"></script>
-    <script src="assets/js/main.js"></script>
+    <?php include('components/link_footer.php') ?>
+    <script>
+        $(document).ready(function() {
+
+            $(".btn-update-quantity").click(function() {
+                const btn = $(this);
+                let id = $(this).data('id');
+                let type = $(this).data('type');
+                $.ajax({
+                        url: 'update_quantity.php',
+                        type: 'GET',
+                        data: {
+                            id,
+                            type
+                        },
+                    })
+                    .done(function() {
+                        let parent_tr = btn.parents('tr');
+                        let price = parseInt(parent_tr.find(".span-price").text().replace(/,/g, ''));
+                        let quantity = parent_tr.find(".span-quantity").text();
+
+                        if (type === 1) {
+                            quantity++;
+                        } else {
+                            quantity--;
+                        }
+                        if (quantity === 0) {
+                            parent_tr.remove()
+                        } else {
+                            parent_tr.find(".span-quantity").text(quantity);
+                            let sum = price * quantity;
+                            parent_tr.find('.span-sum').text(sum.format());
+                        }
+                        getTotal()
+                    })
+            });
+        })
+    </script>
 </body>
 
 </html>

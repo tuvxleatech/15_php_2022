@@ -1,7 +1,6 @@
 <?php
 try {
     session_start();
-    unset($_SESSION['cart']);
     if (empty($_SESSION['user'])) {
         header('location:login.php');
         exit();
@@ -35,6 +34,3 @@ try {
 } catch (Throwable $e) {
     echo $e->getMessage();
 }
-
-
-die();

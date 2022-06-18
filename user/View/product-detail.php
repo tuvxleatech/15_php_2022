@@ -134,14 +134,8 @@ $related_products = mysqli_query($connect, $sql);
             </p>
 
             <div class="quickview-plus-minus">
-              <div class="cart-plus-minus">
-                <input type="text" value="02" name="qtybutton" class="cart-plus-minus-box" />
-              </div>
               <div class="quickview-btn-cart">
-                <a class="btn-hover-black" href="#">Thêm vào giỏ hàng</a>
-              </div>
-              <div class="quickview-btn-wishlist">
-                <a class="btn-hover" href="#"><i class="pe-7s-like"></i></a>
+                <a class="btn-add-to-cart btn-hover-black" href="#" data-id="<?php echo $product['id'] ?>">Thêm vào giỏ hàng</a>
               </div>
             </div>
             <div class="product-details-cati-tag mt-35">
