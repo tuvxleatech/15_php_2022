@@ -1,5 +1,7 @@
 <?php
-    require("../../services/connect.php");
+require("../../services/connect.php");
+session_start();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,16 +23,9 @@
     <link href="../../assets/css/icons.min.css" rel="stylesheet" type="text/css" />
     <link href="../../assets/css/app-creative.min.css" rel="stylesheet" type="text/css" id="light-style" />
     <link href="../../assets/css/app-creative-dark.min.css" rel="stylesheet" type="text/css" id="dark-style" />
-    <script type="text/javascript">
-    function xoa(id){
-      var cf = confirm("Bạn có thực sự muốn xóa không!");
-      if(cf){
-        var f = document.getElementById('xoa');
-        document.getElementById('id').value = id;
-        f.submit();
-      }
-    }
-  </script>
+    <script script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js">
+    </script>
+
 </head>
 
 <body class="loading" data-layout-config='{"leftSideBarTheme":"dark","layoutBoxed":false, "leftSidebarCondensed":false, "leftSidebarScrollable":false,"darkMode":false, "showRightSidebarOnStart": true}'>
@@ -329,7 +324,7 @@
                     <div class="app-search dropdown d-none d-lg-block">
                         <form action="timkiem.php" method="post">
                             <div class="input-group">
-                                <input type="text" name = "txtSearch" class="form-control dropdown-toggle" placeholder="Tìm kiếm..." id="top-search">
+                                <input type="text" name="txtSearch" class="form-control dropdown-toggle" placeholder="Tìm kiếm..." id="top-search">
                                 <span class="mdi mdi-magnify search-icon"></span>
                                 <div class="input-group-append">
                                     <button class="btn btn-primary" type="submit">Tìm kiếm</button>
@@ -353,58 +348,92 @@
                     </div>
                     <!-- end page title -->
                     <div class="row justify-content-center">
-                            <table class="table table-striped table-centered mb-0" style = "text-align:center">
-                                <thead>
-                                    <tr>
-                                        <th>STT</th>
-                                        <th>Mã Danh Mục</th>          
-                                        <th>Mã Nhà Sản Xuất</th>
-                                        <th>Tên Sản Phẩm</th>
-                                        <th>Hình Ảnh</th>
-                                        <th>Giá</th>
-                                        <th>Giảm giá</th>
-                                        <th>Số Lượng</th>
-                                        <th>Sửa</th>
-                                        <th>Xóa</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
+                        <table class="table table-striped table-centered mb-0" style="text-align:center">
+                            <thead>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Mã Danh Mục</th>
+                                    <th>Mã Nhà Sản Xuất</th>
+                                    <th>Tên Sản Phẩm</th>
+                                    <th>Hình Ảnh</th>
+                                    <th>Giá</th>
+                                    <th>Giảm giá</th>
+                                    <th>Số Lượng</th>
+                                    <th>Sửa</th>
+                                    <th>Xóa</th>
+                                </tr>
+                            </thead>
+                            <tbody>
                                 <?php
-		                            $sql = "SELECT * FROM products";
-		                            $rs = mysqli_query($connect,$sql);
-		                            $count = 0;
-		                            while($r = mysqli_fetch_assoc($rs)){
-		                                $count++;
-	                            ?>
-                                    <tr>
-                                        <td><?=$count?></td>			
-                                        <td><?=$r['id_category']?></td>
-                                        <td><?=$r['id_manufacturer']?></td>
-                                        <td><?=$r['name']?></td>
-                                        <td><img src="<?=$r['image']?>" alt="" style="width: 100px"></td>
-                                        <td><?=number_format($r['price'])?></td>
-                                        <td><?=$r['discount']?>%</td>
-                                        <td><?=$r['quantity']?></td>
-                                        <td>
-                                            <a href="edit_product.php?id=<?=$r['id']?>">
-                                            <button class="btn btn-warning" style = "margin-top:2px;">Sửa</button>
-                                            </a>
-                                    </td>
-                                        <td>
-                                            <button class="btn btn-danger" onclick="xoa(<?=$r['id']?>)">Xóa</button>
-                                          
-                                    </td>
-                                    </tr>
-                                <?php  	
-                                    }
+                                $sql = "SELECT * FROM products";
+                                $rs = mysqli_query($connect, $sql);
+                                $count = 0;
+                                while ($r = mysqli_fetch_assoc($rs)) {
+                                    $count++;
                                 ?>
-                                </tbody>
-                            </table>
-                            <form action="remove_product.php" method="post" id="xoa">
-                                <input type="hidden" id="id" name="id">
-                            </form>
-                    </div>
+                                    <tr>
+                                        <td><?= $count ?></td>
+                                        <td><?= $r['id_category'] ?></td>
+                                        <td><?= $r['id_manufacturer'] ?></td>
+                                        <td><?= $r['name'] ?></td>
+                                        <td><img src="<?= $r['image'] ?>" alt="" style="width: 100px"></td>
+                                        <td><?= number_format($r['price']) ?></td>
+                                        <td><?= $r['discount'] ?>%</td>
+                                        <td><?= $r['quantity'] ?></td>
+                                        <td>
+                                            <a href="edit_product.php?id=<?= $r['id'] ?>">
+                                                <button class="btn btn-warning" style="margin-top:2px;">Sửa</button>
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-danger" onclick="xoa(<?= $r['id'] ?>)">Xóa</button>
 
+                                        </td>
+                                    </tr>
+                                <?php
+                                }
+                                ?>
+                            </tbody>
+
+                        </table>
+                        <form action="remove_product.php" method="post" id="xoa">
+                            <input type="hidden" id="id" name="id">
+                        </form>
+                    </div>
+                    <script>
+                        function xoa(id) {
+                            document.getElementById('id').value = id;
+                            var form = document.getElementById('xoa');
+                            swal({
+                                    title: "Bạn chắc chắn?",
+                                    text: "Khi đã xóa, bạn sẽ không thể lấy lại được bản ghi!",
+                                    icon: "warning",
+                                    buttons: true,
+                                    dangerMode: true,
+                                })
+                                .then((willDelete) => {
+                                    if (willDelete) {
+                                        form.submit();
+                                        swal("Bạn đã xóa một bản ghi! " + id, {
+                                            icon: "success",
+                                        });
+
+                                    } else {
+                                        swal("Bản ghi an toàn!");
+                                    }
+                                });
+                        }
+
+                        <?php
+                        if ($_SESSION['success'] == "Thêm thành công") { ?>
+                            swal("Success", "Thêm sản phẩm thành công", "success");
+                        <?php
+                        } else if ($_SESSION['success'] == "Sửa thành công") {
+                        ?>
+                            swal("Success", "Sửa sản phẩm thành công", "success");
+
+                        <?php } ?>
+                    </script>
                 </div>
                 <!-- container -->
 
