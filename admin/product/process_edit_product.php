@@ -1,5 +1,6 @@
 <?php
-    include("../../connect.php");
+    include("../../services/connect.php");
+    session_start();
     $id = $_POST['id'];
     $tenSP = $_POST['name'];
     $gia =$_POST['price'];
@@ -19,8 +20,7 @@
           WHERE id = $id";
 	$rs2 = mysqli_query($connect,$sql);
     if($rs2){
-        echo '<script>alert("Sửa thành công!");
-        location.href = "http://localhost/15_php_2022-main/admin/product/index.php";
-        </script>';  
+        $_SESSION['success'] = "Sửa thành công";
+        header("location:../../admin/product");
     }  
 ?>

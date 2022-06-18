@@ -29,10 +29,10 @@
         </a>
         <ul class="side-nav-second-level" aria-expanded="false">
             <li>
-                <a href="../admin/manufacturer">Tất cả nhà sản xuất</a>
+                <a href="../../admin/manufacturer">Tất cả nhà sản xuất</a>
             </li>
             <li>
-                <a href="../admin/manufacturer/add_manufacturer.php">Thêm nhà sản xuất mới</a>
+                <a href="../../admin/manufacturer/add_manufacturer.php">Thêm nhà sản xuất mới</a>
             </li>
         </ul>
     </li>
@@ -59,7 +59,7 @@
         </a>
         <ul class="side-nav-second-level" aria-expanded="false">
             <li>
-                <a href="../customer">Danh sách khách hàng</a>
+                <a href="../../admin/customer">Danh sách khách hàng</a>
             </li>
         </ul>
     </li>

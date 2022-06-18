@@ -1,5 +1,5 @@
 <?php
-    include("../../connect.php");
+    include("../../services/connect.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
