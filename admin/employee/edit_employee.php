@@ -1,15 +1,22 @@
 <?php
+session_start();
 require("../../services/connect.php");
-$sql = "SELECT id, `name`, `phone`, `address`, `image` FROM `manufacturers`";
-$result = mysqli_query($connect, $sql);
-?>
+if (isset($_GET["id"])) {
+    $id = $_GET["id"];
+    $sql = "SELECT `name`, `phone`, `address`, `image` FROM `manufacturers` WHERE id = $id";
+    $a = mysqli_query($connect, $sql);
+    $rs = mysqli_fetch_assoc($a);
 
+}
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8" />
-    <title>Danh sách nhà sản xuất</title>
+    <title>Tất cả nhà sản xuất</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
     <meta content="Coderthemes" name="author" />
@@ -26,7 +33,6 @@ $result = mysqli_query($connect, $sql);
     <link href="../../assets/css/app-creative-dark.min.css" rel="stylesheet" type="text/css" id="dark-style" />
 
 </head>
-
 
 <body class="loading" data-layout-config='{"leftSideBarTheme":"dark","layoutBoxed":false, "leftSidebarCondensed":false, "leftSidebarScrollable":false,"darkMode":false, "showRightSidebarOnStart": true}'>
     <!-- Begin page -->
@@ -320,9 +326,9 @@ $result = mysqli_query($connect, $sql);
                         <i class="mdi mdi-menu"></i>
                     </button>
                     <div class="app-search dropdown d-none d-lg-block">
-                        <form>
+                        <form action="timkiem.php" method="post">
                             <div class="input-group">
-                                <input type="text" class="form-control dropdown-toggle" placeholder="Tìm kiếm..." id="top-search">
+                                <input type="text" name="txtSearch" class="form-control dropdown-toggle" placeholder="Tìm kiếm..." id="top-search">
                                 <span class="mdi mdi-magnify search-icon"></span>
                                 <div class="input-group-append">
                                     <button class="btn btn-primary" type="submit">Tìm kiếm</button>
@@ -330,60 +336,6 @@ $result = mysqli_query($connect, $sql);
                             </div>
 
                         </form>
-
-                        <div class="dropdown-menu dropdown-menu-animated dropdown-lg" id="search-dropdown">
-                            <!-- item-->
-                            <div class="dropdown-header noti-title">
-                                <h5 class="text-overflow mb-2">Found <span class="text-danger">17</span> results</h5>
-                            </div>
-
-                            <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                <i class="uil-notes font-16 mr-1"></i>
-                                <span>Analytics Report</span>
-                            </a>
-
-                            <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                <i class="uil-life-ring font-16 mr-1"></i>
-                                <span>How can I help you?</span>
-                            </a>
-
-                            <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                <i class="uil-cog font-16 mr-1"></i>
-                                <span>User profile settings</span>
-                            </a>
-
-                            <!-- item-->
-                            <div class="dropdown-header noti-title">
-                                <h6 class="text-overflow mb-2 text-uppercase">Users</h6>
-                            </div>
-
-                            <div class="notification-list">
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <div class="media">
-                                        <img class="d-flex mr-2 rounded-circle" src="../assets/images/users/avatar-2.jpg" alt="Generic placeholder image" height="32">
-                                        <div class="media-body">
-                                            <h5 class="m-0 font-14">Erwin Brown</h5>
-                                            <span class="font-12 mb-0">UI Designer</span>
-                                        </div>
-                                    </div>
-                                </a>
-
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <div class="media">
-                                        <img class="d-flex mr-2 rounded-circle" src="../assets/images/users/avatar-5.jpg" alt="Generic placeholder image" height="32">
-                                        <div class="media-body">
-                                            <h5 class="m-0 font-14">Jacob Deo</h5>
-                                            <span class="font-12 mb-0">Developer</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
                     </div>
                 </div>
                 <!-- end Topbar -->
@@ -395,56 +347,56 @@ $result = mysqli_query($connect, $sql);
                     <div class="row">
                         <div class="col-12">
                             <div class="page-title-box">
-                                <div class="page-title-right">
-
-
-                                </div>
-                                <h4 class="page-title">Tất cả nhà sản xuất</h4>
+                                <h4 class="page-title">Sửa thông tin nhân viên</h4>
                             </div>
                         </div>
                     </div>
                     <!-- end page title -->
                     <div class="row justify-content-center">
                         <div class="col-xl-10 col-lg-10 ">
-                            <table class="table table-striped table-centered mb-0">
-                                <thead>
+
+                            <form action="../employee/edit_process_employee.php" method="post" >
+                                <table class="table table-striped table-centered mb-0">
+                                    
+                                <tr>
+                                    <input type="hidden" name="id" value="<?php echo $id ?>">
+                                </tr>
                                     <tr>
-                                        <th>Mã</th>
-                                        <th>Tên </th>
-                                        <th>Số điện thoại</th>
-                                        <th>Địa chỉ</th>
-                                        <th>Hình ảnh</th>
-                                        <th>Hành động</th>
+                                        <th>Tên Nhân viên</th>
+                                        <td>
+                                            <input type="text" name="name" value="<?php echo $rs['name']?>">
+                                        </td>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    $count = 0;
-                                    foreach ($result as $each) {
-                                        $count++; ?>
-                                        <tr>
-                                            <td><?php echo $count ?></td>
-                                            <td><?php echo $each['name'] ?></td>
-                                            <td><?php echo $each['phone'] ?></td>
-                                            <td><?php echo $each['address'] ?></td>
+                                    <tr>
+                                        <th>Số điện thoại</th>
+                                        <td><input type="text" name="phone" value="<?= $rs['phone'] ?>"></td>
+                                    </tr>
 
-                                            <td class="table-user">
-                                                <img src="../../assets/images/users/avatar-2.jpg" alt="table-user" class="mr-2 rounded-circle" />
-                                            </td>
-                                            <td class="table-action">
-                                               <a href="../../admin/employee/edit_employee.php?<?php echo $each['id'] ?>" class="btn btn-outline-warning">Sửa</a>
-                                               
-                                                <button class="btn btn-outline-danger">Xóa</button>
-                                            </td>
-                                        </tr>
-                                    <?php } ?>
+                                    <tr>
+                                        <th>Địa chỉ</th>
+                                        <td><input type="text" name="address" value="<?= $rs['address'] ?>"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Ảnh đại diện</th>
 
-                                </tbody>
-                            </table>
+                                    <td>
+                                        <img src="<?php echo $rs['image'] ?>" class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt="ảnh đại diện">    
+                                    </td>
+
+                                    </tr>
+                                   
+                                    <tr>
+                                        <th>Hành động</th>
+                                        <td><button type="submit" name="submit" class="btn btn-outline-success">Cập nhật</button></td>
+                                    </tr>
+                                </table>
+                            </form>
                         </div>
                     </div>
 
                 </div>
+
+               
                 <!-- container -->
 
             </div>

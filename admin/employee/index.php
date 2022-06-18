@@ -1,7 +1,7 @@
 <?php
 session_start();
 require("../../services/connect.php");
-$sql = "SELECT `id`, `name`, `email`, `password`, `address`, `phone`, `gender`, `image` FROM `users` WHERE id_role = 2";
+$sql = "SELECT `id`, `name`, `email`, `password`, `address`, `phone`, `gender`, `image` FROM `users` WHERE id_role = 1";
 $result = mysqli_query($connect, $sql);
 ?>
 <!DOCTYPE html>
@@ -436,13 +436,13 @@ $result = mysqli_query($connect, $sql);
                                                 <?php echo $each['gender'] ?>
                                             </td>
                                             <td>
-                                                <?php echo $each['image'] ?>
+                                                <img src="<?php echo $each['image'] ?>" class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt="anh">
                                             </td>
                                             <td>
-                                                <a href="./edit_customer.php?id=<?php echo $each['id'] ?>" class="btn btn-outline-warning">Repair</a>
+                                                <a href="./edit_employee.php?id=<?php echo $each['id'] ?>" class="btn btn-outline-warning">Sửa</a>
                                             </td>
                                             <td>
-                                                <button onclick="remove(<?php echo $each['id'] ?>)" class="btn btn-outline-danger">Delete</button>
+                                                <button onclick="remove(<?php echo $each['id'] ?>)" class="btn btn-outline-danger">Xóa</button>
                                             </td>
                                         </tr>
 
