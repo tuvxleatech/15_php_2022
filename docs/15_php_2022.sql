@@ -2,10 +2,10 @@
 -- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jun 16, 2022 at 04:18 PM
--- Server version: 10.4.22-MariaDB
--- PHP Version: 8.0.13
+-- Máy chủ: 127.0.0.1
+-- Thời gian đã tạo: Th6 18, 2022 lúc 11:41 AM
+-- Phiên bản máy phục vụ: 10.4.22-MariaDB
+-- Phiên bản PHP: 8.1.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `15_php_2022`
+-- Cơ sở dữ liệu: `15_php_2022`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `categories`
+-- Cấu trúc bảng cho bảng `categories`
 --
 
 CREATE TABLE `categories` (
@@ -33,7 +33,7 @@ CREATE TABLE `categories` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `categories`
+-- Đang đổ dữ liệu cho bảng `categories`
 --
 
 INSERT INTO `categories` (`id`, `name`) VALUES
@@ -45,7 +45,7 @@ INSERT INTO `categories` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `manufacturers`
+-- Cấu trúc bảng cho bảng `manufacturers`
 --
 
 CREATE TABLE `manufacturers` (
@@ -57,7 +57,7 @@ CREATE TABLE `manufacturers` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `manufacturers`
+-- Đang đổ dữ liệu cho bảng `manufacturers`
 --
 
 INSERT INTO `manufacturers` (`id`, `name`, `phone`, `address`, `image`) VALUES
@@ -70,7 +70,7 @@ INSERT INTO `manufacturers` (`id`, `name`, `phone`, `address`, `image`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `orders`
+-- Cấu trúc bảng cho bảng `orders`
 --
 
 CREATE TABLE `orders` (
@@ -88,7 +88,7 @@ CREATE TABLE `orders` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `order_product`
+-- Cấu trúc bảng cho bảng `order_product`
 --
 
 CREATE TABLE `order_product` (
@@ -100,7 +100,7 @@ CREATE TABLE `order_product` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `products`
+-- Cấu trúc bảng cho bảng `products`
 --
 
 CREATE TABLE `products` (
@@ -116,11 +116,10 @@ CREATE TABLE `products` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `products`
+-- Đang đổ dữ liệu cho bảng `products`
 --
 
 INSERT INTO `products` (`id`, `id_category`, `id_manufacturer`, `name`, `image`, `price`, `quantity`, `description`, `discount`) VALUES
-(1, 1, 1, 'Laptop Apple MacBook Air M1 2020 16GB/256GB/7-core GPU (Z124000DE) ', '../../assets/images/products/macbook-air-m1-2020-gray-600x600.jpg', 10000000, 50, 'CPU: Apple M1;RAM: 16 GB;Ổ cứng: 256 GB SSD;Màn hình: 13.3\", Retina (2560 x 1600);Card màn hình: Card tích hợp, 7 nhân GPU;Cổng kết nối: 2 x Thunderbolt 3 (USB-C), Jack tai nghe 3.5 mm;Đặc biệt: Có đèn bàn phím;Hệ điều hành: Mac OS;Thiết kế: Vỏ kim loại nguyên khối;Kích thước, trọng lượng: Dài 304.1 mm - Rộng 212.4 mm - Dày 4.1 mm đến 16.1 mm - Nặng 1.29 kg;Thời điểm ra mắt: 2020', 10),
 (2, 1, 1, 'Laptop MacBook Pro 14 M1 Max 2021 10-core CPU/32GB/512GB/24-core GPU (Z15G) ', '../../assets/images/products/macbook-pro-14-m1-max-2021-10-core-cpu-600x600.jpg', 10000000, 50, 'CPU: Apple M1 Max, 400GB/s memory bandwidth;RAM: 32 GB;Ổ cứng: 512 GB SSD;Màn hình: 14.2 inch, Liquid Retina XDR display (3024 x 1964), 120Hz;Card màn hình: Card tích hợp24 nhân GPU;Cổng kết nối: 3 x Thunderbolt 4 USB-C, HDMI, Jack tai nghe 3.5 mm;Đặc biệt: Có đèn bàn phím;Hệ điều hành: Mac OS;Thiết kế: Vỏ kim loại nguyên khối;Kích thước, trọng lượng: Dài 312.6 mm - Rộng 221.2 mm - Dày 15.5 mm - Nặng 1.6 kg;Thời điểm ra mắt: 10/2021', 10),
 (3, 1, 1, 'Laptop MacBook Pro 14 M1 Pro 2021 10-core CPU/32GB/512GB/16-core GPU (Z15J001N0) ', '../../assets/images/products/macbook-pro-14-inch-m1-pro-2021-10-core-cpu-thumb-1-600x600.jpg', 10000000, 45, 'CPU: Apple M1 Pro, 200GB/s memory bandwidth;RAM: 32 GB;Ổ cứng: 512 GB SSD;Màn hình: 14.2 inch, Liquid Retina XDR display (3024 x 1964), 120Hz;Card màn hình: Card tích hợp, 16 core-GPU;Cổng kết nối: 3 x Thunderbolt 4 USB-C, HDMI, Jack tai nghe 3.5 mm;Đặc biệt: Có đèn bàn phím;Hệ điều hành: Mac OS;Thiết kế: Vỏ kim loại nguyên khối;Kích thước, trọng lượng: Dài 312.6 mm - Rộng 221.2 mm - Dày 15.5 mm - Nặng 1.6 kg;Thời điểm ra mắt: 10/2021', 10),
 (4, 1, 4, 'Laptop Dell Gaming Alienware m15 R6 i7 11800H/32GB/1TB SSD/8GB RTX3070/240Hz/OfficeHS/Win11 (70272633) ', '../../assets/images/products/dell-gaming-alienware-m15-r6-i7-11800h-32gb-1tb-ssd-8gb-600x600.jpg', 10000000, 50, 'CPU: i711800H, 2.30 GHz;RAM: 32 GB, DDR4 2 khe (1 khe 16GB + 1 khe 16GB)3200 MHz;Ổ cứng: 1 TB SSD M.2 PCIe (Có thể tháo ra, lắp thanh khác tối đa 2TB), Hỗ trợ thêm 1 khe cắm SSD M.2 PCIe mở rộng (nâng cấp tối đa 2TB);Màn hình: 15.6\", QHD (2560 x 1440), 240Hz;Card màn hình: Card rời, RTX 3070 8GB;Cổng kết nối: 3 x USB 3.2, HDMI, Jack tai nghe 3.5 mm, LAN (RJ45), USB Type-C;Đặc biệt: Có đèn bàn phím;Hệ điều hành: Windows 11 Home SL + Office Home & Student 2021 vĩnh viễn;Thiết kế: Vỏ nhựa;Kích thước, trọng lượng: Dài 356 mm - Rộng 272 mm - Dày 19 mm - Nặng 2.69 kg;Thời điểm ra mắt: 2021', 10),
@@ -193,7 +192,7 @@ INSERT INTO `products` (`id`, `id_category`, `id_manufacturer`, `name`, `image`,
 -- --------------------------------------------------------
 
 --
--- Table structure for table `rates`
+-- Cấu trúc bảng cho bảng `rates`
 --
 
 CREATE TABLE `rates` (
@@ -207,7 +206,7 @@ CREATE TABLE `rates` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `role`
+-- Cấu trúc bảng cho bảng `role`
 --
 
 CREATE TABLE `role` (
@@ -216,7 +215,7 @@ CREATE TABLE `role` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `role`
+-- Đang đổ dữ liệu cho bảng `role`
 --
 
 INSERT INTO `role` (`id`, `name`) VALUES
@@ -226,7 +225,7 @@ INSERT INTO `role` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Cấu trúc bảng cho bảng `users`
 --
 
 CREATE TABLE `users` (
@@ -242,36 +241,44 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `users`
+-- Đang đổ dữ liệu cho bảng `users`
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `address`, `phone`, `gender`, `image`, `id_role`) VALUES
-(2, 'Nguyễn Xuân Hoàng', 'xhoang0509@gmail.com', '1', '', '', '', '', 2);
+(14, 'Nguyễn Văn Hùng', 'hungnguyen@gmail.com', '1', '', '', '', '', 2),
+(15, 'hung', 'hung@gmail.com', '1', '', '', '', '', 2);
 
 --
--- Indexes for dumped tables
+-- Chỉ mục cho các bảng đã đổ
 --
 
 --
--- Indexes for table `categories`
+-- Chỉ mục cho bảng `categories`
 --
 ALTER TABLE `categories`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `manufacturers`
+-- Chỉ mục cho bảng `manufacturers`
 --
 ALTER TABLE `manufacturers`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `order_product`
+-- Chỉ mục cho bảng `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_user` (`id_user`);
+
+--
+-- Chỉ mục cho bảng `order_product`
 --
 ALTER TABLE `order_product`
   ADD PRIMARY KEY (`id_order`,`id_product`);
 
 --
--- Indexes for table `products`
+-- Chỉ mục cho bảng `products`
 --
 ALTER TABLE `products`
   ADD PRIMARY KEY (`id`),
@@ -279,19 +286,19 @@ ALTER TABLE `products`
   ADD KEY `id_manufacturer` (`id_manufacturer`);
 
 --
--- Indexes for table `rates`
+-- Chỉ mục cho bảng `rates`
 --
 ALTER TABLE `rates`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `role`
+-- Chỉ mục cho bảng `role`
 --
 ALTER TABLE `role`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `users`
+-- Chỉ mục cho bảng `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
@@ -299,58 +306,65 @@ ALTER TABLE `users`
   ADD KEY `id_role` (`id_role`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT cho các bảng đã đổ
 --
 
 --
--- AUTO_INCREMENT for table `categories`
+-- AUTO_INCREMENT cho bảng `categories`
 --
 ALTER TABLE `categories`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `manufacturers`
+-- AUTO_INCREMENT cho bảng `manufacturers`
 --
 ALTER TABLE `manufacturers`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT for table `products`
+-- AUTO_INCREMENT cho bảng `products`
 --
 ALTER TABLE `products`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
 
 --
--- AUTO_INCREMENT for table `rates`
+-- AUTO_INCREMENT cho bảng `rates`
 --
 ALTER TABLE `rates`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `role`
+-- AUTO_INCREMENT cho bảng `role`
 --
 ALTER TABLE `role`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
--- Constraints for dumped tables
+-- Các ràng buộc cho các bảng đã đổ
 --
 
 --
--- Constraints for table `products`
+-- Các ràng buộc cho bảng `orders`
+--
+ALTER TABLE `orders`
+  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`id`) REFERENCES `order_product` (`id_order`),
+  ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`);
+
+--
+-- Các ràng buộc cho bảng `products`
 --
 ALTER TABLE `products`
   ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`id_category`) REFERENCES `categories` (`id`),
   ADD CONSTRAINT `products_ibfk_2` FOREIGN KEY (`id_manufacturer`) REFERENCES `manufacturers` (`id`);
 
 --
--- Constraints for table `users`
+-- Các ràng buộc cho bảng `users`
 --
 ALTER TABLE `users`
   ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`id_role`) REFERENCES `role` (`id`);

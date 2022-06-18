@@ -1,7 +1,9 @@
 <?php
 session_start();
 require("../../services/connect.php");
-$sql = "SELECT `id`, `name`, `email`, `password`, `address`, `phone`, `gender`, `image` FROM `users` WHERE id_role = 2";
+$sql = "SELECT  users.name, users.email, users.address, products.name, products.image,order_product.quantity,(products.price*(1-products.discount)) 
+as currentPrice, (products.quantity*(products.price*(1-products.discount))) as totalPrice  FROM `products` INNER JOIN order_product ON products.id =
+ order_product.id_product INNER JOIN orders ON orders.id = order_product.id_order INNER JOIN users ON users.id = orders.id_user";
 $result = mysqli_query($connect, $sql);
 ?>
 <!DOCTYPE html>
@@ -408,12 +410,14 @@ $result = mysqli_query($connect, $sql);
                                 <thead>
                                     <tr>
                                         <th>STT</th>
-                                        <th>Name </th>
+                                        <th>Tên khách hàng </th>
                                         <th>Email</th>
-                                        <th>Address</th>
-                                        <th>Phone</th>
-                                        <th>Gender</th>
-                                        <th>Avatar</th>
+                                        <th>Địa chỉ nhận hàng</th>
+                                        <th>Tên hàng</th>
+                                        <th></th>
+                                        <th>Số lượng</th>
+                                        <th>Đơn giá</th>
+                                        <th>Tổng tiền</th>
                                         <th>Repair</th>
                                         <th>Delete</th>
                                     </tr>
@@ -426,17 +430,23 @@ $result = mysqli_query($connect, $sql);
                                     ?>
                                         <tr>
                                             <td><?php echo $count ?></td>
-                                            <td><?php echo $each['name'] ?></td>
-                                            <td><?php echo $each['email'] ?></td>
-                                            <td><?php echo $each['address'] ?></td>
+                                            <td><?php echo $each['users.name'] ?></td>
+                                            <td><?php echo $each['users.email'] ?></td>
+                                            <td><?php echo $each['users.address'] ?></td>
                                             <td>
-                                                <?php echo $each['phone'] ?>
+                                                <?php echo $each['products.name'] ?>
                                             </td>
                                             <td>
-                                                <?php echo $each['gender'] ?>
+                                                <img src=" <?php echo $each['products.image'] ?>" class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt="product">
                                             </td>
                                             <td>
-                                                <?php echo $each['image'] ?>
+                                                <?php echo $each['products.quantity'] ?>
+                                            </td>
+                                            <td>
+                                                <?php echo $each['currentPrice'] ?>
+                                            </td>
+                                            <td>
+                                                <?php echo $each['totalPrice'] ?>
                                             </td>
                                             <td>
                                                 <a href="./edit_customer.php?id=<?php echo $each['id'] ?>" class="btn btn-outline-warning">Repair</a>
