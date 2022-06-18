@@ -1,7 +1,19 @@
 <?php
-session_start(); ?>
+include("../../services/connect.php");
+?>
+<!doctype html>
+<html class="no-js" lang="en">
 
-<header>
+<head>
+    <?php include('components/head.php') ?>
+</head>
+
+<body>
+    <?php
+        session_start(); 
+        include("../../services/connect.php");
+    ?>
+    <!-- header start -->
     <div class="header-area">
         <div class="header-left-sidebar">
             <div class="logo">
@@ -75,11 +87,26 @@ session_start(); ?>
                         <span class="shop-count pink">02</span>
                     </a>
                     <ul class="cart-dropdown">
+                        <li class="single-product-cart">
+                            <div class="cart-img">
+                                <a href="#"><img src="assets/img/cart/1.jpg" alt=""></a>
+                            </div>
+                            <div class="cart-delete">
+                                <a href="#"><i class="ti-trash"></i></a>
+                            </div>
+                        </li>
+
+                        <li class="cart-space">
+                            <div class="cart-sub">
+                                <h4>Tổng</h4>
+                            </div>
+                            <div class="cart-price">
+                                <h4>$240.00</h4>
+                            </div>
+                        </li>
                         <li class="cart-btn-wrapper">
                             <a class="cart-btn btn-hover" href="showcart.php">giỏ hàng</a>
                             <a class="cart-btn btn-hover" href="checkout.php">thanh toán</a>
-                            <a class="cart-btn btn-hover" href="purchase_history.php">liệt kê đơn hàng</a>
-
                         </li>
                     </ul>
                 </div>
@@ -149,44 +176,103 @@ session_start(); ?>
                     </nav>
                 </div>
             </div>
-            <div class="slider-area ">
-                <div class="slider-active owl-carousel">
-                    <div class="single-slider single-slider-hm1 bg-img height-100vh" style="background-image: url(assets/img/slider/Slider2.jpg);background-size:60% 60%;background-repeat : no-repeat;background-position:10px;">
-                        <div class="slider-content slider-animation slider-content-style-1 slider-animated-1">
-                            <h1 style="color:yellow" class="animated">Fashion</h1>
-                            <p style="color: yellow " class="animated">Find your favorite device model. </p>
+        </div>
+    </div>
+    <!-- header end -->
+
+    <!-- body start -->
+<body>
+    <div class="cart-main-area pt-95 pb-100">
+        <br><br><br><br><br><br><br>    
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-6">
+                    <h1 class="cart-heading">Lịch sử mua hàng</h1>
+                    <form action="#">
+                        <div class="table-content table-responsive">
+                            <?php
+                            //lấy giỏ hàng
+                            if (isset($_SESSION['user'])) {  
+                                //$cart = $_SESSION['cart'];
+                                $user_id = $_SESSION['user']['id'];
+                                $sql = " SELECT * FROM orders WHERE id_user = '$user_id' ";
+                                $rs = mysqli_query($connect, $sql);
+                                $total = 0;
+                                $count = 0;
+                            ?>
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>STT</th>
+                                            <th>Ngày tạo đơn</th>
+                                            <th>Thành tiền</th>
+                                            <th>Trạng thái</th>
+                                            <th>Chi tiết đơn hàng </th>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                         while($row = mysqli_fetch_assoc($rs)){
+                                            $count++;
+                                            $total += $row['total_price'];
+                                        ?>
+                                          <tr>
+                                            <td><?=$count?></td>
+                                            <td><?=$row['created_at']?></td>
+                                            <td><?=number_format($row['total_price']) .'VND'?></td>
+                                            <td><?=$row['status']?></td>
+                                            <td>
+                                                        <button type="button" class="btn btn-success">
+                                                            <a href="order_details.php?order_id=<?$row['order_id']?>">Chi tiết</a>
+                                                        </button>
+                                            </td>
+                                  
+                                          </tr>
+                                        <?php    
+                                          }
+
+                                        ?>
+                                        <tr>
+                                            <td colspan="4"><strong>Tổng tiền</strong></td>
+                                            <td><b id="tongTien"><?= number_format($total) ?></b></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            <?php
+                            } else {
+                                echo 'Đăng nhập để xem lại lịch sử mua hàng';
+                            }
+                            ?>
                         </div>
-                        <div class="position-slider-img">
-                            <div class="slider-img-1">
-                                <img src="assets/img/slider/ " alt="">
-                            </div>
-                            <div class="slider-img-2">
-                                <img class="tilter" src="assets/img/slider/Slider3.jpg" alt="">
-                            </div>
-                            <div class="slider-img-3">
-                                <img src="assets/img/slider/8.png" alt="">
+                        <div class="row">
+                            <div class="col-md-5 ml-auto">
+                                <div class="cart-page-total">
+                                    <a href="index.php">Trở về trang chủ</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="single-slider single-slider-hm1 bg-img height-100vh" style="background-image: url(assets/img/slider/Slider1.jpg);background-size:40% 50%;background-repeat : no-repeat;background-position:300px;">
-                        <div class="slider-content slider-animation slider-content-style-1 slider-animated-2">
-                            <h1 class="animated">Young</h1>
-                            <p class="animated">Explore in your own style. </p>
-                        </div>
-                        <div class="position-slider-img">
-                            <div class="slider-img-1">
-                                <img src="assets/img/slider/ " alt="">
-                            </div>
-                            <div class="slider-img-4 slider-mrg">
-                                <img class="tilter" src="assets/img/slider/Slider4.jpg" alt="" style="background-color:yellow">
-                            </div>
-                            <div class="slider-img-3">
-                                <img src="assets/img/slider/8.png" alt="">
-                            </div>
-                        </div>
-                    </div>
+                    </form>
+
+
                 </div>
             </div>
         </div>
     </div>
-</header>
+
+    <!-- all js here -->
+    <script src="assets/js/vendor/jquery-1.12.0.min.js"></script>
+    <script src="assets/js/popper.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/jquery.magnific-popup.min.js"></script>
+    <script src="assets/js/isotope.pkgd.min.js"></script>
+    <script src="assets/js/imagesloaded.pkgd.min.js"></script>
+    <script src="assets/js/jquery.counterup.min.js"></script>
+    <script src="assets/js/waypoints.min.js"></script>
+    <script src="assets/js/ajax-mail.js"></script>
+    <script src="assets/js/owl.carousel.min.js"></script>
+    <script src="assets/js/plugins.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+<?php
+        include('footer.php');
+    ?>
+</html>
