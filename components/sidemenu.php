@@ -71,7 +71,7 @@
         </a>
         <ul class="side-nav-second-level" aria-expanded="false">
             <li>
-                <a href="apps-ecommerce-products.html">Danh sách đơn hàng</a>
+                <a href="../../admin/order">Danh sách đơn hàng</a>
             </li>
 
         </ul>
