@@ -34,11 +34,14 @@ session_start();
                             //lấy giỏ hàng
                             if (isset($_SESSION['cart'])) {
                                 $cart = $_SESSION['cart'];
+                                var_dump($cart);
+                                die();
                             ?>
                                 <table class="table table-hover">
                                     <thead>
                                         <tr>
                                             <th>STT</th>
+                                            <th>Hình ảnh</th>
                                             <th>Tên hàng</th>
                                             <th>Số lượng</th>
                                             <th>Đơn giá</th>
@@ -46,33 +49,25 @@ session_start();
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php
-                                        $count = 0;
-                                        $total = 0;
-                                        foreach ($cart as $k => $v) { //start for
+                                        <?php $count = 0; ?>
+                                        <?php foreach ($cart as $item) : ?>
+                                            <?php
                                             $count++;
-                                            $total += $v['quantity'] * $v['price'];
-                                        ?>
+                                            ?>
                                             <tr>
                                                 <td><?= $count ?></td>
-                                                <td><?= $v['name'] ?></td>
+                                                <td><?= $item['name'] ?></td>
+                                                <td><img src="<?= $item['image'] ?>" class="cart-image" alt=""></td>
                                                 <td class="product-quantity">
                                                     <form action="update_cart.php" id="suasl" method="post">
-                                                        <input type="number" value="<?= $v['quantity'] ?>" min="0" id="newamount" onchange="suasoluong($v['id'])">
+                                                        <input type="number" value="<?= $item['quantity'] ?>" min="0" id="newamount" onchange="suasoluong($item['id'])">
                                                         <input type="hidden" id="id" name="id">
                                                     </form>
                                                 </td>
-                                                <td><?= number_format($v['price']) ?></td>
-                                                <td><?= number_format($v['quantity'] * $v['price']) ?></td>
+                                                <td><?= number_format($item['price']) ?></td>
+                                                <td><?= number_format($item['quantity'] * $item['price']) ?></td>
                                             </tr>
-                                        <?php
-                                        } //end for
-
-                                        ?>
-                                        <tr>
-                                            <td colspan="4">Tổng tiền</td>
-                                            <td><b id="tongTien"><?= number_format($total) ?></b></td>
-                                        </tr>
+                                        <?php endforeach ?>
                                     </tbody>
                                 </table>
                             <?php
@@ -85,36 +80,37 @@ session_start();
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <div class="coupon-all">
                                     <div class="coupon2">
-                                        <input class="button" name="update_cart" value="Update cart" type="submit" onclick="reset()">
-
+                                        <button class="button-primary"><a href="reset_cart.php">Xóa tất cả sản phẩm</a></button>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-5 ml-auto">
-                                <div class="cart-page-total">
-                                    <h2>Cart totals</h2>
-                                    <ul>
-                                        <li>Subtotal<span>
-                                                <?php
-                                                if (isset($total)) {
-                                                    echo number_format($total);
-                                                } else echo 0;
-                                                ?>
-                                            </span></li>
-                                        <li>Total<span>
-                                                <?php
-                                                if (isset($total)) {
-                                                    echo number_format($total);
-                                                } else echo 0;
-                                                ?>
-                                            </span></li>
-                                    </ul>
-                                    <a href="checkout.php">Proceed to checkout</a>
+                        <?php if (isset($_SESSION['cart'])) { ?>
+                            <div class="row">
+                                <div class="col-md-5 ml-auto">
+                                    <div class="cart-page-total">
+                                        <h2>Tổng</h2>
+                                        <ul>
+                                            <li>Số sản phẩm: <span>
+                                                    <?php
+                                                    if (isset($total)) {
+                                                        echo number_format($total);
+                                                    } else echo 0;
+                                                    ?>
+                                                </span></li>
+                                            <li>Tổng tiền: <span>
+                                                    <?php
+                                                    if (isset($total)) {
+                                                        echo number_format($total);
+                                                    } else echo 0;
+                                                    ?>
+                                                </span></li>
+                                        </ul>
+                                        <a href="checkout.php">Proceed to checkout</a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        <?php } ?>
                     </form>
                 </div>
             </div>

@@ -17,5 +17,7 @@
 <link rel="stylesheet" href="assets/css/bundle.css">
 <link rel="stylesheet" href="assets/css/style.css">
 <link rel="stylesheet" href="assets/css/responsive.css">
+<link rel="stylesheet" href="assets/css/user.css">
 <script src="assets/js/vendor/modernizr-2.8.3.min.js"></script>
 <script src="https://rawgit.com/notifyjs/notifyjs/master/dist/notify.js"></script>
+<script src="assets/js/notify.js"></script>
