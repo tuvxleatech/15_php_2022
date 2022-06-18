@@ -422,7 +422,7 @@
                     <div class="row justify-content-center">
                         <div class="col-xl-10 col-lg-10 ">
                             <?php
-                                include("../../connect.php");
+                                include("../../services/connect.php");
                                 $id = $_GET['id'];
                                 $sql = "SELECT * FROM products WHERE id = '$id'";
                                 $rs = mysqli_query($connect,$sql);

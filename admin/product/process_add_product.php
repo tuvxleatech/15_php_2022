@@ -1,5 +1,6 @@
 <?php
-    include("../../connect.php");
+    include("../../services/connect.php");
+    session_start();
     $tenSP = $_POST['product_name'];
     $gia =$_POST['price'];
     $discount =$_POST['discount'];
@@ -17,8 +18,7 @@
             values('$tenSP','$gia','$discount','$soluong','$anh','$mota','$maDM','$maNSX')";    
     $rs1 = mysqli_query($connect,$sql); 
     if($rs1){
-        echo '<script>alert("Thêm thành công!");
-        location.href = "http://localhost/15_php_2022-main/admin/product/add_product.php";
-        </script>';
+        $_SESSION['success'] = "Thêm thành công";
+       header("location:../../admin/product");
     }    
 ?>

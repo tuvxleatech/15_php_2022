@@ -1,11 +1,10 @@
 <?php
-    include("../../connect.php");
+    include("../../services/connect.php");
+    session_start();
     $id = $_POST['id'];
     $sql ="DELETE FROM products WHERE id = '$id'";
     $rs = mysqli_query($connect,$sql);
     if($rs){
-        echo '<script>alert("Xóa thành công!");
-        location.href = "http://localhost/15_php_2022-main/admin/product/index.php";
-        </script>';
+        $_SESSION['success'] = "Delete success";
+        header("location: ../../admin/product");
     }
-?>
