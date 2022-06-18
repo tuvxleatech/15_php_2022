@@ -9,7 +9,7 @@ $result = mysqli_query($connect, $sql);
 
 <head>
     <meta charset="utf-8" />
-    <title>Danh sách khách hàng</title>
+    <title>Danh sách đơn hàng</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
     <meta content="Coderthemes" name="author" />
@@ -396,7 +396,7 @@ $result = mysqli_query($connect, $sql);
                             <div class="page-title-box">
                                 <div class="page-title-right">
                                 </div>
-                                <h4 class="page-title">Danh sách khách hàng</h4>
+                                <h4 class="page-title">Danh sách đơn hàng</h4>
                             </div>
                         </div>
                     </div>
