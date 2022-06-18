@@ -1,14 +1,5 @@
 <?php
-session_start();
-require("../../services/connect.php");
-if (isset($_GET["id"])) {
-    $id = $_GET["id"];
-    $sql = "SELECT `id`, `name`, `email`, `password`, `address`, `phone`, `gender`, `image` FROM `users` WHERE id = $id";
-    $a = mysqli_query($connect, $sql);
-    $rs = mysqli_fetch_assoc($a);
-}
-
-
+    include("../../connect.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -30,7 +21,25 @@ if (isset($_GET["id"])) {
     <link href="../../assets/css/icons.min.css" rel="stylesheet" type="text/css" />
     <link href="../../assets/css/app-creative.min.css" rel="stylesheet" type="text/css" id="light-style" />
     <link href="../../assets/css/app-creative-dark.min.css" rel="stylesheet" type="text/css" id="dark-style" />
-
+    <script type="text/javascript">
+    function xoa(id){
+      var cf = confirm("Bạn có thực sự muốn xóa không!");
+      if(cf){
+        var f = document.getElementById('xoa');
+        document.getElementById('id').value = id;
+        f.submit();
+      }
+    }
+    function optionChanged(obj)
+    {
+        var sub = document.getElementById('view_cate');
+        var value = document.getElementById('cate').value;
+        var value2 = document.getElementById('optSort').value;
+        document.getElementById('id2').value = value;
+        document.getElementById('id3').value = value2;
+        sub.submit();
+    }
+  </script>
 </head>
 
 <body class="loading" data-layout-config='{"leftSideBarTheme":"dark","layoutBoxed":false, "leftSidebarCondensed":false, "leftSidebarScrollable":false,"darkMode":false, "showRightSidebarOnStart": true}'>
@@ -407,13 +416,12 @@ if (isset($_GET["id"])) {
                     <div class="app-search dropdown d-none d-lg-block">
                         <form action="timkiem.php" method="post">
                             <div class="input-group">
-                                <input type="text" name="txtSearch" class="form-control dropdown-toggle" placeholder="Tìm kiếm..." id="top-search">
+                                <input type="text" name = "txtSearch" class="form-control dropdown-toggle" placeholder="Tìm kiếm..." id="top-search">
                                 <span class="mdi mdi-magnify search-icon"></span>
                                 <div class="input-group-append">
                                     <button class="btn btn-primary" type="submit">Tìm kiếm</button>
                                 </div>
                             </div>
-
                         </form>
                     </div>
                 </div>
@@ -425,67 +433,120 @@ if (isset($_GET["id"])) {
                     <!-- start page title -->
                     <div class="row">
                         <div class="col-12">
-                            <div class="page-title-box">
-                                <h4 class="page-title">Sửa thông tin khách hàng</h4>
+                            <div class="page-title-box" style = "display:flex;">
+                                <h4 class="page-title">Tất cả sản phẩm</h4>
+                                <div class="page-title" style = "margin-left:10px;">
+                                    <select name="" onchange="optionChanged()" id = "cate">
+                                        <option value="0">All</option>
+                                        <?php
+                                            $id3 = $_POST['id2'];
+                                            $id4 = $_POST['id3'];
+                                            $sql4 = "SELECT * FROM categories";
+                                            $rs4 = mysqli_query($connect,$sql4);
+                                            while($r4 = mysqli_fetch_assoc($rs4)){
+                                        ?>
+                                        <option <?php if($r4['id'] == $id3){echo("selected");}?> value="<?=$r4['id']?>"><?=$r4['name']?></option>
+                                        <?php
+                                            }
+                                        ?>
+                                    </select>
+                                </div>
+                                <div class="page-title" style = "margin-left:10px;">
+                                    Sắp xếp:
+                                    <select name="" onchange="optionChanged()" id = "optSort">
+                                        <option value="0" <?php if($id4 == 0){echo("selected");}?> >Không</option>
+                                        <option value="1" <?php if($id4 == 1){echo("selected");}?>>Tăng dần theo giá tiền</option>
+                                        <option value="2" <?php if($id4 == 2){echo("selected");}?> >Giảm dần theo giá tiền</option>
+                                    </select>
+                                </div>
+                                <form action="viewByCategory.php" method="post" id="view_cate">
+                                    <input type="hidden" id="id2" name="id2">
+                                    <input type="hidden" id="id3" name="id3">
+                                </form>
                             </div>
                         </div>
                     </div>
                     <!-- end page title -->
                     <div class="row justify-content-center">
-                        <div class="col-xl-10 col-lg-10 ">
-
-                            <form action="../customer/edit_process.php" method="post" >
-                                <table class="table table-striped table-centered mb-0">
+                            <table class="table table-striped table-centered mb-0" style = "text-align:center">
+                                <thead>
                                     <tr>
-                                        <th>Mã Khách hàng</th>
-                                        <td>
-                                            <input type="text" name="id" readonly value="<?php echo $id ?>">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>Tên khách hàng</th>
-                                        <td>
-                                            <input type="text" name="name" value="<?= $rs["name"] ?>">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>Email</th>
-                                        <td><input type="text" name="email" value="<?= $rs['email'] ?>"></td>
-                                    </tr>
-
-                                    <tr>
-                                        <th>Địa chỉ</th>
-                                        <td><input type="text" name="address" value="<?= $rs['address'] ?>"></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Số điện thoại</th>
-
-                                        <td><input type="text" name="phone" value="<?= $rs['phone'] ?>"></td>
-
-                                    </tr>
-                                    <tr>
-                                        <th>Giới tính</th>
-                                        <td><input type="text" name="gender" value="<?= $rs['gender'] ?>"></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Ảnh đại diện</th>
-                                        <td>
-                                            <img src="<?php echo $rs["image"] ?>" alt="anh dai dien" width="100px" , height="100px">
-                                        </td>
-                                    </tr>
-
-                                    <tr>
+                                        <th>STT</th>
+                                        <th>Mã Danh Mục</th>          
+                                        <th>Mã Nhà Sản Xuất</th>
+                                        <th>Tên Sản Phẩm</th>
+                                        <th>Hình Ảnh</th>
+                                        <th>Giá</th>
+                                        <th>Giảm giá</th>
+                                        <th>Số Lượng</th>
+                                        <th>Mô Tả</th>
                                         <th>Hành động</th>
-                                        <td><button type="submit" name="submit" class="btn btn-outline-success">Cập nhật</button></td>
                                     </tr>
-                                </table>
+                                </thead>
+                                <tbody>
+                                <?php
+                                    if(empty($id3)){
+                                        if($id4 == 0){
+                                            $sql = "SELECT * FROM products";
+                                        }
+                                        else if($id4 == 1){
+                                            $sql = "SELECT * FROM products ORDER BY price ASC";
+                                        }
+                                        else if($id4 == 2){
+                                            $sql = "SELECT * FROM products ORDER BY price DESC";
+                                        }
+                                    }
+                                    else{
+                                        if($id4 == 0){
+                                            $sql = "SELECT * FROM products WHERE id_category = '$id3'";
+                                        }
+                                        else if($id4 == 1){
+                                            $sql = "SELECT * FROM products WHERE id_category = '$id3' ORDER BY price ASC";
+                                        }
+                                        else if($id4 == 2){
+                                            $sql = "SELECT * FROM products WHERE id_category = '$id3' ORDER BY price DESC";
+                                        }
+                                         
+                                    }
+		                            $rs = mysqli_query($connect,$sql);
+		                            $count = 0;
+		                            while($r = mysqli_fetch_assoc($rs)){
+                                        
+		                                $count++;
+                                        //Lấy ra bảng danh mục chứa id đang xét
+                                        $id = $r['id_category'];
+                                        $sql2 = "SELECT * FROM categories WHERE id = '$id'";
+                                        $rs2 =  mysqli_query($connect,$sql2);
+                                        $r2 = mysqli_fetch_assoc($rs2);
+                                        //Lấy ra bảng nhà sản xuất chứa id đang xét
+                                        $id2 = $r['id_manufacturer'];
+                                        $sql3 = "SELECT * FROM manufacturers WHERE id = '$id'";
+                                        $rs3 =  mysqli_query($connect,$sql3);
+                                        $r3 = mysqli_fetch_assoc($rs3);
+	                            ?>
+                                    <tr>
+                                        <td><?=$count?></td>			
+                                        <td><?=$r['id_category']?>-<?=$r2['name']?></td>
+                                        <td><?=$r['id_manufacturer']?>-<?=$r3['name']?></td>
+                                        <td><?=$r['name']?></td>
+                                        <td><img src="<?=$r['image']?>" alt="" style="width: 100px"></td>
+                                        <td><?=number_format($r['price'])?></td>
+                                        <td><?=$r['discount']?>%</td>
+                                        <td><?=$r['quantity']?></td>
+                                        <td><?=$r['description']?></td>
+                                        <td><button onclick="xoa(<?=$r['id']?>)">Xóa</button><a href="edit_product.php?id=<?=$r['id']?>"><button style = "margin-top:2px;">Sửa</button></a></td>
+                                    </tr>
+                                <?php  	
+                                    }
+                                ?>
+                                </tbody>
+                            </table>
+                            <form action="remove_product.php" method="post" id="xoa">
+                                <input type="hidden" id="id" name="id">
                             </form>
-                        </div>
                     </div>
 
                 </div>
-
-               
                 <!-- container -->
 
             </div>

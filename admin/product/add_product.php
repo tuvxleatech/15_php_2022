@@ -18,7 +18,6 @@
     <link href="../../assets/css/icons.min.css" rel="stylesheet" type="text/css" />
     <link href="../../assets/css/app-creative.min.css" rel="stylesheet" type="text/css" id="light-style" />
     <link href="../../assets/css/app-creative-dark.min.css" rel="stylesheet" type="text/css" id="dark-style" />
-
 </head>
 
 <body class="loading" data-layout-config='{"leftSideBarTheme":"dark","layoutBoxed":false, "leftSidebarCondensed":false, "leftSidebarScrollable":false,"darkMode":false, "showRightSidebarOnStart": true}'>
@@ -50,7 +49,87 @@
             <div class="h-100" id="left-side-menu-container" data-simplebar>
 
                 <!--- Sidemenu -->
-                <?php include("../../components/sidemenu.php"); ?>
+                <ul class="metismenu side-nav">
+
+                    <li class="side-nav-title side-nav-item">Trang chủ</li>
+
+                    <li class="side-nav-item">
+                        <a href="javascript: void(0);" class="side-nav-link">
+                            <i class="uil-store"></i>
+                            <span> Quản lý sản phẩm </span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <ul class="side-nav-second-level" aria-expanded="false">
+                            <li>
+                                <a href="index.php">Tất cả sản phẩm</a>
+                            </li>
+                            <li>
+                                <a href="add_product.php">Thêm sản phẩm mới</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="side-nav-item">
+                        <a href="javascript: void(0);" class="side-nav-link">
+                            <i class="uil-store"></i>
+                            <span> Quản lý nhà sản xuất </span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <ul class="side-nav-second-level" aria-expanded="false">
+                            <li>
+                                <a href="./manufacturer">Tất cả nhà sản xuất</a>
+                            </li>
+                            <li>
+                                <a href="./manufacturer/add_manufacturer.php">Thêm nhà sản xuất mới</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="side-nav-item">
+                        <a href="javascript: void(0);" class="side-nav-link">
+                            <i class="uil-store"></i>
+                            <span> Quản lý nhân viên </span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <ul class="side-nav-second-level" aria-expanded="false">
+                            <li>
+                                <a href="apps-ecommerce-products.html">Products</a>
+                            </li>
+                            <li>
+                                <a href="apps-ecommerce-products-details.html">Products Details</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="side-nav-item">
+                        <a href="javascript: void(0);" class="side-nav-link">
+                            <i class="uil-store"></i>
+                            <span> Quản lý khách hàng </span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <ul class="side-nav-second-level" aria-expanded="false">
+                            <li>
+                                <a href="apps-ecommerce-products.html">Products</a>
+                            </li>
+                            <li>
+                                <a href="apps-ecommerce-products-details.html">Products Details</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="side-nav-item">
+                        <a href="javascript: void(0);" class="side-nav-link">
+                            <i class="uil-store"></i>
+                            <span> Quản lý đơn hàng </span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <ul class="side-nav-second-level" aria-expanded="false">
+                            <li>
+                                <a href="apps-ecommerce-products.html">Products</a>
+                            </li>
+                            <li>
+                                <a href="apps-ecommerce-products-details.html">Products Details</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                </ul>
                 <div class="clearfix"></div>
 
             </div>
@@ -348,12 +427,12 @@
                                             <td>
                                                 <select name="id_category">
                                                     <?php
-                                                        include("../../services/connect.php");
+                                                        include("../../connect.php");
                                                         $sql = "SELECT * FROM categories";
                                                         $rs = mysqli_query($connect,$sql);                    
                                                         while($r = mysqli_fetch_assoc($rs)){
                                                     ?>
-                                                        <option value="<?=$r['id']?>"><?=$r['id']?></option>                                                        
+                                                        <option value="<?=$r['id']?>"><?=$r['id']?>-<?=$r['name']?></option>                                                        
                                                    <?php
                                                         }
                                                     ?>
@@ -365,12 +444,12 @@
                                             <td>
                                                 <select name="id_manufacturer">
                                                     <?php
-                                                        include("../../services/connect.php");
+                                                        include("../connect.php");
                                                         $sql2 = "SELECT * FROM manufacturers";
                                                         $rs2 = mysqli_query($connect,$sql2);                    
                                                         while($r2 = mysqli_fetch_assoc($rs2)){
                                                     ?>
-                                                        <option value="<?=$r2['id']?>"><?=$r2['id']?></option>                                                        
+                                                        <option value="<?=$r2['id']?>"><?=$r2['id']?>-<?=$r2['name']?></option>                                                        
                                                    <?php
                                                         }
                                                     ?>
@@ -379,11 +458,11 @@
                                         </tr>
                                         <tr>
                                             <th>Tên Sản Phẩm</th>
-                                            <td> <input type="text" name = "product_name" style ="width:62%"></td>
+                                            <td> <input required type="text" name = "product_name" id = "product_name" style ="width:62%"></td>
                                         </tr>
                                         <tr>
                                             <th>Giá</th>
-                                            <td><input type="text" name = "price"></td>                                           
+                                            <td><input required type="number" name = "price"></td>                                           
                                         </tr>  
                                         <tr>
                                             <th>Giảm giá</th>
@@ -398,26 +477,26 @@
                                         </tr>                                
                                         <tr>
                                             <th>Số Lượng</th>
-                                            <td><input type="text" name = "quantity"></td>
+                                            <td><input required type="number" name = "quantity"></td>
                                         </tr>
                                         
                                         <tr>
                                             <th>Hình Ảnh</th>
-                                            <td><input type="file" name = "img"></td>
+                                            <td><input required type="file" name = "img"></td>
                                         </tr>
                                         <tr>
                                             <th>Mô Tả</th>
-                                            <td><textarea name="description" rows="5" cols="60"></textarea></td>
+                                            <td><textarea required name="description" rows="5" cols="60"></textarea></td>
                                         </tr>
                                         <tr>
                                             <th>Hành Động</th>
-                                            <td><button type ="submit">Thêm</button></td>
+                                            <td><button onclick = "add()">Thêm</button>
+                                            <button type ="reset">Reset</button></td>
                                         </tr>
                                 </table>
                             </form>
                         </div>
                     </div>
-
                 </div>
                 <!-- container -->
 

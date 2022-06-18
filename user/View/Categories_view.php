@@ -1,5 +1,5 @@
 <?php
-include("../../services/connect.php");
+    include("../../connect.php");            
 ?>
 <!doctype html>
 <html class="no-js" lang="en">
@@ -7,7 +7,7 @@ include("../../services/connect.php");
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>ABC SHOP</title>
+    <title>Fashion - eCommerce HTML5 Template</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon -->
@@ -28,110 +28,200 @@ include("../../services/connect.php");
 </head>
 
 <body>
+    <!--[if lt IE 8]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
     <!-- header start -->
-    <?php include('header.php') ?>
-    <div class="container">
-        <div id="content">
-            <?php
-            $cate_id = $_GET['cate_id'];
-            $manu_id = $_GET['manu_id'];
-            $sql =  "SELECT * FROM categories WHERE id =  '$cate_id'";
-            $rs  = mysqli_query($connect, $sql);
-            $r = mysqli_fetch_assoc($rs);
-            if (empty($manu_id)) {
-            ?>
-                <h4><?= $r['name'] ?> / <a href="index.php">TRANG CHỦ</a></h4>
-                <div class="tab-content">
-                    <div class="tab-pane active show fade" id="home1" role="tabpanel">
-                        <div class="custom-row">
-                            <?php
-                            $sql3 =  "SELECT * FROM products WHERE id_category =  '$cate_id'";
-                            $rs3  = mysqli_query($connect, $sql3);
-                            while ($r3 = mysqli_fetch_assoc($rs3)) {
-                            ?>
-                                <div class="custom-col-5 custom-col-style mb-65">
-                                    <div class="product-wrapper" style="text-align: center;">
-                                        <div class="product-img">
-                                            <a href="#" style="display:block;">
-                                                <img style="width:90%; height:90%;" src="<?= $r3['image'] ?>" alt="">
-                                            </a>
-                                            <span><?= -$r3['discount'] ?>%</span>
-                                            <div class="product-action">
-                                                <a class="animate-left" title="Add To Cart" href="#">
-                                                    <i class="pe-7s-cart"></i>
-                                                </a>
-                                                <a class="animate-right" title="Quick View" data-toggle="modal" data-target="#exampleModal" href="#">
-                                                    <i class="pe-7s-look"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="product-content">
-                                            <a href="product-details.html" style="display:block;">
-                                                <h4><?= $r3['name'] ?></h4>
-                                                <div style=" text-decoration: line-through;"><?= number_format($r3['price']) ?><span style="text-decoration: underline;"><sup>đ</sup></span></div>
-                                                <div style="color:red;font-weight: bold;font-size: 18px;"><?= number_format($r3['price'] * (1 - $r3['discount'] / 100)) ?><span style="text-decoration: underline;"><sup>đ</sup></span></div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            <?php
-                            }
-                            ?>
-                        </div>
-                    </div>
+    <header style = "height:110px;">
+        <div class="header-area" >
+            <div class="header-left-sidebar" style = "width:250px">
+                <div class="logo">
+                    <a href="index.html"><img src="../assets/img/logo/logo.png" alt=""></a>
                 </div>
-            <?php
-            } else {
-                $sql2 =  "SELECT * FROM manufacturers WHERE id =  '$manu_id'";
-                $rs2  = mysqli_query($connect, $sql2);
-                $r2 = mysqli_fetch_assoc($rs2);
-            ?>
-                <h4><?= $r['name'] ?> : <?= $r2['name'] ?> / <a href="index.php">TRANG CHỦ</a></h4>
-                <div class="tab-content">
-                    <div class="tab-pane active show fade" id="home1" role="tabpanel">
-                        <div class="custom-row">
-                            <?php
-                            $sql3 =  "SELECT * FROM products WHERE id_category =  '$cate_id' AND id_manufacturer  = '$manu_id'";
-                            $rs3  = mysqli_query($connect, $sql3);
-                            while ($r3 = mysqli_fetch_assoc($rs3)) {
-                            ?>
-                                <div class="custom-col-5 custom-col-style mb-65">
-                                    <div class="product-wrapper" style="text-align: center;">
-                                        <div class="product-img">
-                                            <a href="#" style="display:block;">
-                                                <img style="width:90%; height:90%;" src="<?= $r3['image'] ?>" alt="">
-                                            </a>
-                                            <span><?= -$r3['discount'] ?>%</span>
-                                            <div class="product-action">
-                                                <a class="animate-left" title="Add To Cart" href="#">
-                                                    <i class="pe-7s-cart"></i>
-                                                </a>
-                                                <a class="animate-right" title="Quick View" data-toggle="modal" data-target="#exampleModal" href="#">
-                                                    <i class="pe-7s-look"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="product-content">
-                                            <a href="product-details.html" style="display:block;">
-                                                <h4><?= $r3['name'] ?></h4>
-                                                <div style=" text-decoration: line-through;"><?= number_format($r3['price']) ?><span style="text-decoration: underline;"><sup>đ</sup></span></div>
-                                                <div style="color:red;font-weight: bold;font-size: 18px;"><?= number_format($r3['price'] * (1 - $r3['discount'] / 100)) ?><span style="text-decoration: underline;"><sup>đ</sup></span></div>
-                                            </a>
-                                        </div>
-                                    </div>
+                <div class="main-menu menu-hover">
+                    <nav>
+                        <ul>
+                            <li><a href="Categories_view.php?Cate_id=1&&Manu_id=0">LAPTOP</a>
+                                <ul class="single-dropdown">
+                                    <li><a href="Categories_view.php?Cate_id=1&&Manu_id=1">Apple</a></li>
+                                    <li><a href="Categories_view.php?Cate_id=1&&Manu_id=4">Dell</a></li>
+                                    <li><a href="Categories_view.php?Cate_id=1&&Manu_id=5">Asus</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="Categories_view.php?Cate_id=2&&Manu_id=0">SMART WATCH</a>
+                                <ul class="single-dropdown">
+                                    <li><a href="Categories_view.php?Cate_id=2&&Manu_id=1">Apple</a></li>
+                                    <li><a href="Categories_view.php?Cate_id=2&&Manu_id=2">Samsung</a></li>
+                                    <li><a href="Categories_view.php?Cate_id=2&&Manu_id=3">Xiaomi</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="Categories_view.php?Cate_id=3&&Manu_id=0">MOBILE</a>
+                                <ul class="single-dropdown">
+                                    <li><a href="Categories_view.php?Cate_id=3&&Manu_id=1">Apple</a></li>
+                                    <li><a href="Categories_view.php?Cate_id=3&&Manu_id=2">Samsung</a></li>
+                                    <li><a href="Categories_view.php?Cate_id=3&&Manu_id=3">Xiaomi</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="Categories_view.php?Cate_id=4&&Manu_id=0">TABLET</a>
+                                <ul class="single-dropdown">
+                                    <li><a href="Categories_view.php?Cate_id=4&&Manu_id=1">Apple</a></li>
+                                    <li><a href="Categories_view.php?Cate_id=4&&Manu_id=2">Samsung</a></li>
+                                    <li><a href="Categories_view.php?Cate_id=4&&Manu_id=5">Asus</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <div class="header-right-sidebar">
+                <div class="header-search-cart-login" >
+                    <div class="logo">
+                        <a href="index.html">
+                            <img src="assets/img/logo/logo.png" alt="">
+                        </a>
+                    </div>
+                    <div class="header-search">
+                        <form action="search.php" method = "post">
+                            <input name = "txtSearch" placeholder="Search What you want" type="text">
+                            <button>
+                                <i class="ti-search"></i>
+                            </button>
+                        </form>
+                    </div>
+                    <div class="header-login">
+                        <ul>
+                            <li><a href="login.html">Login</a></li>
+                            <li><a href="register.html">Reg</a></li>
+                        </ul>
+                    </div>
+                    <div class="header-cart cart-res">
+                        <a class="icon-cart" href="#">
+                            <i class="ti-shopping-cart"></i>
+                            <span class="shop-count pink">02</span>
+                        </a>
+                        <ul class="cart-dropdown">
+                            <li class="single-product-cart">
+                                <div class="cart-img">
+                                    <a href="#"><img src="assets/img/cart/1.jpg" alt=""></a>
                                 </div>
-                        <?php
-                            }
-                        }
-                        ?>
-                        </div>
+                                <div class="cart-title">
+                                    <h5><a href="#"> Bits Headphone</a></h5>
+                                    <h6><a href="#">Black</a></h6>
+                                    <span>$80.00 x 1</span>
+                                </div>
+                                <div class="cart-delete">
+                                    <a href="#"><i class="ti-trash"></i></a>
+                                </div>
+                            </li>
+                            <li class="single-product-cart">
+                                <div class="cart-img">
+                                    <a href="#"><img src="assets/img/cart/2.jpg" alt=""></a>
+                                </div>
+                                <div class="cart-title">
+                                    <h5><a href="#"> Bits Headphone</a></h5>
+                                    <h6><a href="#">Black</a></h6>
+                                    <span>$80.00 x 1</span>
+                                </div>
+                                <div class="cart-delete">
+                                    <a href="#"><i class="ti-trash"></i></a>
+                                </div>
+                            </li>
+                            <li class="single-product-cart">
+                                <div class="cart-img">
+                                    <a href="#"><img src="assets/img/cart/3.jpg" alt=""></a>
+                                </div>
+                                <div class="cart-title">
+                                    <h5><a href="#"> Bits Headphone</a></h5>
+                                    <h6><a href="#">Black</a></h6>
+                                    <span>$80.00 x 1</span>
+                                </div>
+                                <div class="cart-delete">
+                                    <a href="#"><i class="ti-trash"></i></a>
+                                </div>
+                            </li>
+                            <li class="cart-space">
+                                <div class="cart-sub">
+                                    <h4>Subtotal</h4>
+                                </div>
+                                <div class="cart-price">
+                                    <h4>$240.00</h4>
+                                </div>
+                            </li>
+                            <li class="cart-btn-wrapper">
+                                <a class="cart-btn btn-hover" href="#">view cart</a>
+                                <a class="cart-btn btn-hover" href="#">checkout</a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
         </div>
-    </div>
+    </header>   
+   <div id = "content">
+        <?php
+            $Cate_id = $_GET['Cate_id'];
+            $Manu_id = $_GET['Manu_id'];
+            $sql =  "SELECT * FROM categories WHERE id =  '$Cate_id'";
+            $rs  = mysqli_query($connect,$sql);
+            $r = mysqli_fetch_assoc($rs);
+            if(empty($Manu_id)){
+        ?>
+                <h4><?=$r['name']?> / <a href="index.php">TRANG CHỦ</a></h4>
+                <div class="tab-content"> 
+                    <div class="tab-pane active show fade" id="home1" role="tabpanel">   
+                        <div class="custom-row">
+        <?php        
+                $sql3 =  "SELECT * FROM products WHERE id_category =  '$Cate_id'";
+            }
+            else{
+                $sql2 =  "SELECT * FROM manufacturers WHERE id =  '$Manu_id'";
+                $rs2  = mysqli_query($connect,$sql2);
+                $r2 = mysqli_fetch_assoc($rs2);
+        ?>
+                <h4><?=$r['name']?> : <?=$r2['name']?> / <a href="index.php">TRANG CHỦ</a></h4>
+                <div class="tab-content"> 
+                    <div class="tab-pane active show fade" id="home1" role="tabpanel">   
+                        <div class="custom-row">
+            <?php        
+                $sql3 =  "SELECT * FROM products WHERE id_category =  '$Cate_id' AND id_manufacturer  = '$Manu_id'";
+            }  
+                $rs3  = mysqli_query($connect,$sql3);
+                while($r3 = mysqli_fetch_assoc($rs3)){
+            ?>
+                            <div class="custom-col-5 custom-col-style mb-65">
+                                    <div class="product-wrapper" style = "text-align: center;">
+                                        <div class="product-img">
+                                            <a href="#" style = "display:block;">
+                                                <img style = "width:90%; height:90%;" src="<?=$r3['image']?>" alt="">
+                                            </a>
+                                            <span><?=-$r3['discount']?>%</span>
+                                            <div class="product-action">
+                                                <a class="animate-left" title="Add To Cart" href="#">
+                                                    <i class="pe-7s-cart"></i>
+                                                </a>
+                                                <a class="animate-right" title="Quick View" data-toggle="modal" data-target="#exampleModal" href="#">
+                                                    <i class="pe-7s-look"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="product-content">
+                                            <a href="product-details.html" style = "display:block;"><h4><?=$r3['name']?></h4>
+                                            <div style = " text-decoration: line-through;"><?=number_format($r3['price'])?><span style = "text-decoration: underline;"><sup>đ</sup></span></div>
+                                            <div style = "color:red;font-weight: bold;font-size: 18px;"><?=number_format($r3['price'] * (1 - $r3['discount']/100))?><span style = "text-decoration: underline;"><sup>đ</sup></span></div></a>
+                                        </div>
+                                    </div>
+                                </div>
+        <?php
+            }
+        ?>   
+                        </div> 
+                    </div>
+                </div>     
+   </div>
+
     <!-- insta feed end -->
     <footer class="footer-area">
-        <div class="footer-top-area bg-img pt-105 pb-65" data-overlay="9">
+        <div class="footer-top-area bg-img pt-105 pb-65"  data-overlay="9">
             <div class="container">
                 <div class="row">
                     <div class="col-xl-4 col-md-3">
@@ -247,7 +337,7 @@ include("../../services/connect.php");
                             <h3>Handcrafted Supper Mug</h3>
                             <div class="price">
                                 <span class="new">$90.00</span>
-                                <span class="old">$120.00 </span>
+                                <span class="old">$120.00  </span>
                             </div>
                             <div class="rating-number">
                                 <div class="quick-view-rating">

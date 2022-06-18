@@ -1,7 +1,5 @@
 <?php
-require("../../services/connect.php");
-session_start();
-
+    include("../../connect.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,9 +21,25 @@ session_start();
     <link href="../../assets/css/icons.min.css" rel="stylesheet" type="text/css" />
     <link href="../../assets/css/app-creative.min.css" rel="stylesheet" type="text/css" id="light-style" />
     <link href="../../assets/css/app-creative-dark.min.css" rel="stylesheet" type="text/css" id="dark-style" />
-    <script script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js">
-    </script>
-
+    <script type="text/javascript">
+    function xoa(id){
+      var cf = confirm("Bạn có thực sự muốn xóa không!");
+      if(cf){
+        var f = document.getElementById('xoa');
+        document.getElementById('id').value = id;
+        f.submit();
+      }
+    }
+    function optionChanged(obj)
+    {
+        var sub = document.getElementById('view_cate');
+        var value = document.getElementById('cate').value;
+        var value2 = document.getElementById('optSort').value;
+        document.getElementById('id2').value = value;
+        document.getElementById('id3').value = value2;
+        sub.submit();
+    }
+  </script>
 </head>
 
 <body class="loading" data-layout-config='{"leftSideBarTheme":"dark","layoutBoxed":false, "leftSidebarCondensed":false, "leftSidebarScrollable":false,"darkMode":false, "showRightSidebarOnStart": true}'>
@@ -57,9 +71,87 @@ session_start();
             <div class="h-100" id="left-side-menu-container" data-simplebar>
 
                 <!--- Sidemenu -->
-                <?php
-                include("../../components/sidemenu.php");
-                ?>
+                <ul class="metismenu side-nav">
+
+                    <li class="side-nav-title side-nav-item">Trang chủ</li>
+
+                    <li class="side-nav-item">
+                        <a href="javascript: void(0);" class="side-nav-link">
+                            <i class="uil-store"></i>
+                            <span> Quản lý sản phẩm </span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <ul class="side-nav-second-level" aria-expanded="false">
+                            <li>
+                                <a href="index.php">Tất cả sản phẩm</a>
+                            </li>
+                            <li>
+                                <a href="add_product.php">Thêm sản phẩm mới</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="side-nav-item">
+                        <a href="javascript: void(0);" class="side-nav-link">
+                            <i class="uil-store"></i>
+                            <span> Quản lý nhà sản xuất </span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <ul class="side-nav-second-level" aria-expanded="false">
+                            <li>
+                                <a href="./manufacturer">Tất cả nhà sản xuất</a>
+                            </li>
+                            <li>
+                                <a href="./manufacturer/add_manufacturer.php">Thêm nhà sản xuất mới</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="side-nav-item">
+                        <a href="javascript: void(0);" class="side-nav-link">
+                            <i class="uil-store"></i>
+                            <span> Quản lý nhân viên </span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <ul class="side-nav-second-level" aria-expanded="false">
+                            <li>
+                                <a href="apps-ecommerce-products.html">Products</a>
+                            </li>
+                            <li>
+                                <a href="apps-ecommerce-products-details.html">Products Details</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="side-nav-item">
+                        <a href="javascript: void(0);" class="side-nav-link">
+                            <i class="uil-store"></i>
+                            <span> Quản lý khách hàng </span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <ul class="side-nav-second-level" aria-expanded="false">
+                            <li>
+                                <a href="apps-ecommerce-products.html">Products</a>
+                            </li>
+                            <li>
+                                <a href="apps-ecommerce-products-details.html">Products Details</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="side-nav-item">
+                        <a href="javascript: void(0);" class="side-nav-link">
+                            <i class="uil-store"></i>
+                            <span> Quản lý đơn hàng </span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <ul class="side-nav-second-level" aria-expanded="false">
+                            <li>
+                                <a href="apps-ecommerce-products.html">Products</a>
+                            </li>
+                            <li>
+                                <a href="apps-ecommerce-products-details.html">Products Details</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                </ul>
                 <div class="clearfix"></div>
 
             </div>
@@ -324,7 +416,7 @@ session_start();
                     <div class="app-search dropdown d-none d-lg-block">
                         <form action="timkiem.php" method="post">
                             <div class="input-group">
-                                <input type="text" name="txtSearch" class="form-control dropdown-toggle" placeholder="Tìm kiếm..." id="top-search">
+                                <input type="text" name = "txtSearch" class="form-control dropdown-toggle" placeholder="Tìm kiếm..." id="top-search">
                                 <span class="mdi mdi-magnify search-icon"></span>
                                 <div class="input-group-append">
                                     <button class="btn btn-primary" type="submit">Tìm kiếm</button>
@@ -341,99 +433,94 @@ session_start();
                     <!-- start page title -->
                     <div class="row">
                         <div class="col-12">
-                            <div class="page-title-box">
+                            <div class="page-title-box" style = "display:flex;">
                                 <h4 class="page-title">Tất cả sản phẩm</h4>
+                                <div class="page-title" style = "margin-left:10px;">
+                                    <select name="" onchange="optionChanged()" id = "cate">
+                                        <option value="0">All</option>
+                                        <?php
+                                            $sql4 = "SELECT * FROM categories";
+                                            $rs4 = mysqli_query($connect,$sql4);
+                                            while($r4 = mysqli_fetch_assoc($rs4)){
+                                        ?>
+                                        <option value="<?=$r4['id']?>" ><?=$r4['name']?></option>
+                                        <?php
+                                            }
+                                        ?>
+                                    </select>    
+                                </div>
+                                <div class="page-title" style = "margin-left:10px;">
+                                    Sắp xếp:
+                                    <select name="" onchange="optionChanged()" id ="optSort">
+                                    <option value="0">Không</option>
+                                        <option value="1">Tăng dần theo giá tiền</option>
+                                        <option value="2">Giảm dần theo giá tiền</option>
+                                    </select>
+                                </div>
+                                <form action="viewByCategory.php" method="post" id="view_cate">
+                                    <input type="hidden" id="id2" name="id2">
+                                    <input type="hidden" id="id3" name="id3">
+                                </form>
                             </div>
                         </div>
                     </div>
                     <!-- end page title -->
                     <div class="row justify-content-center">
-                        <table class="table table-striped table-centered mb-0" style="text-align:center">
-                            <thead>
-                                <tr>
-                                    <th>STT</th>
-                                    <th>Mã Danh Mục</th>
-                                    <th>Mã Nhà Sản Xuất</th>
-                                    <th>Tên Sản Phẩm</th>
-                                    <th>Hình Ảnh</th>
-                                    <th>Giá</th>
-                                    <th>Giảm giá</th>
-                                    <th>Số Lượng</th>
-                                    <th>Sửa</th>
-                                    <th>Xóa</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                $sql = "SELECT * FROM products";
-                                $rs = mysqli_query($connect, $sql);
-                                $count = 0;
-                                while ($r = mysqli_fetch_assoc($rs)) {
-                                    $count++;
-                                ?>
+                            <table class="table table-striped table-centered mb-0" style = "text-align:center">
+                                <thead>
                                     <tr>
-                                        <td><?= $count ?></td>
-                                        <td><?= $r['id_category'] ?></td>
-                                        <td><?= $r['id_manufacturer'] ?></td>
-                                        <td><?= $r['name'] ?></td>
-                                        <td><img src="<?= $r['image'] ?>" alt="" style="width: 100px"></td>
-                                        <td><?= number_format($r['price']) ?></td>
-                                        <td><?= $r['discount'] ?>%</td>
-                                        <td><?= $r['quantity'] ?></td>
-                                        <td>
-                                            <a href="edit_product.php?id=<?= $r['id'] ?>">
-                                                <button class="btn btn-warning" style="margin-top:2px;">Sửa</button>
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <button class="btn btn-danger" onclick="xoa(<?= $r['id'] ?>)">Xóa</button>
-
-                                        </td>
+                                        <th>STT</th>
+                                        <th>Mã Danh Mục</th>          
+                                        <th>Mã Nhà Sản Xuất</th>
+                                        <th>Tên Sản Phẩm</th>
+                                        <th>Hình Ảnh</th>
+                                        <th>Giá</th>
+                                        <th>Giảm giá</th>
+                                        <th>Số Lượng</th>
+                                        <th>Mô Tả</th>
+                                        <th>Hành động</th>
                                     </tr>
+                                </thead>
+                                <tbody>
                                 <?php
-                                }
-                                ?>
-                            </tbody>
-
-                        </table>
-                        <form action="remove_product.php" method="post" id="xoa">
-                            <input type="hidden" id="id" name="id">
-                        </form>
-                    </div>
-                    <script>
-                        function xoa(id) {
-                            document.getElementById('id').value = id;
-                            var form = document.getElementById('xoa');
-                            swal({
-                                    title: "Bạn chắc chắn?",
-                                    text: "Khi đã xóa, bạn sẽ không thể lấy lại được bản ghi!",
-                                    icon: "warning",
-                                    buttons: true,
-                                    dangerMode: true,
-                                })
-                                .then((willDelete) => {
-                                    if (willDelete) {
-                                        form.submit();
-                                        swal("Bạn đã xóa một bản ghi! " + id, {
-                                            icon: "success",
-                                        });
-
-                                    } else {
-                                        swal("Bản ghi an toàn!");
+		                            $sql = "SELECT * FROM products";
+		                            $rs = mysqli_query($connect,$sql);
+		                            $count = 0;
+		                            while($r = mysqli_fetch_assoc($rs)){
+		                                $count++;
+                                        //Lấy ra bảng danh mục chứa id đang xét
+                                        $id = $r['id_category'];
+                                        $sql2 = "SELECT * FROM categories WHERE id = '$id'";
+                                        $rs2 =  mysqli_query($connect,$sql2);
+                                        $r2 = mysqli_fetch_assoc($rs2);
+                                        //Lấy ra bảng nhà sản xuất chứa id đang xét
+                                        $id3 = $r['id_manufacturer'];
+                                        $sql3 = "SELECT * FROM manufacturers WHERE id = '$id3'";
+                                        $rs3 =  mysqli_query($connect,$sql3);
+                                        $r3 = mysqli_fetch_assoc($rs3);
+	                            ?>
+                                    <tr>
+                                        <td><?=$count?></td>			
+                                        <td><?=$r['id_category']?>-<?=$r2['name']?></td>
+                                        <td><?=$r['id_manufacturer']?>-<?=$r3['name']?></td>
+                                        <td><?=$r['name']?></td>
+                                        <td><img src="<?=$r['image']?>" alt="" style="width: 100px"></td>
+                                        <td><?=number_format($r['price'])?></td>
+                                        <td><?=$r['discount']?>%</td>
+                                        <td><?=$r['quantity']?></td>
+                                        <td><?=$r['description']?></td>
+                                        <td><button onclick="xoa(<?=$r['id']?>)">Xóa</button><a href="edit_product.php?id=<?=$r['id']?>"><button style = "margin-top:2px;">Sửa</button></a></td>
+                                    </tr>
+                                <?php  	
                                     }
-                                });
-                        }
+                                ?>
+                                </tbody>
+                            </table>
+                            <form action="remove_product.php" method="post" id="xoa">
+                                <input type="hidden" id="id" name="id">
+                            </form>
+                    </div>
 
-                        <?php
-                        if ($_SESSION['success'] == "Thêm thành công") { ?>
-                            swal("Success", "Thêm sản phẩm thành công", "success");
-                        <?php
-                        } else if ($_SESSION['success'] == "Sửa thành công") {
-                        ?>
-                            swal("Success", "Sửa sản phẩm thành công", "success");
-
-                        <?php } ?>
-                    </script>
                 </div>
                 <!-- container -->
 

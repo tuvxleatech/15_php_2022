@@ -1,17 +1,9 @@
-<?php
-session_start();
-require("../../services/connect.php");
-$sql = "SELECT  users.name, users.email, users.address, products.name, products.image,order_product.quantity,(products.price*(1-products.discount)) 
-as currentPrice, (products.quantity*(products.price*(1-products.discount))) as totalPrice  FROM `products` INNER JOIN order_product ON products.id =
- order_product.id_product INNER JOIN orders ON orders.id = order_product.id_order INNER JOIN users ON users.id = orders.id_user";
-$result = mysqli_query($connect, $sql);
-?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8" />
-    <title>Danh sách đơn hàng</title>
+    <title>Tất cả nhà sản xuất</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
     <meta content="Coderthemes" name="author" />
@@ -58,7 +50,87 @@ $result = mysqli_query($connect, $sql);
             <div class="h-100" id="left-side-menu-container" data-simplebar>
 
                 <!--- Sidemenu -->
-                <?php include("../../components/sidemenu.php"); ?>
+                <ul class="metismenu side-nav">
+
+                    <li class="side-nav-title side-nav-item">Trang chủ</li>
+
+                    <li class="side-nav-item">
+                        <a href="javascript: void(0);" class="side-nav-link">
+                            <i class="uil-store"></i>
+                            <span> Quản lý sản phẩm </span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <ul class="side-nav-second-level" aria-expanded="false">
+                            <li>
+                                <a href="index.php">Tất cả sản phẩm</a>
+                            </li>
+                            <li>
+                                <a href="add_product.php">Thêm sản phẩm mới</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="side-nav-item">
+                        <a href="javascript: void(0);" class="side-nav-link">
+                            <i class="uil-store"></i>
+                            <span> Quản lý nhà sản xuất </span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <ul class="side-nav-second-level" aria-expanded="false">
+                            <li>
+                                <a href="./manufacturer">Tất cả nhà sản xuất</a>
+                            </li>
+                            <li>
+                                <a href="./manufacturer/add_manufacturer.php">Thêm nhà sản xuất mới</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="side-nav-item">
+                        <a href="javascript: void(0);" class="side-nav-link">
+                            <i class="uil-store"></i>
+                            <span> Quản lý nhân viên </span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <ul class="side-nav-second-level" aria-expanded="false">
+                            <li>
+                                <a href="apps-ecommerce-products.html">Products</a>
+                            </li>
+                            <li>
+                                <a href="apps-ecommerce-products-details.html">Products Details</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="side-nav-item">
+                        <a href="javascript: void(0);" class="side-nav-link">
+                            <i class="uil-store"></i>
+                            <span> Quản lý khách hàng </span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <ul class="side-nav-second-level" aria-expanded="false">
+                            <li>
+                                <a href="apps-ecommerce-products.html">Products</a>
+                            </li>
+                            <li>
+                                <a href="apps-ecommerce-products-details.html">Products Details</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="side-nav-item">
+                        <a href="javascript: void(0);" class="side-nav-link">
+                            <i class="uil-store"></i>
+                            <span> Quản lý đơn hàng </span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <ul class="side-nav-second-level" aria-expanded="false">
+                            <li>
+                                <a href="apps-ecommerce-products.html">Products</a>
+                            </li>
+                            <li>
+                                <a href="apps-ecommerce-products-details.html">Products Details</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                </ul>
                 <div class="clearfix"></div>
 
             </div>
@@ -321,9 +393,9 @@ $result = mysqli_query($connect, $sql);
                         <i class="mdi mdi-menu"></i>
                     </button>
                     <div class="app-search dropdown d-none d-lg-block">
-                        <form>
+                        <form action="timkiem.php" method="post">
                             <div class="input-group">
-                                <input type="text" class="form-control dropdown-toggle" placeholder="Tìm kiếm..." id="top-search">
+                                <input type="text" name = "txtSearch" class="form-control dropdown-toggle" placeholder="Tìm kiếm..." id="top-search">
                                 <span class="mdi mdi-magnify search-icon"></span>
                                 <div class="input-group-append">
                                     <button class="btn btn-primary" type="submit">Tìm kiếm</button>
@@ -331,60 +403,6 @@ $result = mysqli_query($connect, $sql);
                             </div>
 
                         </form>
-
-                        <div class="dropdown-menu dropdown-menu-animated dropdown-lg" id="search-dropdown">
-                            <!-- item-->
-                            <div class="dropdown-header noti-title">
-                                <h5 class="text-overflow mb-2">Found <span class="text-danger">17</span> results</h5>
-                            </div>
-
-                            <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                <i class="uil-notes font-16 mr-1"></i>
-                                <span>Analytics Report</span>
-                            </a>
-
-                            <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                <i class="uil-life-ring font-16 mr-1"></i>
-                                <span>How can I help you?</span>
-                            </a>
-
-                            <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                <i class="uil-cog font-16 mr-1"></i>
-                                <span>User profile settings</span>
-                            </a>
-
-                            <!-- item-->
-                            <div class="dropdown-header noti-title">
-                                <h6 class="text-overflow mb-2 text-uppercase">Users</h6>
-                            </div>
-
-                            <div class="notification-list">
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <div class="media">
-                                        <img class="d-flex mr-2 rounded-circle" src="../assets/images/users/avatar-2.jpg" alt="Generic placeholder image" height="32">
-                                        <div class="media-body">
-                                            <h5 class="m-0 font-14">Erwin Brown</h5>
-                                            <span class="font-12 mb-0">UI Designer</span>
-                                        </div>
-                                    </div>
-                                </a>
-
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <div class="media">
-                                        <img class="d-flex mr-2 rounded-circle" src="../assets/images/users/avatar-5.jpg" alt="Generic placeholder image" height="32">
-                                        <div class="media-body">
-                                            <h5 class="m-0 font-14">Jacob Deo</h5>
-                                            <span class="font-12 mb-0">Developer</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
                     </div>
                 </div>
                 <!-- end Topbar -->
@@ -396,118 +414,112 @@ $result = mysqli_query($connect, $sql);
                     <div class="row">
                         <div class="col-12">
                             <div class="page-title-box">
-                                <div class="page-title-right">
-                                </div>
-                                <h4 class="page-title">Danh sách đơn hàng</h4>
+                                <h4 class="page-title">Sửa sản phẩm</h4>
                             </div>
                         </div>
                     </div>
-
                     <!-- end page title -->
                     <div class="row justify-content-center">
                         <div class="col-xl-10 col-lg-10 ">
-                            <table class="table table-striped table-centered mb-0">
-                                <thead>
-                                    <tr>
-                                        <th>STT</th>
-                                        <th>Tên khách hàng </th>
-                                        <th>Email</th>
-                                        <th>Địa chỉ nhận hàng</th>
-                                        <th>Tên hàng</th>
-                                        <th></th>
-                                        <th>Số lượng</th>
-                                        <th>Đơn giá</th>
-                                        <th>Tổng tiền</th>
-                                        <th>Repair</th>
-                                        <th>Delete</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    $count = 0;
-                                    foreach ($result as $each) {
-                                        $count++;
-                                    ?>
+                            <?php
+                                include("../../connect.php");
+                                $id = $_GET['id'];
+                                $maDM = trim($_GET['maDM']);
+                                $maNSX = trim($_GET['maNSX']);
+                                $tenSP = trim($_GET['tenSP']);
+                                $gia = trim($_GET['gia']);
+                                $discount = trim($_GET['discount']);
+                                $soluong = trim($_GET['soluong']);
+                                $mota = trim($_GET['mota']);
+                                $temTenSP = trim($_GET['tempTenSP']);
+                                $anh = trim($_GET['anh']);
+                            ?>
+                            <div class="row justify-content-center">
+                        <div class="col-xl-10 col-lg-10 ">
+                            <form action="process_edit_product.php" method="post" enctype="multipart/form-data">
+                                <table class="table table-striped table-centered mb-0">
                                         <tr>
-                                            <td><?php echo $count ?></td>
-                                            <td><?php echo $each['users.name'] ?></td>
-                                            <td><?php echo $each['users.email'] ?></td>
-                                            <td><?php echo $each['users.address'] ?></td>
+                                            <th>Mã Danh Mục</th>
                                             <td>
-                                                <?php echo $each['products.name'] ?>
-                                            </td>
+                                                <select name="id_category"  >
+                                                    <?php
+                                                        include("../../connect.php");
+                                                        $sql = "SELECT * FROM categories";
+                                                        $rs = mysqli_query($connect,$sql);                    
+                                                        while($r = mysqli_fetch_assoc($rs)){
+                                                    ?>
+                                                        <option value="<?=$r['id']?>" <?php if($r['id'] == $maDM){echo("selected");}?>><?=$r['id']?>-<?=$r['name']?></option>                                                        
+                                                   <?php
+                                                        }
+                                                    ?>
+                                                </select>
+                                            </td>                                         
+                                        </tr>
+                                        <tr>
+                                            <th>Mã Nhà Sản Xuất</th>
                                             <td>
-                                                <img src=" <?php echo $each['products.image'] ?>" class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt="product">
-                                            </td>
-                                            <td>
-                                                <?php echo $each['products.quantity'] ?>
-                                            </td>
-                                            <td>
-                                                <?php echo $each['currentPrice'] ?>
-                                            </td>
-                                            <td>
-                                                <?php echo $each['totalPrice'] ?>
-                                            </td>
-                                            <td>
-                                                <a href="./edit_customer.php?id=<?php echo $each['id'] ?>" class="btn btn-outline-warning">Repair</a>
-                                            </td>
-                                            <td>
-                                                <button onclick="remove(<?php echo $each['id'] ?>)" class="btn btn-outline-danger">Delete</button>
+                                                <select name="id_manufacturer">
+                                                    <?php
+                                                        include("../connect.php");
+                                                        $sql2 = "SELECT * FROM manufacturers";
+                                                        $rs2 = mysqli_query($connect,$sql2);                    
+                                                        while($r2 = mysqli_fetch_assoc($rs2)){
+                                                    ?>
+                                                        <option value="<?=$r2['id']?>" <?php if($r2['id'] == $maNSX){echo("selected");}?>><?=$r2['id']?>-<?=$r2['name']?></option>                                                        
+                                                   <?php
+                                                        }
+                                                    ?>
+                                                </select>         
                                             </td>
                                         </tr>
-
-                                    <?php } ?>
-
-                                </tbody>
-                            </table>
-                            <form action="../customer/delete_customer.php" method="POST" id="delete">
-                                <input type="hidden" name="id" id="idCustomer">
+                                        <tr>
+                                            <th>Tên Sản Phẩm</th>
+                                            <td> <input value = "<?=$tenSP?>" required type="text" name = "name" id = "product_name" style ="width:62%"></td>
+                                            <input type="hidden" name = "tempTenSP" value = "<?=$temTenSP?>">
+                                        </tr>
+                                        <tr>
+                                            <th>Giá</th>
+                                            <td><input value = "<?=$gia?>" required type="number" name = "price"></td>                                           
+                                        </tr>  
+                                        <tr>
+                                            <th>Giảm giá</th>
+                                            <td>
+                                                <select name="discount">
+                                                   <option value="0" <?php if($discount == 0){echo("selected");}?>>0%</option>
+                                                   <option value="10" <?php if($discount == 10){echo("selected");}?>>10%</option> 
+                                                   <option value="20" <?php if($discount == 20){echo("selected");}?>>20%</option>  
+                                                   <option value="30" <?php if($discount == 30){echo("selected");}?>>30%</option>      
+                                                </select>                                           
+                                            </td>
+                                        </tr>                                
+                                        <tr>
+                                            <th>Số Lượng</th>
+                                            <td><input value = "<?=$soluong?>" required type="number" name = "quantity"></td>
+                                        </tr>
+                                        
+                                        <tr>
+                                            <th>Hình Ảnh</th>
+                                            <td>
+                                            <img src="<?=$anh?>"  style="width: 100px" alt="">
+                                            <input required type="file" name = "img"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Mô Tả</th>
+                                            <td><textarea required name="description" rows="5" cols="60"><?=$mota?></textarea></td>
+                                        </tr>
+                                            
+                                        <tr>
+                                            <th>Hành động</th>
+                                            <td><button type ="submit">Sửa</button></td>
+                                        </tr>
+                                        <input type="hidden" name = "id" value ="<?=$id?>">
+                                    </table>
                             </form>
                         </div>
                     </div>
+
                 </div>
-                <script>
-                    function remove(id) {
-                        document.getElementById('idCustomer').value = id;
-                        var form = document.getElementById('delete');
-
-                        swal({
-                                title: "Bạn chắc chắn?",
-                                text: "Khi đã xóa, bạn sẽ không thể lấy lại được bản ghi!",
-                                icon: "warning",
-                                buttons: true,
-                                dangerMode: true,
-                            })
-                            .then((willDelete) => {
-                                if (willDelete) {
-                                    form.submit();
-                                    swal("Bạn đã xóa một bản ghi! " + id, {
-                                        icon: "success",
-                                    });
-
-                                } else {
-                                    swal("Bản ghi an toàn!");
-                                }
-                            });
-                    }
-                </script>
                 <!-- container -->
-                <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-                <script>
-                    <?php if (isset($_SESSION["success"])) {
-                        if ($_SESSION["success"] == "Thành công") { ?>
-
-                            swal("Success", "Chỉnh sửa thành công", "success");
-                        <?php
-                        }
-                        ?>
-
-
-
-                    <?php
-                        unset($_SESSION["success"]);
-                    } ?>
-                </script>
 
             </div>
             <!-- content -->

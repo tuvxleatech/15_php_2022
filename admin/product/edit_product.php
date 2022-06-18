@@ -422,7 +422,7 @@
                     <div class="row justify-content-center">
                         <div class="col-xl-10 col-lg-10 ">
                             <?php
-                                include("../../services/connect.php");
+                                include("../../connect.php");
                                 $id = $_GET['id'];
                                 $sql = "SELECT * FROM products WHERE id = '$id'";
                                 $rs = mysqli_query($connect,$sql);
@@ -439,7 +439,7 @@
                                                             $rs2 = mysqli_query($connect,$sql2);                    
                                                             while($r2 = mysqli_fetch_assoc($rs2)){
                                                         ?>
-                                                            <option <?php if($r2['id'] == $r['id_category']){echo("selected");} ?> value="<?=$r2['id']?>"><?=$r2['id']?></option>                                                        
+                                                            <option <?php if($r2['id'] == $r['id_category']){echo("selected");} ?> value="<?=$r2['id']?>"><?=$r2['id']?>-<?=$r2['name']?></option>                                                        
                                                     <?php
                                                             }
                                                         ?>
@@ -455,7 +455,7 @@
                                                             $rs3 = mysqli_query($connect,$sql3);                    
                                                             while($r3 = mysqli_fetch_assoc($rs3)){
                                                         ?>
-                                                            <option <?php if($r3['id'] == $r['id_manufacturer']){echo("selected");} ?> value="<?=$r3['id']?>"><?=$r3['id']?></option>                                                        
+                                                            <option <?php if($r3['id'] == $r['id_manufacturer']){echo("selected");} ?> value="<?=$r3['id']?>"><?=$r3['id']?>-<?=$r3['name']?></option>                                                        
                                                     <?php
                                                             }
                                                         ?>
@@ -464,18 +464,19 @@
                                             </tr>
                                             <tr>
                                                 <th>Tên Sản Phẩm</th>
-                                                <td><input type="text" name = "name" value = "<?=$r['name']?>"></td>
+                                                <td><input required type="text" name = "name" value = "<?=$r['name']?>"></td>
+                                                <input type="hidden" name = "tempTenSP" value = "<?=$r['name']?>">
                                             </tr>
                                             <tr>
                                                 <th>Hình Ảnh</th>
                                                 <td>
                                                     <img src="<?=$r['image']?>" alt="ảnh minh họa" style="width: 100px">
-                                                    <input type="file" name = "img">
+                                                    <input required type="file" name = "img">
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <th>Giá</th>
-                                                <td><input type="text" name = "price" value = "<?=$r['price']?>"></td>                                              
+                                                <td><input required type="number" name = "price" value = "<?=$r['price']?>"></td>                                              
                                             </tr> 
                                             <tr>
                                                 <th>Giảm giá</th>
@@ -493,11 +494,11 @@
                                             </tr>                                  
                                             <tr>
                                                 <th>Số Lượng</th>
-                                                <td><input type="text" name = "quantity" value = "<?=$r['quantity']?>"></td>   
+                                                <td><input required type="number" name = "quantity" value = "<?=$r['quantity']?>"></td>   
                                             </tr>
                                             <tr>
                                                 <th>Mô Tả</th>
-                                                <td><textarea name="description" rows="5" cols="60"><?=$r['description']?></textarea></td>
+                                                <td><textarea required name="description" rows="5" cols="60"><?=$r['description']?></textarea></td>
                                             </tr>
                                             
                                             <tr>
