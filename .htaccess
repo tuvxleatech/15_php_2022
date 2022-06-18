@@ -1,0 +1,2 @@
+
+ErrorDocument 404 http://localhost/15_php_2022/pagenotfound/notFound.html
