@@ -48,12 +48,6 @@ $related_products = mysqli_query($connect, $sql);
 </head>
 
 <body>
-  <!--[if lt IE 8]>
-      <p class="browserupgrade">
-        You are using an <strong>outdated</strong> browser. Please
-        <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.
-      </p>
-    <![endif]-->
   <!-- header start -->
   <?php include('components/header.php') ?>
   <!-- header end -->
@@ -61,8 +55,6 @@ $related_products = mysqli_query($connect, $sql);
     <div class="container">
       <div class="breadcrumb-content text-center">
         <h2 class="text-dark">Chi tiết sản phẩm</h2>
-        <button class="btn btn-success btn-test"></button>
-
       </div>
     </div>
   </div>
@@ -97,21 +89,21 @@ $related_products = mysqli_query($connect, $sql);
                 <div class="tab-pane fade" id="pro-details2" role="tabpanel">
                   <div class="easyzoom easyzoom--overlay is-ready">
                     <a href="assets/img/product-details/bl2.jpg">
-                      <img src="assets/img/product-details/l6-details-2.jpg" alt="" />
+                      <img src="<?php echo $product['image'] ?>" alt="" />
                     </a>
                   </div>
                 </div>
                 <div class="tab-pane fade" id="pro-details3" role="tabpanel">
                   <div class="easyzoom easyzoom--overlay is-ready">
                     <a href="assets/img/product-details/bl3.jpg">
-                      <img src="assets/img/product-details/l7-details-2.jpg" alt="" />
+                      <img src="<?php echo $product['image'] ?>" alt="" />
                     </a>
                   </div>
                 </div>
                 <div class="tab-pane fade" id="pro-details4" role="tabpanel">
                   <div class="easyzoom easyzoom--overlay is-ready">
                     <a href="assets/img/product-details/bl4.jpg">
-                      <img src="assets/img/product-details/l8-details-2.jpg" alt="" />
+                      <img src="<?php echo $product['image'] ?>" alt="" />
                     </a>
                   </div>
                 </div>
@@ -260,7 +252,7 @@ $related_products = mysqli_query($connect, $sql);
     </div>
   </div>
   <!-- product area end -->
-  <?php include('footer.php') ?>
+  <?php include('components/footer.php') ?>
   <!-- modal -->
   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">

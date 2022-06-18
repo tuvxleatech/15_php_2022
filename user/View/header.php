@@ -72,7 +72,7 @@ session_start(); ?>
                 <div class="header-cart cart-res">
                     <a class="icon-cart" href="#">
                         <i class="ti-shopping-cart"></i>
-                        <span class="shop-count pink">02</span>
+                        <span class="shop-count pink">0</span>
                     </a>
                     <ul class="cart-dropdown">
                         <li class="cart-btn-wrapper">

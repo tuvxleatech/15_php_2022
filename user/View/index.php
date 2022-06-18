@@ -64,7 +64,10 @@ include("../../services/connect.php");
                                         </a>
                                         <span><?= -$r['discount'] ?>%</span>
                                         <div class="product-action">
-                                            <a class="animate-left" title="Add To Cart" href="cart.php?id=<?= $r['id'] ?>&name=<?= $r['name'] ?>&price=<?= $r['price'] * (100 - $r['discount']) / 100 ?>">
+                                            <!-- <a onclick="addToCart()" class="animate-left" title="Add To Cart" href="cart.php?id=<?= $r['id'] ?>&name=<?= $r['name'] ?>&price=<?= $r['price'] * (100 - $r['discount']) / 100 ?>">
+                                                <i class="pe-7s-cart"></i>
+                                            </a> -->
+                                            <a onclick="addToCart()" class="animate-left" title="Add To Cart">
                                                 <i class="pe-7s-cart"></i>
                                             </a>
                                             <a class="animate-right" title="Quick View" data-toggle="modal" data-target="#exampleModal" href="#">
@@ -351,7 +354,16 @@ include("../../services/connect.php");
         </div>
     </div>
     <!-- insta feed end -->
-    <?php include('footer.php') ?>
+    <?php include('components/footer.php') ?>
+
+    <script>
+        function addToCart() {
+            swal("Thêm vào giỏ hàng thành công !");
+        }
+    </script>
+
+    </div>
+
     <!-- modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -443,18 +455,7 @@ include("../../services/connect.php");
         </div>
     </div>
     <!-- all js here -->
-    <script src="assets/js/vendor/jquery-1.12.0.min.js"></script>
-    <script src="assets/js/popper.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-    <script src="assets/js/jquery.magnific-popup.min.js"></script>
-    <script src="assets/js/isotope.pkgd.min.js"></script>
-    <script src="assets/js/imagesloaded.pkgd.min.js"></script>
-    <script src="assets/js/jquery.counterup.min.js"></script>
-    <script src="assets/js/waypoints.min.js"></script>
-    <script src="assets/js/ajax-mail.js"></script>
-    <script src="assets/js/owl.carousel.min.js"></script>
-    <script src="assets/js/plugins.js"></script>
-    <script src="assets/js/main.js"></script>
+    <?php include('components/link_footer.php') ?>
 </body>
 
 </html>

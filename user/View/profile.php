@@ -59,7 +59,7 @@
             </div>
         </div>
     </div>
-    <?php include('footer.php') ?>
+    <?php include('components/footer.php') ?>
     <!-- modal -->
     <div class="modal fade" id="exampleCompare" tabindex="-1" role="dialog" aria-hidden="true">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
