@@ -28,29 +28,12 @@
         <div class="left-side-menu">
 
             <!-- LOGO -->
-            <a href="index.php" class="logo text-center logo-light">
-                <span class="logo-lg">
-                    <img src="../assets/images/logo.png" alt="" height="16">
-                </span>
-                <span class="logo-sm">
-                    <img src="../assets/images/logo_sm.png" alt="" height="16">
-                </span>
-            </a>
-
-            <!-- LOGO -->
-            <a href="index.php" class="logo text-center logo-dark">
-                <span class="logo-lg">
-                    <img src="../assets/images/logo-dark.png" alt="" height="16">
-                </span>
-                <span class="logo-sm">
-                    <img src="../assets/images/logo_sm_dark.png" alt="" height="16">
-                </span>
-            </a>
+            <?php include('../components/logo.php') ?>
 
             <div class="h-100" id="left-side-menu-container" data-simplebar>
 
                 <!--- Sidemenu -->
-               <?php include("../../components/sidemenu.php"); ?>
+                <?php include("../components/sidemenu.php"); ?>
                 <div class="clearfix"></div>
 
             </div>
@@ -914,7 +897,7 @@
             <!-- content -->
 
             <!-- Footer Start -->
-            <?php include('footer.php'); ?>
+            <?php include('../components/footer.php'); ?>
             <!-- end Footer -->
 
         </div>
