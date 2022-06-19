@@ -47,7 +47,7 @@
                 <a href="../../admin/employee">Danh sách nhân viên</a>
             </li>
             <li>
-                <a href="../../add_employee.php">Thêm mới nhân viên</a>
+                <a href="../../admin/employee/add_employee.php">Thêm mới nhân viên</a>
             </li>
         </ul>
     </li>   

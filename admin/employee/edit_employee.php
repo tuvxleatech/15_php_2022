@@ -3,7 +3,8 @@ session_start();
 require("../../services/connect.php");
 if (isset($_GET["id"])) {
     $id = $_GET["id"];
-    $sql = "SELECT `name`, `phone`, `address`, `image` FROM `manufacturers` WHERE id = $id";
+    $sql = "SELECT `name`,email , `password`, `address`,phone, `image` FROM `users` WHERE id = $id";
+    // die($sql);
     $a = mysqli_query($connect, $sql);
     $rs = mysqli_fetch_assoc($a);
 
@@ -367,6 +368,13 @@ if (isset($_GET["id"])) {
                                             <input type="text" name="name" value="<?php echo $rs['name']?>">
                                         </td>
                                     </tr>
+                                    <tr>
+                                        <th>email</th>
+                                        <td>
+                                            <input type="text" name="email" value="<?php echo $rs['email'] ?>">
+                                        </td>
+                                    </tr>
+                                   
                                     <tr>
                                         <th>Số điện thoại</th>
                                         <td><input type="text" name="phone" value="<?= $rs['phone'] ?>"></td>

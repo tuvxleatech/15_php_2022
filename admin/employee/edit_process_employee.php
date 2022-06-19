@@ -10,4 +10,5 @@ $address = $_POST['address'];
 $sql = "UPDATE `manufacturers` SET `name`='$name',`phone`='$sdt',`address`='$address' WHERE id = $id";
 mysqli_query($connect, $sql);
 $_SESSION['success'] = "Thành công";
+header('location:../../admin/employee');
 }
