@@ -3,7 +3,7 @@ session_start();
 require("../../services/connect.php");
 if (isset($_GET["id"])) {
     $id = $_GET["id"];
-    $sql = "SELECT `name`, `phone`, `address`, `image` FROM `users` WHERE id = $id";
+    $sql = "SELECT `name`, `email`,`phone`, `address`, `image` FROM `users` WHERE id = $id";
     $a = mysqli_query($connect, $sql);
     $rs = mysqli_fetch_assoc($a);
 }
@@ -15,7 +15,7 @@ if (isset($_GET["id"])) {
 
 <head>
     <meta charset="utf-8" />
-    <title>Tất cả nhà sản xuất</title>
+    <title>Chỉnh sửa nhân viên</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
     <meta content="Coderthemes" name="author" />
@@ -366,7 +366,7 @@ if (isset($_GET["id"])) {
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th>email</th>
+                                        <th>Email</th>
                                         <td>
                                             <input type="text" name="email" value="<?php echo $rs['email'] ?>">
                                         </td>
