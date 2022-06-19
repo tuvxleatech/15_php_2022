@@ -47,16 +47,19 @@ session_start();
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php $count = 0; ?>
-                                        <?php var_dump($cart) ?>
+                                        <?php $count = 0;
+                                        $total_money = 0;
+                                        $total_quantity = 0; ?>
                                         <?php foreach ($cart as $id => $item) : ?>
                                             <?php
                                             $count++;
+                                            $total_quantity += $item['quantity'];
+                                            $total_money += $item['quantity'] * $item['price'];
                                             ?>
                                             <tr>
                                                 <td><?= $count ?></td>
                                                 <td><?= $item['name'] ?></td>
-                                                <td><img src="<?php $item['image'] ?>" class="cart-image" alt=""></td>
+                                                <td><img src="<?php echo $item['image'] ?>" class="cart-image" alt=""></td>
                                                 <td class="product-quantity">
                                                     <button class="btn btn-secondary btn-update-quantity" data-id="<?php echo $id ?>" data-type="0">-</button>
                                                     <span class="span-quantity"><?php echo $item['quantity'] ?></span>
@@ -91,20 +94,20 @@ session_start();
                                         <ul>
                                             <li>Số sản phẩm: <span>
                                                     <?php
-                                                    if (isset($total)) {
-                                                        echo number_format($total);
+                                                    if (isset($total_quantity)) {
+                                                        echo $total_quantity;
                                                     } else echo 0;
                                                     ?>
                                                 </span></li>
                                             <li>Tổng tiền: <span>
                                                     <?php
-                                                    if (isset($total)) {
-                                                        echo number_format($total);
+                                                    if (isset($total_money)) {
+                                                        echo number_format($total_money);
                                                     } else echo 0;
                                                     ?>
                                                 </span></li>
                                         </ul>
-                                        <a href="checkout.php">Proceed to checkout</a>
+                                        <a href="checkout.php">Đặt hàng</a>
                                     </div>
                                 </div>
                             </div>

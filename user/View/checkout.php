@@ -11,17 +11,14 @@
         <![endif]-->
     <!-- header start -->
     <?php include('components/header.php') ?>
+    <?php
+    if (isset($_SESSION['user'])) {
+        $user = $_SESSION['user'];
+    }
+    ?>
     <!-- header end -->
-    <div class="breadcrumb-area pt-205 pb-210" style="background-image: url(assets/img/bg/breadcrumb.jpg)">
-        <div class="container">
-            <div class="breadcrumb-content text-center">
-                <h2>checkout</h2>
-                <ul>
-                    <li><a href="#">home</a></li>
-                    <li> checkout </li>
-                </ul>
-            </div>
-        </div>
+    <div class="container">
+        <h2>Thông tin thanh toán</h2>
     </div>
     <!-- checkout-area start -->
     <div class="checkout-area ptb-100">
@@ -72,44 +69,47 @@
                     </div>
                 </div>
             </div>
+
             <div class="row">
                 <div class="col-lg-6 col-md-12 col-12">
-                    <form action="#">
+                    <form id="form_checkout" action="process_checkout.php" method="POST">
+                        <input type="hidden" name="id_user" value="<?php echo $user['id'] ?>">
                         <div class="checkbox-form">
                             <h3>Chi tiết hóa đơn</h3>
+                            <?php if (isset($_SESSION['error_checkout'])) { ?>
+                                <h5 class="text-danger">
+                                    <?php echo $_SESSION['error_checkout'];
+                                    unset($_SESSION['error_checkout']); ?>
+                                </h5>
+                            <?php } ?>
                             <div class="row">
                                 <div class="col-md-12">
                                 </div>
                                 <div class="col-md-12">
                                     <div class="checkout-form-list">
                                         <label>Họ tên người nhận <span class="required">*</span></label>
-                                        <input type="text" placeholder="" />
+                                        <input name="name_receiver" type="text" placeholder="" value="<?php echo $user['name'] ?>" />
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="checkout-form-list">
                                         <label>Địa chỉ nhận hàng <span class="required">*</span></label>
-                                        <input type="text" placeholder="" />
+                                        <input type="text" name="address_receiver" placeholder="" value="<?php echo $user['address'] ?>" />
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="checkout-form-list">
-                                        <label>Địa chỉ email <span class="required">*</span></label>
-                                        <input type="email" />
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <div class="checkout-form-list">
                                         <label>Số điện thoại <span class="required">*</span></label>
-                                        <input type="text" />
+                                        <input name="phone_receiver" type="number" value="<?php echo $user['phone'] ?>" />
                                     </div>
                                 </div>
                                 <div class="order-notes">
                                     <div class="checkout-form-list mrg-nn">
                                         <label>Notes</label>
-                                        <textarea id="checkout-mess" cols="50" rows="30" placeholder="Ghi chú về đơn đặt hàng của bạn, ví dụ: lưu ý đặc biệt để giao hàng."></textarea>
+                                        <textarea name="notes" id="checkout-mess" cols="50" rows="30" placeholder="Ghi chú về đơn đặt hàng của bạn, ví dụ: lưu ý đặc biệt để giao hàng."></textarea>
                                     </div>
                                 </div>
+                                <input type="hidden" name="total_price" value="<?php echo $total_money; ?>">
                             </div>
                         </div>
                     </form>
@@ -126,34 +126,33 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-
-                                    <tr class="cart_item">
-                                        <td class="product-name">
-                                            Vestibulum suscipit <strong class="product-quantity"> × 1</strong>
-                                        </td>
-                                        <td class="product-total">
-                                            <span class="amount">£165.00</span>
-                                        </td>
-                                    </tr>
-                                    <tr class="cart_item">
-                                        <td class="product-name">
-                                            Vestibulum dictum magna <strong class="product-quantity"> × 1</strong>
-                                        </td>
-                                        <td class="product-total">
-                                            <span class="amount">£50.00</span>
-                                        </td>
-                                    </tr>
-
+                                    <?php
+                                    $total_money = 0;
+                                    if (isset($_SESSION['cart'])) {
+                                        $cart = $_SESSION['cart'];
+                                    }
+                                    ?>
+                                    <?php foreach ($cart as $item) { ?>
+                                        <?php $total_money += $item['price']  * $item['quantity'] ?>
+                                        <tr class="cart_item">
+                                            <td class="product-name">
+                                                <?php echo $item['name'] ?> <strong class="product-quantity"> × <?= $item['quantity'] ?></strong>
+                                            </td>
+                                            <td class="product-total">
+                                                <span class="amount"><?php echo number_format($item['price']  * $item['quantity']) ?>VND</span>
+                                            </td>
+                                        </tr>
+                                    <?php } ?>
                                 </tbody>
                                 <tfoot>
 
                                     <tr class="cart-subtotal">
                                         <th>Tổng giá trị</th>
-                                        <td><span class="amount">£215.00</span></td>
+                                        <td><span class="amount"><?php echo number_format($total_money) ?>VND</span></td>
                                     </tr>
                                     <tr class="order-total">
                                         <th>Số tiền cần thanh toán</th>
-                                        <td><strong><span class="amount">£215.00</span></strong>
+                                        <td><strong><span class="amount"><?php echo number_format($total_money) ?>VND</span></strong>
                                         </td>
                                     </tr>
 
@@ -195,7 +194,7 @@
                                     </div>
                                 </div>
                                 <div class="order-button-payment">
-                                    <input type="submit" value="Đặt hàng" />
+                                    <input type="submit" value="Đặt hàng" onclick="handleClick()" />
                                 </div>
                             </div>
                         </div>
@@ -314,18 +313,13 @@
 
 
     <!-- all js here -->
-    <script src="assets/js/vendor/jquery-1.12.0.min.js"></script>
-    <script src="assets/js/popper.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-    <script src="assets/js/jquery.magnific-popup.min.js"></script>
-    <script src="assets/js/isotope.pkgd.min.js"></script>
-    <script src="assets/js/imagesloaded.pkgd.min.js"></script>
-    <script src="assets/js/jquery.counterup.min.js"></script>
-    <script src="assets/js/waypoints.min.js"></script>
-    <script src="assets/js/ajax-mail.js"></script>
-    <script src="assets/js/owl.carousel.min.js"></script>
-    <script src="assets/js/plugins.js"></script>
-    <script src="assets/js/main.js"></script>
+    <?php include('components/link_footer.php') ?>
+    <script>
+        function handleClick() {
+            $("input[name=total_price]").val("<?php echo $total_money ?>");
+            $('#form_checkout').submit();
+        }
+    </script>
 </body>
 
 </html>

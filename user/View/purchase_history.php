@@ -10,8 +10,8 @@ include("../../services/connect.php");
 
 <body>
     <?php
-        session_start(); 
-        include("../../services/connect.php");
+    session_start();
+    include("../../services/connect.php");
     ?>
     <!-- header start -->
     <div class="header-area">
@@ -181,98 +181,84 @@ include("../../services/connect.php");
     <!-- header end -->
 
     <!-- body start -->
-<body>
-    <div class="cart-main-area pt-95 pb-100">
-        <br><br><br><br><br><br><br>    
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-6">
-                    <h1 class="cart-heading">Lịch sử mua hàng</h1>
-                    <form action="#">
-                        <div class="table-content table-responsive">
-                            <?php
-                            //lấy giỏ hàng
-                            if (isset($_SESSION['user'])) {  
-                                //$cart = $_SESSION['cart'];
-                                $user_id = $_SESSION['user']['id'];
-                                $sql = " SELECT * FROM orders WHERE id_user = '$user_id' ";
-                                $rs = mysqli_query($connect, $sql);
-                                $total = 0;
-                                $count = 0;
-                            ?>
-                                <table class="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>STT</th>
-                                            <th>Ngày tạo đơn</th>
-                                            <th>Thành tiền</th>
-                                            <th>Trạng thái</th>
-                                            <th>Chi tiết đơn hàng </th>
-                                    </thead>
-                                    <tbody>
-                                        <?php
-                                         while($row = mysqli_fetch_assoc($rs)){
-                                            $count++;
-                                            $total += $row['total_price'];
-                                        ?>
-                                          <tr>
-                                            <td><?=$count?></td>
-                                            <td><?=$row['created_at']?></td>
-                                            <td><?=number_format($row['total_price']) .'VND'?></td>
-                                            <td><?=$row['status']?></td>
-                                            <td>
-                                                        <button type="button" class="btn btn-success">
-                                                            <a href="order_details.php?order_id=<?$row['order_id']?>">Chi tiết</a>
-                                                        </button>
-                                            </td>
-                                  
-                                          </tr>
-                                        <?php    
-                                          }
 
-                                        ?>
-                                        <tr>
-                                            <td colspan="4"><strong>Tổng tiền</strong></td>
-                                            <td><b id="tongTien"><?= number_format($total) ?></b></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            <?php
-                            } else {
-                                echo 'Đăng nhập để xem lại lịch sử mua hàng';
-                            }
-                            ?>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-5 ml-auto">
-                                <div class="cart-page-total">
-                                    <a href="index.php">Trở về trang chủ</a>
+    <body>
+        <div class="cart-main-area pt-95 pb-100">
+            <br><br><br><br><br><br><br>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-6">
+                        <h1 class="cart-heading">Lịch sử mua hàng</h1>
+                        <form action="#">
+                            <div class="table-content table-responsive">
+                                <?php
+                                //lấy giỏ hàng
+                                if (isset($_SESSION['user'])) {
+                                    //$cart = $_SESSION['cart'];
+                                    $user_id = $_SESSION['user']['id'];
+                                    $sql = " SELECT * FROM orders WHERE id_user = '$user_id' ";
+                                    $rs = mysqli_query($connect, $sql);
+                                    $total = 0;
+                                    $count = 0;
+                                ?>
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>STT</th>
+                                                <th>Ngày tạo đơn</th>
+                                                <th>Thành tiền</th>
+                                                <th>Trạng thái</th>
+                                                <th>Chi tiết đơn hàng </th>
+                                        </thead>
+                                        <tbody>
+                                            <?php foreach ($rs as $item) :
+                                                $total += $item['total_price'];
+                                            ?>
+                                                <tr>
+                                                    <td><?= $count ?></td>
+                                                    <td><?= $item['created_at'] ?></td>
+                                                    <td><?= number_format($item['total_price']) . 'VND' ?></td>
+                                                    <td><?= $item['status'] ?></td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-success">
+                                                            <a href="order_details.php?id=<?php echo $item['id'] ?>">Chi tiết</a>
+                                                        </button>
+                                                    </td>
+
+                                                </tr>
+                                            <?php endforeach ?>
+                                            <tr>
+                                                <td colspan="4"><strong>Tổng tiền</strong></td>
+                                                <td><b id="tongTien"><?= number_format($total) ?></b></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                <?php
+                                } else {
+                                    echo 'Đăng nhập để xem lại lịch sử mua hàng';
+                                }
+                                ?>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-5 ml-auto">
+                                    <div class="cart-page-total">
+                                        <a href="index.php">Trở về trang chủ</a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </form>
+                        </form>
 
 
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- all js here -->
-    <script src="assets/js/vendor/jquery-1.12.0.min.js"></script>
-    <script src="assets/js/popper.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-    <script src="assets/js/jquery.magnific-popup.min.js"></script>
-    <script src="assets/js/isotope.pkgd.min.js"></script>
-    <script src="assets/js/imagesloaded.pkgd.min.js"></script>
-    <script src="assets/js/jquery.counterup.min.js"></script>
-    <script src="assets/js/waypoints.min.js"></script>
-    <script src="assets/js/ajax-mail.js"></script>
-    <script src="assets/js/owl.carousel.min.js"></script>
-    <script src="assets/js/plugins.js"></script>
-    <script src="assets/js/main.js"></script>
-</body>
-<?php
-        include('footer.php');
+        <!-- all js here -->
+        <?php include('components/link_footer.php') ?>
+    </body>
+    <?php
+    include('components/footer.php');
     ?>
+
 </html>
