@@ -58,7 +58,7 @@ require("../../services/connect.php");
             <div class="h-100" id="left-side-menu-container" data-simplebar>
 
                 <!--- Sidemenu -->
-               <?php include("../../components/sidemenu.php"); ?>
+                <?php include("../../components/sidemenu.php"); ?>
                 <div class="clearfix"></div>
 
             </div>

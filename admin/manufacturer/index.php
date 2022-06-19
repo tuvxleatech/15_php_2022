@@ -432,8 +432,8 @@ $result = mysqli_query($connect, $sql);
                                                 <img src="../../assets/images/users/avatar-2.jpg" alt="table-user" class="mr-2 rounded-circle" />
                                             </td>
                                             <td class="table-action">
-                                               <a href="../../admin/employee/edit_employee.php?<?php echo $each['id'] ?>" class="btn btn-outline-warning">Sửa</a>
-                                               
+                                                <a href="../../admin/manufacturer/edit_manufacturer.php?id=<?php echo $each['id'] ?>" class="btn btn-outline-warning">Sửa</a>
+
                                                 <button class="btn btn-outline-danger">Xóa</button>
                                             </td>
                                         </tr>

@@ -3,10 +3,9 @@ session_start();
 require("../../services/connect.php");
 if (isset($_GET["id"])) {
     $id = $_GET["id"];
-    $sql = "SELECT `name`, `phone`, `address`, `image` FROM `manufacturers` WHERE id = $id";
+    $sql = "SELECT `name`, `phone`, `address`, `image` FROM `users` WHERE id = $id";
     $a = mysqli_query($connect, $sql);
     $rs = mysqli_fetch_assoc($a);
-
 }
 
 
@@ -355,16 +354,15 @@ if (isset($_GET["id"])) {
                     <div class="row justify-content-center">
                         <div class="col-xl-10 col-lg-10 ">
 
-                            <form action="../employee/edit_process_employee.php" method="post" >
+                            <form action="edit_process_employee.php" method="post">
                                 <table class="table table-striped table-centered mb-0">
-                                    
-                                <tr>
-                                    <input type="hidden" name="id" value="<?php echo $id ?>">
-                                </tr>
+                                    <tr>
+                                        <input type="hidden" name="id" value="<?php echo $id ?>">
+                                    </tr>
                                     <tr>
                                         <th>Tên Nhân viên</th>
                                         <td>
-                                            <input type="text" name="name" value="<?php echo $rs['name']?>">
+                                            <input type="text" name="name" value="<?php echo $rs['name'] ?>">
                                         </td>
                                     </tr>
                                     <tr>
@@ -379,12 +377,12 @@ if (isset($_GET["id"])) {
                                     <tr>
                                         <th>Ảnh đại diện</th>
 
-                                    <td>
-                                        <img src="<?php echo $rs['image'] ?>" class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt="ảnh đại diện">    
-                                    </td>
+                                        <td>
+                                            <img src="<?php echo $rs['image'] ?>" class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt="ảnh đại diện">
+                                        </td>
 
                                     </tr>
-                                   
+
                                     <tr>
                                         <th>Hành động</th>
                                         <td><button type="submit" name="submit" class="btn btn-outline-success">Cập nhật</button></td>
@@ -396,7 +394,7 @@ if (isset($_GET["id"])) {
 
                 </div>
 
-               
+
                 <!-- container -->
 
             </div>
