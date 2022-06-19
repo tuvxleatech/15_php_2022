@@ -7,7 +7,6 @@ if (isset($_GET["id"])) {
     // die($sql);
     $a = mysqli_query($connect, $sql);
     $rs = mysqli_fetch_assoc($a);
-
 }
 
 
@@ -17,7 +16,7 @@ if (isset($_GET["id"])) {
 
 <head>
     <meta charset="utf-8" />
-    <title>Tất cả nhà sản xuất</title>
+    <title>Thêm mới nhân viên</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
     <meta content="Coderthemes" name="author" />
@@ -353,54 +352,65 @@ if (isset($_GET["id"])) {
                         </div>
                     </div>
                     <!-- end page title -->
+
                     <div class="row justify-content-center">
                         <div class="col-xl-10 col-lg-10 ">
 
-                            <form action="../employee/edit_process_employee.php" method="post" >
+                            <form action="process_add.php" method="post">
                                 <table class="table table-striped table-centered mb-0">
-                                    
-                                <tr>
-                                    <input type="hidden" name="id" value="<?php echo $id ?>">
-                                </tr>
+                                    <?php if (isset($_SESSION['error_add'])) { ?>
+                                        <tr>
+                                            <h5 class="text-danger"> <?php echo $_SESSION['error_add'];
+                                                                        unset($_SESSION['error_add']) ?></h5>
+                                        </tr>
+                                    <?php } ?>
                                     <tr>
                                         <th>Tên Nhân viên</th>
                                         <td>
-                                            <input type="text" name="name" value="<?php echo $rs['name']?>">
+                                            <input type="text" name="name" require>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th>email</th>
+                                        <th>Email</th>
                                         <td>
-                                            <input type="text" name="email" value="<?php echo $rs['email'] ?>">
+                                            <input type="text" name="email" require>
                                         </td>
                                     </tr>
-                                   <tr>
-                                    <th>password</th>
-                                    <td>
-                                        <input type="password" name="password">
-                                    </td>
-                                   </tr>
+                                    <tr>
+                                        <th>Password</th>
+                                        <td>
+                                            <input type="password" name="password" require>
+                                        </td>
+                                    </tr>
                                     <tr>
                                         <th>Số điện thoại</th>
-                                        <td><input type="text" name="phone" value="<?= $rs['phone'] ?>"></td>
+                                        <td><input type="text" name="phone" require>
                                     </tr>
 
                                     <tr>
                                         <th>Địa chỉ</th>
-                                        <td><input type="text" name="address" value="<?= $rs['address'] ?>"></td>
+                                        <td><input type="text" name="address" require>
+                                    </tr>
+                                    <tr>
+                                        <th>Giới tính</th>
+                                        <td>
+                                            Nam <input type="radio" name="gender" value="0" checked>
+
+                                            Nữ <input type="radio" name="gender" value="1">
+                                        </td>
                                     </tr>
                                     <tr>
                                         <th>Ảnh đại diện</th>
 
-                                    <td>
-                                        <img src="<?php echo $rs['image'] ?>" name="image" class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt="ảnh đại diện">    
-                                    </td>
+                                        <td>
+                                            <img src="<?php echo $rs['image'] ?>" name="image" class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt="ảnh đại diện">
+                                        </td>
 
                                     </tr>
-                                   
+
                                     <tr>
                                         <th>Hành động</th>
-                                        <td><button type="submit" name="submit" class="btn btn-outline-success">Cập nhật</button></td>
+                                        <td><button type="submit" name="submit" class="btn btn-outline-success">Thêm mới</button></td>
                                     </tr>
                                 </table>
                             </form>
@@ -409,7 +419,7 @@ if (isset($_GET["id"])) {
 
                 </div>
 
-               
+
                 <!-- container -->
 
             </div>
