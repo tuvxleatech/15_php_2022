@@ -366,6 +366,13 @@ if (isset($_GET["id"])) {
                                         </td>
                                     </tr>
                                     <tr>
+                                        <th>email</th>
+                                        <td>
+                                            <input type="text" name="email" value="<?php echo $rs['email'] ?>">
+                                        </td>
+                                    </tr>
+
+                                    <tr>
                                         <th>Số điện thoại</th>
                                         <td><input type="text" name="phone" value="<?= $rs['phone'] ?>"></td>
                                     </tr>
