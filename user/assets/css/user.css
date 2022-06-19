@@ -31,3 +31,34 @@
 button {
   cursor: pointer !important;
 }
+
+.hr-custom {
+  border: none;
+  height: 20px;
+  width: 90%;
+  height: 50px;
+  margin-top: 0;
+  border-bottom: 1px solid #1f1209;
+  box-shadow: 0 20px 20px -20px #333;
+  margin: -50px auto 10px;
+}
+.pagination {
+  margin: 20px auto;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.pagination-link {
+  padding: 10px;
+  color: blue;
+  text-decoration: none;
+}
+
+.pagination-link.active {
+  color: red;
+  cursor: default;
+  text-decoration: underline;
+}

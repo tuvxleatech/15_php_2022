@@ -1,5 +1,10 @@
 <?php
 include("services/connect.php");
+if (isset($_GET['page'])) {
+    $current_page = $_GET['page'];
+} else {
+    $current_page = 1;
+}
 ?>
 <!doctype html>
 <html class="no-js" lang="en">
@@ -126,9 +131,18 @@ include("services/connect.php");
                         <div class="tab-pane active show fade" id="home1" role="tabpanel">
                             <div class="custom-row">
                                 <?php
-                                $sql2 = "SELECT * FROM products LIMIT 10";
-                                $rs2 = mysqli_query($connect, $sql2);
-                                while ($r2 = mysqli_fetch_assoc($rs2)) {
+                                $so_san_pham_tren_1_trang = 10;
+
+                                $sql_san_pham = "select count(*) from products";
+                                $mang_san_pham = mysqli_query($connect, $sql_san_pham);
+                                $kq_san_pham = mysqli_fetch_array($mang_san_pham);
+                                $so_san_pham = $kq_san_pham['count(*)'];
+
+                                $so_trang = ceil($so_san_pham / $so_san_pham_tren_1_trang);
+                                $bo_qua = $so_san_pham_tren_1_trang * ($current_page - 1);
+                                $sql = "SELECT * FROM `products` limit $so_san_pham_tren_1_trang offset $bo_qua";
+                                $rs2 = mysqli_query($connect, $sql);
+                                foreach ($rs2 as $r2) :
                                 ?>
                                     <div class="custom-col-5 custom-col-style mb-65">
                                         <div class="product-wrapper" style="text-align: center;">
@@ -161,9 +175,7 @@ include("services/connect.php");
                                             </div>
                                         </div>
                                     </div>
-                                <?php
-                                }
-                                ?>
+                                <?php endforeach ?>
                             </div>
                         </div>
                         <div class="tab-pane fade" id="home2" role="tabpanel">
@@ -177,7 +189,7 @@ include("services/connect.php");
                                         <div class="product-wrapper" style="text-align: center;">
                                             <div class="product-img">
                                                 <a href="#" style="display:block;">
-                                                    <img style="width:70%; height:70%;" src="<?= $r2['image'] ?>" alt="">
+                                                    <img style="width:70%; height:70%;" src="public/images/<?= $r2['image'] ?>" alt="">
                                                 </a>
                                                 <span><?= -$r2['discount'] ?>%</span>
                                                 <div class="product-action">
@@ -219,8 +231,8 @@ include("services/connect.php");
                                     <div class="custom-col-5 custom-col-style mb-65">
                                         <div class="product-wrapper" style="text-align: center;">
                                             <div class="product-img">
-                                                <a href="#" style="display:block;">
-                                                    <img style="width:70%; height:70%;" src="<?= $r2['image'] ?>" alt="">
+                                                <a href="product-detail.php?id=<?php echo $r2['id'] ?>" style="display:block;">
+                                                    <img style="width:70%; height:70%;" src="public/images/<?= $r2['image'] ?>" alt="">
                                                 </a>
                                                 <span><?= -$r2['discount'] ?>%</span>
                                                 <div class="product-action">
@@ -239,7 +251,7 @@ include("services/connect.php");
                                                 </div>
                                             </div>
                                             <div class="product-content">
-                                                <a href="product-details.html" style="display:block;">
+                                                <a href="product-detail.php?id=<?php echo $r2['id'] ?>" style="display:block;">
                                                     <h4><?= $r2['name'] ?></h4>
                                                     <div style=" text-decoration: line-through;"><?= number_format($r2['price']) ?><span style="text-decoration: underline;"><sup>đ</sup></span></div>
                                                     <div style="color:red;font-weight: bold;font-size: 18px;"><?= number_format($r2['price'] * (1 - $r2['discount'] / 100)) ?><span style="text-decoration: underline;"><sup>đ</sup></span></div>
@@ -262,8 +274,8 @@ include("services/connect.php");
                                     <div class="custom-col-5 custom-col-style mb-65">
                                         <div class="product-wrapper" style="text-align: center;">
                                             <div class="product-img">
-                                                <a href="#" style="display:block;">
-                                                    <img style="width:70%; height:70%;" src="<?= $r2['image'] ?>" alt="">
+                                                <a href="product-detail.php?id=<?php echo $r2['id'] ?>" style="display:block;">
+                                                    <img style="width:70%; height:70%;" src="public/images/<?= $r2['image'] ?>" alt="">
                                                 </a>
                                                 <span><?= -$r2['discount'] ?>%</span>
                                                 <div class="product-action">
@@ -282,7 +294,7 @@ include("services/connect.php");
                                                 </div>
                                             </div>
                                             <div class="product-content">
-                                                <a href="product-details.html" style="display:block;">
+                                                <a href="product-detail.php?id=<?php echo $r2['id'] ?>" style="display:block;">
                                                     <h4><?= $r2['name'] ?></h4>
                                                     <div style=" text-decoration: line-through;"><?= number_format($r2['price']) ?><span style="text-decoration: underline;"><sup>đ</sup></span></div>
                                                     <div style="color:red;font-weight: bold;font-size: 18px;"><?= number_format($r2['price'] * (1 - $r2['discount'] / 100)) ?><span style="text-decoration: underline;"><sup>đ</sup></span></div>
@@ -305,8 +317,8 @@ include("services/connect.php");
                                     <div class="custom-col-5 custom-col-style mb-65">
                                         <div class="product-wrapper" style="text-align: center;">
                                             <div class="product-img">
-                                                <a href="product-detai.php" style="display:block;">
-                                                    <img style="width:70%; height:70%;" src="<?= $r2['image'] ?>" alt="">
+                                                <a href="product-detail.php?id=<?php echo $r2['id'] ?>" style="display:block;">
+                                                    <img style="width:70%; height:70%;" src="public/images/<?= $r2['image'] ?>" alt="">
                                                 </a>
                                                 <span><?= -$r2['discount'] ?>%</span>
                                                 <div class="product-action">
@@ -325,7 +337,7 @@ include("services/connect.php");
                                                 </div>
                                             </div>
                                             <div class="product-content">
-                                                <a href="product-details.html" style="display:block;">
+                                                <a href="product-detail.php?id=<?php echo $r2['id'] ?>" style="display:block;">
                                                     <h4><?= $r2['name'] ?></h4>
                                                     <div style=" text-decoration: line-through;"><?= number_format($r2['price']) ?><span style="text-decoration: underline;"><sup>đ</sup></span></div>
                                                     <div style="color:red;font-weight: bold;font-size: 18px;"><?= number_format($r2['price'] * (1 - $r2['discount'] / 100)) ?><span style="text-decoration: underline;"><sup>đ</sup></span></div>
@@ -340,18 +352,15 @@ include("services/connect.php");
                         </div>
                     </div>
                     <div class="pagination-style mt-20 text-center">
-                        <ul>
-                            <li>
-                                <a href="#"><i class="ti-angle-left"></i></a>
-                            </li>
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">...</a></li>
-                            <li><a href="#">19</a></li>
-                            <li class="active">
-                                <a href="#"><i class="ti-angle-right"></i></a>
-                            </li>
-                        </ul>
+                        <div class="pagination">
+                            <?php for ($i = 1; $i <= $so_trang; $i++) { ?>
+                                <a class="pagination-link <?php if ($current_page == $i) {
+                                                                echo 'active';
+                                                            } ?>" href="?page=<?php echo $i ?>">
+                                    <?php echo $i ?>
+                                </a>
+                            <?php } ?>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -14,7 +14,7 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="story-img">
-                        <img class="avatar" src="https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png" alt="" />
+                        <img style="width: 200px" class="avatar" src="https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png" alt="" />
                     </div>
                 </div>
                 <div class="col-lg-6">

@@ -32,11 +32,11 @@ if (!isset($_SESSION)) {
                                 </ul>
                             </li>
                             <li>
-                                <a href="#">pages</a>
+                                <a href="#">Tài khoản</a>
                                 <ul class="single-dropdown">
-                                    <li><a href="about-us.html">about us</a></li>
-                                    <li><a href="menu-list.html">menu list</a></li>
-                                    <li><a href="login.html">login</a></li>
+                                    <li><a href="profile.php">Trang cá nhân</a></li>
+                                    <li><a href="menu-list.html">Giỏ hàng</a></li>
+                                    <li><a href="login.html">Danh sách đơn hàng</a></li>
                                     <li><a href="register.html">register</a></li>
                                     <li><a href="cart.html">cart page</a></li>
                                     <li><a href="checkout.html">checkout</a></li>
@@ -96,7 +96,18 @@ if (!isset($_SESSION)) {
                         </ul>
                     </nav>
                 </div>
-                <div class="header-cart">
+                <div class="header-cart" style="display: flex;">
+                    <div class="menu-style-2 furniture-menu menu-hover">
+                        <ul>
+                            <li>
+                                <a class="icon-cart-furniture" href="#"><i class="ti-user"></i></a>
+                                <ul class="single-dropdown">
+                                    <li><a href="profile.php">Trang cá nhân</a></li>
+                                    <li><a href="purchase_history.php">Danh sách đơn hàng</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
                     <a class="icon-cart-furniture" href="showcart.php">
                         <i class="ti-shopping-cart"></i>
                     </a>
@@ -189,4 +200,5 @@ if (!isset($_SESSION)) {
             </div>
         </div>
     <?php } ?>
+    <hr class="hr-custom">
 </header>

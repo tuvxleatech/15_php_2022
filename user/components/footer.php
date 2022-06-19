@@ -68,7 +68,7 @@
                     <div class="copyright">
                         <p>
                             Copyright ©
-                            <a href="#">TechOne</a> 2022 . All Right Reserved.
+                            <a href="#">Group 15 Team</a> 2022 . All Right Reserved.
                         </p>
                     </div>
                 </div>
