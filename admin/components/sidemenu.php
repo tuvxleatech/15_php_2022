@@ -13,8 +13,8 @@ if ($actual_link === "/15_php_2022/admin/" || $actual_link === "/15_php_2022/adm
         $url_manufacturer = "../manufacturer/index.php";
         $url_add_manufacturer = "../manufacturer/add_manufacturer.php";
     } else {
-        $url_product = "product/index.php";
-        $url_add_product = "product/add_product.php";
+        $url_manufacturer = "manufacturer/index.php";
+        $url_add_manufacturer = "manufacturer/add_manufacturer.php";
     }
 
     $src_assets = "";
