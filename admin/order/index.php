@@ -90,13 +90,12 @@ $result = mysqli_query($connect, $sql);
                                             <td><?= $item['name'] ?></td>
                                             <td><?= $item['created_at'] ?></td>
                                             <td>
-                                                <?php if (isset($_SESSION['success'])) {
-                                                    if ($_SESSION['success'] === "Hủy đơn thành công") { ?>
-                                                        <a href="../../admin/order/accept_process.php?id=<?= $item["id"] ?>" class="btn btn-outline-success">Duyệt</a>
-                                                    <?php
-                                                    } else if ($_SESSION['success'] === "Duyệt đơn thành công") { ?>
-                                                        <a href="../../admin/order/cancel_order.php?id=<?= $item["id"] ?>" class="btn btn-outline-success">Hủy</a>
-                                                    <?php } ?>
+                                                <?php if ($item['name'] === "Đang xử lý") { ?>
+                                                    <a href="../../admin/order/accept_process.php?id=<?= $item["id"] ?>" class="btn btn-outline-success">Duyệt</a>
+                                                <?php
+                                                } else if ($item['name'] === "Đã duyệt") { ?>
+                                                    <a href="../../admin/order/cancel_order.php?id=<?= $item["id"] ?>" class="btn btn-outline-success">Hủy</a>
+                                                <?php } ?>
                                             </td>
                                             <td>
                                                 <button class="btn btn-outline-danger" onclick="remove(<?php echo $item['id'] ?>)">Xóa</button>
@@ -104,12 +103,8 @@ $result = mysqli_query($connect, $sql);
 
                                         </tr>
                                     <?php
-                                                } else { ?>
-                                        <a href="../../admin/order/accept_process.php?id=<?= $item["id"] ?>" class="btn btn-outline-success">Duyệt</a>
-                                <?php
-                                                }
-                                            }
-                                ?>
+                                    }
+                                    ?>
 
                                 </tbody>
                             </table>
@@ -152,11 +147,13 @@ $result = mysqli_query($connect, $sql);
 
                             swal("Success", "Duyệt đơn thành công", "success");
                         <?php
-                        }
+                        } else if ($_SESSION["success"] == "Hủy đơn thành công") {
                         ?>
+                            swal("Success", "Hủy đơn thành công", "success");
+                        <?php } ?>
 
                     <?php
-                        // unset($_SESSION["success"]);
+                        unset($_SESSION["success"]);
                     } ?>
                 </script>
 
