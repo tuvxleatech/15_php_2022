@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 19, 2022 at 04:07 AM
+-- Generation Time: Jun 20, 2022 at 01:04 PM
 -- Server version: 10.4.22-MariaDB
--- PHP Version: 8.0.13
+-- PHP Version: 8.1.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -80,7 +80,7 @@ CREATE TABLE `orders` (
   `phone_receiver` varchar(255) NOT NULL,
   `address_receiver` varchar(255) NOT NULL,
   `notes` text NOT NULL,
-  `status` varchar(255) NOT NULL,
+  `id_status` int(11) NOT NULL,
   `total_price` int(11) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -89,9 +89,9 @@ CREATE TABLE `orders` (
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`id`, `id_user`, `name_receiver`, `phone_receiver`, `address_receiver`, `notes`, `status`, `total_price`, `created_at`) VALUES
-(14, 2, 'Nguyễn Xuân Hoàng', '123', 'ha noi', '', 'Đang xử lý', 50000000, '2022-06-19 01:34:07'),
-(15, 2, 'Nguyễn Xuân Hoàng', '1', 'ha noi', '', 'Đang xử lý', 70000000, '2022-06-19 01:35:09');
+INSERT INTO `orders` (`id`, `id_user`, `name_receiver`, `phone_receiver`, `address_receiver`, `notes`, `id_status`, `total_price`, `created_at`) VALUES
+(14, 2, 'Nguyễn Xuân Hoàng', '123', 'ha noi', '', 2, 50000000, '2022-06-19 01:34:07'),
+(15, 2, 'Nguyễn Xuân Hoàng', '1', 'ha noi', '', 2, 70000000, '2022-06-19 01:35:09');
 
 -- --------------------------------------------------------
 
@@ -242,6 +242,26 @@ INSERT INTO `role` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `status`
+--
+
+CREATE TABLE `status` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `status`
+--
+
+INSERT INTO `status` (`id`, `name`) VALUES
+(0, 'Đang xử lý'),
+(1, 'Đã duyệt'),
+(2, 'Đã xóa');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -265,7 +285,10 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `address`, `phone`, `gen
 (2, 'Nguyễn Xuân Hoàng', 'xhoang0509@gmail.com', '1', '', '', '', '', 2),
 (16, 'Nguyen Văn Hung 1', 'sadm32in@gmail.com', '1', 'Ha Noi', '0912345678', '0', '', 1),
 (17, 'Hoang Nguyen Xuan', 'tien@gmail.com', '1', 'Yen The', '0857812113', '0', '', 1),
-(19, '', '', '', '', '', '0', '', 1);
+(19, '', '', '', '', '', '0', '', 1),
+(24, 'Hùng', 'hung@gmail.com', '1', '', '', '', '', 2),
+(25, 'Hùng', '1@gmail.com', 'md5(12345678)', '', '', '', '', 2),
+(26, 'hung', '2@gmail.com', '25d55ad283aa400af464c76d713c07ad', '', '', '', '', 2);
 
 --
 -- Indexes for dumped tables
@@ -287,7 +310,8 @@ ALTER TABLE `manufacturers`
 -- Indexes for table `orders`
 --
 ALTER TABLE `orders`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_status` (`id_status`);
 
 --
 -- Indexes for table `order_product`
@@ -313,6 +337,12 @@ ALTER TABLE `rates`
 -- Indexes for table `role`
 --
 ALTER TABLE `role`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `status`
+--
+ALTER TABLE `status`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -367,11 +397,17 @@ ALTER TABLE `role`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `orders`
+--
+ALTER TABLE `orders`
+  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`id_status`) REFERENCES `status` (`id`);
 
 --
 -- Constraints for table `products`

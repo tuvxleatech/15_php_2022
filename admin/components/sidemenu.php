@@ -72,7 +72,7 @@ if ($actual_link === "/15_php_2022/admin/" || $actual_link === "/15_php_2022/adm
         $url_add_customer = "../customer/add_customer.php";
     }
     if (str_contains($actual_link, "order")) {
-        $url_order = "index.php";
+        $url_order = "15_php_2022/index.php";
     } else {
         $url_order = "../order/index.php";
     }
