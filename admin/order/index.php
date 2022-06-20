@@ -1,31 +1,17 @@
 <?php
 session_start();
 require("../../services/connect.php");
-$sql = "SELECT  users.name, users.email, users.address, products.name, products.image,order_product.quantity,(products.price*(1-products.discount)) 
-as currentPrice, (products.quantity*(products.price*(1-products.discount))) as totalPrice  FROM `products` INNER JOIN order_product ON products.id =
- order_product.id_product INNER JOIN orders ON orders.id = order_product.id_order INNER JOIN users ON users.id = orders.id_user";
+$sql = "SELECT orders.id, orders.name_receiver, orders.phone_receiver,orders.address_receiver,
+orders.total_price, status.name, orders.created_at FROM  orders INNER JOIN status ON orders.id_status = status.id 
+EXCEPT (SELECT  orders.id, orders.name_receiver, orders.phone_receiver,orders.address_receiver,
+orders.total_price, status.name, orders.created_at from orders INNER JOIN status ON orders.id_status = status.id where id_status = '2');";
 $result = mysqli_query($connect, $sql);
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="utf-8" />
-    <title>Danh sách đơn hàng</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
-    <meta content="Coderthemes" name="author" />
-    <!-- App favicon -->
-    <link rel="shortcut icon" href="../assets/images/favicon.ico">
-
-    <!-- third party css -->
-    <link href="../assets/css/vendor/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
-    <!-- third party css end -->
-
-    <!-- App css -->
-    <link href="../../assets/css/icons.min.css" rel="stylesheet" type="text/css" />
-    <link href="../../assets/css/app-creative.min.css" rel="stylesheet" type="text/css" id="light-style" />
-    <link href="../../assets/css/app-creative-dark.min.css" rel="stylesheet" type="text/css" id="dark-style" />
+    <?php include('../components/head.php') ?>
 
 </head>
 
@@ -36,31 +22,12 @@ $result = mysqli_query($connect, $sql);
         <div class="left-side-menu">
 
             <!-- LOGO -->
-            <a href="index.php" class="logo text-center logo-light">
-                <span class="logo-lg">
-                    <img src="../../assets/images/logo.png" alt="" height="16">
-                </span>
-                <span class="logo-sm">
-                    <img src="../../assets/images/logo_sm.png" alt="" height="16">
-                </span>
-            </a>
-
-            <!-- LOGO -->
-            <a href="index.php" class="logo text-center logo-dark">
-                <span class="logo-lg">
-                    <img src="../../assets/images/logo-dark.png" alt="" height="16">
-                </span>
-                <span class="logo-sm">
-                    <img src="../../assets/images/logo_sm_dark.png" alt="" height="16">
-                </span>
-            </a>
+            <?php include('../components/logo.php') ?>
 
             <div class="h-100" id="left-side-menu-container" data-simplebar>
-
                 <!--- Sidemenu -->
-                <?php include("../../components/sidemenu.php"); ?>
+                <?php include("../components/sidemenu.php"); ?>
                 <div class="clearfix"></div>
-
             </div>
             <!-- Sidebar -left -->
 
@@ -74,319 +41,7 @@ $result = mysqli_query($connect, $sql);
         <div class="content-page">
             <div class="content">
                 <!-- Topbar Start -->
-                <div class="navbar-custom">
-                    <ul class="list-unstyled topbar-right-menu float-right mb-0">
-                        <li class="dropdown notification-list d-lg-none">
-                            <a class="nav-link dropdown-toggle arrow-none" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                                <i class="dripicons-search noti-icon"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-animated dropdown-lg p-0">
-                                <form class="p-3">
-                                    <input type="text" class="form-control" placeholder="Tìm kiếm ..." aria-label="Recipient's username">
-                                </form>
-                            </div>
-                        </li>
-                        <li class="dropdown notification-list topbar-dropdown">
-                            <a class="nav-link dropdown-toggle arrow-none" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                                <img src="../../assets/images/flags/us.jpg" alt="user-image" class="mr-0 mr-sm-1" height="12">
-                                <span class="align-middle d-none d-sm-inline-block">English</span> <i class="mdi mdi-chevron-down d-none d-sm-inline-block align-middle"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated topbar-dropdown-menu">
-
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <img src="../../assets/images/flags/germany.jpg" alt="user-image" class="mr-1" height="12"> <span class="align-middle">German</span>
-                                </a>
-
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <img src="../../assets/images/flags/italy.jpg" alt="user-image" class="mr-1" height="12"> <span class="align-middle">Italian</span>
-                                </a>
-
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <img src="../../assets/images/flags/spain.jpg" alt="user-image" class="mr-1" height="12"> <span class="align-middle">Spanish</span>
-                                </a>
-
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <img src="../../assets/images/flags/russia.jpg" alt="user-image" class="mr-1" height="12"> <span class="align-middle">Russian</span>
-                                </a>
-
-                            </div>
-                        </li>
-
-                        <li class="dropdown notification-list">
-                            <a class="nav-link dropdown-toggle arrow-none" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                                <i class="dripicons-bell noti-icon"></i>
-                                <span class="noti-icon-badge"></span>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated dropdown-lg">
-
-                                <!-- item-->
-                                <div class="dropdown-item noti-title">
-                                    <h5 class="m-0">
-                                        <span class="float-right">
-                                            <a href="javascript: void(0);" class="text-dark">
-                                                <small>Clear All</small>
-                                            </a>
-                                        </span>Notification
-                                    </h5>
-                                </div>
-
-                                <div style="max-height: 230px;" data-simplebar>
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                        <div class="notify-icon bg-primary">
-                                            <i class="mdi mdi-comment-account-outline"></i>
-                                        </div>
-                                        <p class="notify-details">Caleb Flakelar commented on Admin
-                                            <small class="text-muted">1 min ago</small>
-                                        </p>
-                                    </a>
-
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                        <div class="notify-icon bg-info">
-                                            <i class="mdi mdi-account-plus"></i>
-                                        </div>
-                                        <p class="notify-details">New user registered.
-                                            <small class="text-muted">5 hours ago</small>
-                                        </p>
-                                    </a>
-
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                        <div class="notify-icon">
-                                            <img src="../../assets/images/users/avatar-2.jpg" class="img-fluid rounded-circle" alt="" />
-                                        </div>
-                                        <p class="notify-details">Cristina Pride</p>
-                                        <p class="text-muted mb-0 user-msg">
-                                            <small>Hi, How are you? What about our next meeting</small>
-                                        </p>
-                                    </a>
-
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                        <div class="notify-icon bg-primary">
-                                            <i class="mdi mdi-comment-account-outline"></i>
-                                        </div>
-                                        <p class="notify-details">Caleb Flakelar commented on Admin
-                                            <small class="text-muted">4 days ago</small>
-                                        </p>
-                                    </a>
-
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                        <div class="notify-icon">
-                                            <img src="../../assets/images/users/avatar-4.jpg" class="img-fluid rounded-circle" alt="" />
-                                        </div>
-                                        <p class="notify-details">Karen Robinson</p>
-                                        <p class="text-muted mb-0 user-msg">
-                                            <small>Wow ! this admin looks good and awesome design</small>
-                                        </p>
-                                    </a>
-
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                        <div class="notify-icon bg-info">
-                                            <i class="mdi mdi-heart"></i>
-                                        </div>
-                                        <p class="notify-details">Carlos Crouch liked
-                                            <b>Admin</b>
-                                            <small class="text-muted">13 days ago</small>
-                                        </p>
-                                    </a>
-                                </div>
-
-                                <!-- All-->
-                                <a href="javascript:void(0);" class="dropdown-item text-center text-primary notify-item notify-all">
-                                    View All
-                                </a>
-
-                            </div>
-                        </li>
-
-                        <li class="dropdown notification-list d-none d-sm-inline-block">
-                            <a class="nav-link dropdown-toggle arrow-none" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                                <i class="dripicons-view-apps noti-icon"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated dropdown-lg p-0">
-
-                                <div class="p-2">
-                                    <div class="row no-gutters">
-                                        <div class="col">
-                                            <a class="dropdown-icon-item" href="#">
-                                                <img src="../../assets/images/brands/slack.png" alt="slack">
-                                                <span>Slack</span>
-                                            </a>
-                                        </div>
-                                        <div class="col">
-                                            <a class="dropdown-icon-item" href="#">
-                                                <img src="../../assets/images/brands/github.png" alt="Github">
-                                                <span>GitHub</span>
-                                            </a>
-                                        </div>
-                                        <div class="col">
-                                            <a class="dropdown-icon-item" href="#">
-                                                <img src="../../assets/images/brands/dribbble.png" alt="dribbble">
-                                                <span>Dribbble</span>
-                                            </a>
-                                        </div>
-                                    </div>
-
-                                    <div class="row no-gutters">
-                                        <div class="col">
-                                            <a class="dropdown-icon-item" href="#">
-                                                <img src="../../assets/images/brands/bitbucket.png" alt="bitbucket">
-                                                <span>Bitbucket</span>
-                                            </a>
-                                        </div>
-                                        <div class="col">
-                                            <a class="dropdown-icon-item" href="#">
-                                                <img src="../../assets/images/brands/dropbox.png" alt="dropbox">
-                                                <span>Dropbox</span>
-                                            </a>
-                                        </div>
-                                        <div class="col">
-                                            <a class="dropdown-icon-item" href="#">
-                                                <img src="../../assets/images/brands/g-suite.png" alt="G Suite">
-                                                <span>G Suite</span>
-                                            </a>
-                                        </div>
-
-                                    </div>
-                                </div>
-
-                            </div>
-                        </li>
-
-                        <li class="notification-list">
-                            <a class="nav-link right-bar-toggle" href="javascript: void(0);">
-                                <i class="dripicons-gear noti-icon"></i>
-                            </a>
-                        </li>
-
-                        <li class="dropdown notification-list">
-                            <a class="nav-link dropdown-toggle nav-user arrow-none mr-0" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                                <span class="account-user-avatar">
-                                    <img src="../../assets/images/users/avatar-1.jpg" alt="user-image" class="rounded-circle">
-                                </span>
-                                <span>
-                                    <span class="account-user-name">Nguyen Xuan Hoang</span>
-                                    <span class="account-position">Founder</span>
-                                </span>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated topbar-dropdown-menu profile-dropdown">
-                                <!-- item-->
-                                <div class=" dropdown-header noti-title">
-                                    <h6 class="text-overflow m-0">Xin chào !</h6>
-                                </div>
-
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <i class="mdi mdi-account-circle mr-1"></i>
-                                    <span>Trang cá nhân</span>
-                                </a>
-
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <i class="mdi mdi-account-edit mr-1"></i>
-                                    <span>Cài đặt</span>
-                                </a>
-
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <i class="mdi mdi-lifebuoy mr-1"></i>
-                                    <span>Hỗ trợ</span>
-                                </a>
-
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <i class="mdi mdi-lock-outline mr-1"></i>
-                                    <span>Lock Screen</span>
-                                </a>
-
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <i class="mdi mdi-logout mr-1"></i>
-                                    <span>Đăng xuất</span>
-                                </a>
-
-                            </div>
-                        </li>
-
-                    </ul>
-                    <button class="button-menu-mobile open-left disable-btn">
-                        <i class="mdi mdi-menu"></i>
-                    </button>
-                    <div class="app-search dropdown d-none d-lg-block">
-                        <form>
-                            <div class="input-group">
-                                <input type="text" class="form-control dropdown-toggle" placeholder="Tìm kiếm..." id="top-search">
-                                <span class="mdi mdi-magnify search-icon"></span>
-                                <div class="input-group-append">
-                                    <button class="btn btn-primary" type="submit">Tìm kiếm</button>
-                                </div>
-                            </div>
-
-                        </form>
-
-                        <div class="dropdown-menu dropdown-menu-animated dropdown-lg" id="search-dropdown">
-                            <!-- item-->
-                            <div class="dropdown-header noti-title">
-                                <h5 class="text-overflow mb-2">Found <span class="text-danger">17</span> results</h5>
-                            </div>
-
-                            <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                <i class="uil-notes font-16 mr-1"></i>
-                                <span>Analytics Report</span>
-                            </a>
-
-                            <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                <i class="uil-life-ring font-16 mr-1"></i>
-                                <span>How can I help you?</span>
-                            </a>
-
-                            <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                <i class="uil-cog font-16 mr-1"></i>
-                                <span>User profile settings</span>
-                            </a>
-
-                            <!-- item-->
-                            <div class="dropdown-header noti-title">
-                                <h6 class="text-overflow mb-2 text-uppercase">Users</h6>
-                            </div>
-
-                            <div class="notification-list">
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <div class="media">
-                                        <img class="d-flex mr-2 rounded-circle" src="../assets/images/users/avatar-2.jpg" alt="Generic placeholder image" height="32">
-                                        <div class="media-body">
-                                            <h5 class="m-0 font-14">Erwin Brown</h5>
-                                            <span class="font-12 mb-0">UI Designer</span>
-                                        </div>
-                                    </div>
-                                </a>
-
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <div class="media">
-                                        <img class="d-flex mr-2 rounded-circle" src="../assets/images/users/avatar-5.jpg" alt="Generic placeholder image" height="32">
-                                        <div class="media-body">
-                                            <h5 class="m-0 font-14">Jacob Deo</h5>
-                                            <span class="font-12 mb-0">Developer</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <?php include('../components/topbar.php') ?>
                 <!-- end Topbar -->
 
                 <!-- Start Content-->
@@ -398,7 +53,7 @@ $result = mysqli_query($connect, $sql);
                             <div class="page-title-box">
                                 <div class="page-title-right">
                                 </div>
-                                <h4 class="page-title">Danh sách đơn hàng</h4>
+                                <h4 class="page-title">Danh sách khách hàng</h4>
                             </div>
                         </div>
                     </div>
@@ -410,65 +65,58 @@ $result = mysqli_query($connect, $sql);
                                 <thead>
                                     <tr>
                                         <th>STT</th>
-                                        <th>Tên khách hàng </th>
-                                        <th>Email</th>
-                                        <th>Địa chỉ nhận hàng</th>
-                                        <th>Tên hàng</th>
-                                        <th></th>
-                                        <th>Số lượng</th>
-                                        <th>Đơn giá</th>
-                                        <th>Tổng tiền</th>
-                                        <th>Repair</th>
-                                        <th>Delete</th>
+                                        <th>Tên người nhận </th>
+                                        <th>Số điện thoại người nhận</th>
+                                        <th>Địa chỉ người nhận</th>
+                                        <th>Tổng giá</th>
+                                        <th>Trạng thái</th>
+                                        <th>Ngày tạo đơn</th>
+                                        <th>Duyệt đơn</th>
+                                        <th>Xóa</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
                                     $count = 0;
-                                    foreach ($result as $each) {
-                                        $count++;
-                                    ?>
+                                    foreach ($result as $item) {
+                                        $id = $item["id"];
+                                        $count++; ?>
                                         <tr>
-                                            <td><?php echo $count ?></td>
-                                            <td><?php echo $each['users.name'] ?></td>
-                                            <td><?php echo $each['users.email'] ?></td>
-                                            <td><?php echo $each['users.address'] ?></td>
+                                            <td><?= $count ?></td>
+                                            <td><?= $item['name_receiver'] ?></td>
+                                            <td><?= $item['phone_receiver'] ?></td>
+                                            <td><?= $item['address_receiver'] ?></td>
+                                            <td><?= $item['total_price'] ?></td>
+                                            <td><?= $item['name'] ?></td>
+                                            <td><?= $item['created_at'] ?></td>
                                             <td>
-                                                <?php echo $each['products.name'] ?>
+                                                <?php if ($item['name'] === "Đang xử lý") { ?>
+                                                    <a href="../../admin/order/accept_process.php?id=<?= $item["id"] ?>" class="btn btn-outline-success">Duyệt</a>
+                                                <?php
+                                                } else if ($item['name'] === "Đã duyệt") { ?>
+                                                    <a href="../../admin/order/cancel_order.php?id=<?= $item["id"] ?>" class="btn btn-outline-success">Hủy</a>
+                                                <?php } ?>
                                             </td>
                                             <td>
-                                                <img src=" <?php echo $each['products.image'] ?>" class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt="product">
+                                                <button class="btn btn-outline-danger" onclick="remove(<?php echo $item['id'] ?>)">Xóa</button>
                                             </td>
-                                            <td>
-                                                <?php echo $each['products.quantity'] ?>
-                                            </td>
-                                            <td>
-                                                <?php echo $each['currentPrice'] ?>
-                                            </td>
-                                            <td>
-                                                <?php echo $each['totalPrice'] ?>
-                                            </td>
-                                            <td>
-                                                <a href="./edit_customer.php?id=<?php echo $each['id'] ?>" class="btn btn-outline-warning">Repair</a>
-                                            </td>
-                                            <td>
-                                                <button onclick="remove(<?php echo $each['id'] ?>)" class="btn btn-outline-danger">Delete</button>
-                                            </td>
-                                        </tr>
 
-                                    <?php } ?>
+                                        </tr>
+                                    <?php
+                                    }
+                                    ?>
 
                                 </tbody>
                             </table>
-                            <form action="../customer/delete_customer.php" method="POST" id="delete">
-                                <input type="hidden" name="id" id="idCustomer">
+                            <form action="../order/delete_order.php" method="POST" id="delete">
+                                <input type="hidden" name="id" id="id">
                             </form>
                         </div>
                     </div>
                 </div>
                 <script>
                     function remove(id) {
-                        document.getElementById('idCustomer').value = id;
+                        document.getElementById('id').value = id;
                         var form = document.getElementById('delete');
 
                         swal({
@@ -495,14 +143,14 @@ $result = mysqli_query($connect, $sql);
                 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
                 <script>
                     <?php if (isset($_SESSION["success"])) {
-                        if ($_SESSION["success"] == "Thành công") { ?>
+                        if ($_SESSION["success"] == "Duyệt đơn thành công") { ?>
 
-                            swal("Success", "Chỉnh sửa thành công", "success");
+                            swal("Success", "Duyệt đơn thành công", "success");
                         <?php
-                        }
+                        } else if ($_SESSION["success"] == "Hủy đơn thành công") {
                         ?>
-
-
+                            swal("Success", "Hủy đơn thành công", "success");
+                        <?php } ?>
 
                     <?php
                         unset($_SESSION["success"]);
@@ -566,17 +214,17 @@ $result = mysqli_query($connect, $sql);
     <!-- /Right-bar -->
 
     <!-- bundle -->
-    <script src="../../assets/js/vendor.min.js"></script>
-    <script src="../../assets/js/app.min.js"></script>
+    <script src="../assets/js/vendor.min.js"></script>
+    <script src="../assets/js/app.min.js"></script>
 
     <!-- third party js -->
-    <script src="../../assets/js/vendor/apexcharts.min.js"></script>
-    <script src="../../assets/js/vendor/jquery-jvectormap-1.2.2.min.js"></script>
-    <script src="../../assets/js/vendor/jquery-jvectormap-world-mill-en.js"></script>
+    <script src="../assets/js/vendor/apexcharts.min.js"></script>
+    <script src="../assets/js/vendor/jquery-jvectormap-1.2.2.min.js"></script>
+    <script src="../assets/js/vendor/jquery-jvectormap-world-mill-en.js"></script>
     <!-- third party js ends -->
 
     <!-- demo app -->
-    <script src="../../assets/js/pages/demo.dashboard.js"></script>
+    <script src="../assets/js/pages/demo.dashboard.js"></script>
     <!-- end demo js-->
 </body>
 

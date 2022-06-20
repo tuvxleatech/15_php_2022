@@ -1,5 +1,8 @@
 <?php
+
 require('../services/check_admin_login.php');
+require('../services/connect.php');
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -80,7 +83,14 @@ require('../services/check_admin_login.php');
                                                 <i class="mdi mdi-account-multiple widget-icon bg-success-lighten text-success"></i>
                                             </div>
                                             <h5 class="text-muted font-weight-normal mt-0" title="Number of Customers">Tổng khách hàng</h5>
-                                            <h3 class="mt-3 mb-3">36,254</h3>
+
+                                            <?php
+                                            $sql = "SELECT * FROM `users` WHERE id_role = 2";
+                                            $result = mysqli_query($connect, $sql);
+                                            $total_user = mysqli_num_rows($result);
+                                            ?>
+                                            <h3 class="mt-3 mb-3"><?php echo $total_user; ?></h3>
+
                                             <p class="mb-0 text-muted">
                                                 <span class="text-success mr-2"><i class="mdi mdi-arrow-up-bold"></i> 5.27%</span>
                                                 <span class="text-nowrap">Kể từ tháng trước</span>
@@ -96,7 +106,14 @@ require('../services/check_admin_login.php');
                                                 <i class="mdi mdi-cart-plus widget-icon bg-danger-lighten text-danger"></i>
                                             </div>
                                             <h5 class="text-muted font-weight-normal mt-0" title="Number of Orders">Tổng đơn hàng</h5>
-                                            <h3 class="mt-3 mb-3">5,543</h3>
+
+                                            <?php
+                                            $sql = "SELECT * FROM `orders`";
+                                            $result = mysqli_query($connect, $sql);
+                                            $total_order = mysqli_num_rows($result);
+                                            ?>
+                                            <h3 class="mt-3 mb-3"><?php echo $total_order ?></h3>
+
                                             <p class="mb-0 text-muted">
                                                 <span class="text-danger mr-2"><i class="mdi mdi-arrow-down-bold"></i> 1.08%</span>
                                                 <span class="text-nowrap">Kể từ tháng trước</span>
@@ -114,9 +131,18 @@ require('../services/check_admin_login.php');
                                                 <i class="mdi mdi-currency-usd widget-icon bg-info-lighten text-info"></i>
                                             </div>
                                             <h5 class="text-muted font-weight-normal mt-0" title="Average Revenue">Doanh thu</h5>
-                                            <h3 class="mt-3 mb-3">$6,254</h3>
+
+                                            <?php
+                                            $sql = "SELECT sum(orders.total_price) as total_price FROM `orders` WHERE 1";
+                                            $result = mysqli_query($connect, $sql);
+                                            $each = mysqli_fetch_array($result);
+                                            $total_money = $each['total_price'];
+
+                                            ?>
+                                            <h3 class="mt-3 mb-3"><?php echo number_format($total_money) ?>VND</h3>
+
                                             <p class="mb-0 text-muted">
-                                                <span class="text-danger mr-2"><i class="mdi mdi-arrow-down-bold"></i> 7.00%</span>
+                                                <span class="text-danger mr-2"><i class="mdi mdi-arrow-up-bold"></i> 7.00%</span>
                                                 <span class="text-nowrap">Kể từ tháng trước</span>
                                             </p>
                                         </div> <!-- end card-body-->

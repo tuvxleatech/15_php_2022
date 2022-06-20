@@ -32,6 +32,11 @@ if ($actual_link === "/15_php_2022/admin/" || $actual_link === "/15_php_2022/adm
         $url_customer = "customer/index.php";
         $url_add_customer = "customer/add_customer.php";
     }
+    if(str_contains($actual_link, 'order')){
+        $url_order = "../order/index.php";
+    }else{
+        $url_order = "/order/index.php";
+    }
 
     $src_assets = "";
     $src_logout = "";
@@ -66,6 +71,11 @@ if ($actual_link === "/15_php_2022/admin/" || $actual_link === "/15_php_2022/adm
     } else {
         $url_customer = "../customer/index.php";
         $url_add_customer = "../customer/add_customer.php";
+    }
+    if (str_contains($actual_link, "order")) {
+        $url_order = "15_php_2022/index.php";
+    } else {
+        $url_order = "../order/index.php";
     }
 
 
@@ -139,7 +149,7 @@ if ($actual_link === "/15_php_2022/admin/" || $actual_link === "/15_php_2022/adm
         </a>
         <ul class="side-nav-second-level" aria-expanded="false">
             <li>
-                <a href="order">Danh sách đơn hàng</a>
+                <a href="<?php echo $url_order ?>">Danh sách đơn hàng</a>
             </li>
         </ul>
     </li>
