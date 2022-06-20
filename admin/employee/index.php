@@ -1,8 +1,8 @@
 <?php
 session_start();
-$title = 'Danh sách khách hàng';
+$title = "Danh sách nhân viên";
 require("../../services/connect.php");
-$sql = "SELECT `id`, `name`, `email`, `password`, `address`, `phone`, `gender`, `image` FROM `users` WHERE id_role = 2";
+$sql = "SELECT `id`, `name`, `email`, `password`, `address`, `phone`, `gender`, `image` FROM `users` WHERE id_role = 1";
 $result = mysqli_query($connect, $sql);
 ?>
 <!DOCTYPE html>
@@ -23,9 +23,11 @@ $result = mysqli_query($connect, $sql);
             <?php include('../components/logo.php') ?>
 
             <div class="h-100" id="left-side-menu-container" data-simplebar>
+
                 <!--- Sidemenu -->
                 <?php include("../components/sidemenu.php"); ?>
                 <div class="clearfix"></div>
+
             </div>
             <!-- Sidebar -left -->
 
@@ -94,10 +96,10 @@ $result = mysqli_query($connect, $sql);
                                                 <?php echo $each['image'] ?>
                                             </td>
                                             <td>
-                                                <a href="./edit_customer.php?id=<?php echo $each['id'] ?>" class="btn btn-outline-warning">Repair</a>
+                                                <a href="./edit_customer.php?id=<?php echo $each['id'] ?>" class="btn btn-outline-warning">Sửa</a>
                                             </td>
                                             <td>
-                                                <button onclick="remove(<?php echo $each['id'] ?>)" class="btn btn-outline-danger">Delete</button>
+                                                <button onclick="remove(<?php echo $each['id'] ?>)" class="btn btn-outline-danger">Xóa</button>
                                             </td>
                                         </tr>
 
@@ -172,57 +174,8 @@ $result = mysqli_query($connect, $sql);
     <!-- END wrapper -->
 
     <!-- Right Sidebar -->
-    <div class="right-bar">
-
-        <div class="rightbar-title">
-            <a href="javascript:void(0);" class="right-bar-toggle float-right">
-                <i class="dripicons-cross noti-icon"></i>
-            </a>
-            <h5 class="m-0">Cài đặt</h5>
-        </div>
-
-        <div class="rightbar-content h-100" data-simplebar>
-
-            <div class="p-3">
-                <div class="alert alert-warning" role="alert">
-                    <strong>Tùy chỉnh </strong> bảng màu tổng thể.
-                </div>
-
-                <!-- Settings -->
-                <h5 class="mt-3">Bảng màu</h5>
-                <hr class="mt-1" />
-
-                <div class="custom-control custom-switch mb-1">
-                    <input type="radio" class="custom-control-input" name="color-scheme-mode" value="light" id="light-mode-check" checked />
-                    <label class="custom-control-label" for="light-mode-check">Chế độ sáng</label>
-                </div>
-
-                <div class="custom-control custom-switch mb-1">
-                    <input type="radio" class="custom-control-input" name="color-scheme-mode" value="dark" id="dark-mode-check" />
-                    <label class="custom-control-label" for="dark-mode-check">Chế độ tối</label>
-                </div>
-                <button class="btn btn-primary btn-block mt-4" id="resetBtn">Đặt lại về mặc định</button>
-            </div> <!-- end padding-->
-
-        </div>
-    </div>
-
-    <div class="rightbar-overlay"></div>
-    <!-- /Right-bar -->
-
-    <!-- bundle -->
-    <script src="../assets/js/vendor.min.js"></script>
-    <script src="../assets/js/app.min.js"></script>
-
-    <!-- third party js -->
-    <script src="../assets/js/vendor/apexcharts.min.js"></script>
-    <script src="../assets/js/vendor/jquery-jvectormap-1.2.2.min.js"></script>
-    <script src="../assets/js/vendor/jquery-jvectormap-world-mill-en.js"></script>
-    <!-- third party js ends -->
-
-    <!-- demo app -->
-    <script src="../assets/js/pages/demo.dashboard.js"></script>
-    <!-- end demo js-->
+    <?php include('../components/right_sidebar.php') ?>
+    <?php include('../components/link_footer.php') ?>
 </body>
 
 </html>

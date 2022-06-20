@@ -22,7 +22,7 @@ if (isset($_SESSION['user'])) {
         $cart = $_SESSION['cart'];
 
         $sql = "INSERT INTO `orders`(`id_user`, `name_receiver`, `phone_receiver`, `address_receiver`, `notes`, `status`, `total_price`) 
-    VALUES ('$id_user','$name_receiver','$phone_receiver','$address_receiver','$notes','Đang xử lý','$total_price')";
+                VALUES ('$id_user','$name_receiver','$phone_receiver','$address_receiver','$notes','Đang xử lý','$total_price')";
         mysqli_query($connect, $sql);
 
         $sql = "select max(id) from orders where id_user = '$id_user'";
@@ -33,6 +33,8 @@ if (isset($_SESSION['user'])) {
             $quantity = $each['quantity'];
             $sql = "insert into order_product(id_order, id_product, quantity)
 	                values('$order_id', '$product_id', '$quantity')";
+            mysqli_query($connect, $sql);
+            $sql = "update products set quantity = products.quantity - $quantity where id = '$product_id'";
             mysqli_query($connect, $sql);
         }
         unset($_SESSION['cart']);

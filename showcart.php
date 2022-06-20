@@ -1,3 +1,6 @@
+<?php
+require('services/check_user_login.php');
+?>
 <!doctype html>
 <html class="no-js" lang="en">
 
@@ -11,9 +14,6 @@
         f.submit();
     }
 </script>
-<?php
-session_start();
-?>
 
 <body>
     <!--[if lt IE 8]>
@@ -28,7 +28,7 @@ session_start();
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <h1 class="cart-heading">Giỏ hàng</h1>
-                    <form action="#">
+                    <form class="form-cart" action="#">
                         <div class="table-content table-responsive">
                             <?php
                             //lấy giỏ hàng
@@ -54,19 +54,21 @@ session_start();
                                             <?php
                                             $count++;
                                             $total_quantity += $item['quantity'];
-                                            $total_money += $item['quantity'] * $item['price'];
+                                            $price_item = $item['price']  - ($item['price'] * $item['discount'] / 100);
+                                            $price_total = $item['quantity'] *  $price_item;
+                                            $total_money +=   $price_total;
                                             ?>
                                             <tr>
                                                 <td><?= $count ?></td>
                                                 <td><?= $item['name'] ?></td>
                                                 <td><img src="public/images/<?php echo $item['image'] ?>" class="cart-image" alt=""></td>
                                                 <td class="product-quantity">
-                                                    <button class="btn btn-secondary btn-update-quantity" data-id="<?php echo $id ?>" data-type="0">-</button>
+                                                    <button type="button" class="btn btn-secondary btn-update-quantity" data-id="<?php echo $id ?>" data-quantity="<?php echo $item['total_quantity'] ?>" data-type="0">-</button>
                                                     <span class="span-quantity"><?php echo $item['quantity'] ?></span>
-                                                    <button class="btn btn-secondary btn-update-quantity" data-id="<?php echo $id ?>" data-type="1">+</button>
+                                                    <button type="button" class="btn btn-secondary btn-update-quantity" data-id="<?php echo $id ?>" data-type="1" data-quantity="<?php echo $item['total_quantity'] ?>">+</button>
                                                 </td>
-                                                <td><?= number_format($item['price']) ?></td>
-                                                <td><?= number_format($item['quantity'] * $item['price']) ?></td>
+                                                <td><span class="span-price"><?= number_format($price_item) ?></span></td>
+                                                <td><span class="span-sum"><?= number_format($price_total) ?></span></td>
                                             </tr>
                                         <?php endforeach ?>
                                     </tbody>
@@ -99,13 +101,12 @@ session_start();
                                                     } else echo 0;
                                                     ?>
                                                 </span></li>
-                                            <li>Tổng tiền: <span>
-                                                    <?php
-                                                    if (isset($total_money)) {
-                                                        echo number_format($total_money);
-                                                    } else echo 0;
-                                                    ?>
-                                                </span></li>
+                                            <li>Tổng tiền:
+                                                <?php if (isset($total_money)) { ?>
+                                                    <span class="span-total"><?php echo number_format($total_money) ?></span>
+                                                <?php } ?>
+                                                </span>
+                                            </li>
                                         </ul>
                                         <a href="checkout.php">Đặt hàng</a>
                                     </div>
@@ -119,117 +120,27 @@ session_start();
     </div>
     <!-- shopping-cart-area end -->
     <?php include('user/components/footer.php') ?>
-    <!-- modal -->
-    <div class="modal fade" id="exampleCompare" tabindex="-1" role="dialog" aria-hidden="true">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span class="pe-7s-close" aria-hidden="true"></span>
-        </button>
-        <div class="modal-dialog modal-compare-width" role="document">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <form action="#">
-                        <div class="table-content compare-style table-responsive">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th></th>
-                                        <th>
-                                            <a href="#">Remove <span>x</span></a>
-                                            <img src="user/assets/img/cart/4.jpg" alt="">
-                                            <p>Blush Sequin Top </p>
-                                            <span>$75.99</span>
-                                            <a class="compare-btn" href="#">Add to cart</a>
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td class="compare-title">
-                                            <h4>Description </h4>
-                                        </td>
-                                        <td class="compare-dec compare-common">
-                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has beenin the stand ard dummy text ever since the 1500s, when an unknown printer took a galley</p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="compare-title">
-                                            <h4>Sku </h4>
-                                        </td>
-                                        <td class="product-none compare-common">
-                                            <p>-</p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="compare-title">
-                                            <h4>Availability </h4>
-                                        </td>
-                                        <td class="compare-stock compare-common">
-                                            <p>In stock</p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="compare-title">
-                                            <h4>Weight </h4>
-                                        </td>
-                                        <td class="compare-none compare-common">
-                                            <p>-</p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="compare-title">
-                                            <h4>Dimensions </h4>
-                                        </td>
-                                        <td class="compare-stock compare-common">
-                                            <p>N/A</p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="compare-title">
-                                            <h4>brand </h4>
-                                        </td>
-                                        <td class="compare-brand compare-common">
-                                            <p>HasTech</p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="compare-title">
-                                            <h4>color </h4>
-                                        </td>
-                                        <td class="compare-color compare-common">
-                                            <p>Grey, Light Yellow, Green, Blue, Purple, Black </p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="compare-title">
-                                            <h4>size </h4>
-                                        </td>
-                                        <td class="compare-size compare-common">
-                                            <p>XS, S, M, L, XL, XXL </p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="compare-title"></td>
-                                        <td class="compare-price compare-common">
-                                            <p>$75.99 </p>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- all js here -->
     <?php include('user/components/link_footer.php') ?>
     <script>
+        Number.prototype.format = function(n, x) {
+            var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\.' : '$') + ')';
+            return this.toFixed(Math.max(0, ~~n)).replace(new RegExp(re, 'g'), '$&,');
+        };
         $(document).ready(function() {
-
+            function getTotal() {
+                let total = 0;
+                $(".span-sum").each(function(index, el) {
+                    total += parseInt($(this).text().replace(/,/g, ''));
+                });
+                $(".span-total").text(total.format())
+            }
             $(".btn-update-quantity").click(function() {
                 const btn = $(this);
                 let id = $(this).data('id');
+                const quantityProduct = $(this).data('quantity');
+                console.log('quantity: ', quantityProduct);
                 let type = $(this).data('type');
                 $.ajax({
                         url: 'update_quantity.php',
@@ -239,13 +150,16 @@ session_start();
                             type
                         },
                     })
-                    .done(function() {
+                    .done(function(response) {
                         let parent_tr = btn.parents('tr');
                         let price = parseInt(parent_tr.find(".span-price").text().replace(/,/g, ''));
-                        let quantity = parent_tr.find(".span-quantity").text();
+                        let quantity = parent_tr.find(".span-quantity").text()
 
                         if (type === 1) {
                             quantity++;
+                            if (quantity > quantityProduct) {
+                                quantity--;
+                            }
                         } else {
                             quantity--;
                         }
@@ -257,7 +171,12 @@ session_start();
                             parent_tr.find('.span-sum').text(sum.format());
                         }
                         getTotal()
+
+                        if (response) {
+                            $.notify('Vượt quá số lượng sản phẩm !', 'error');
+                        }
                     })
+
             });
         })
     </script>

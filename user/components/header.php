@@ -97,20 +97,23 @@ if (!isset($_SESSION)) {
                     </nav>
                 </div>
                 <div class="header-cart" style="display: flex;">
-                    <div class="menu-style-2 furniture-menu menu-hover">
-                        <ul>
-                            <li>
-                                <a class="icon-cart-furniture" href="#"><i class="ti-user"></i></a>
-                                <ul class="single-dropdown">
-                                    <li><a href="profile.php">Trang cá nhân</a></li>
-                                    <li><a href="purchase_history.php">Danh sách đơn hàng</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                    <a class="icon-cart-furniture" href="showcart.php">
-                        <i class="ti-shopping-cart"></i>
-                    </a>
+                    <?php if (isset($_SESSION['user'])) { ?>
+                        <div class="menu-style-2 furniture-menu menu-hover">
+                            <ul>
+                                <li>
+                                    <a class="icon-cart-furniture" href="#"><i class="ti-user"></i></a>
+                                    <ul class="single-dropdown">
+                                        <li><a href="profile.php">Trang cá nhân</a></li>
+                                        <li><a href="purchase_history.php">Danh sách đơn hàng</a></li>
+                                        <li><a href="logout.php">Đăng xuất</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <a class="icon-cart-furniture" href="showcart.php">
+                            <i class="ti-shopping-cart"></i>
+                        </a>
+                    <?php } ?>
                 </div>
             </div>
             <div class="row">
@@ -200,5 +203,4 @@ if (!isset($_SESSION)) {
             </div>
         </div>
     <?php } ?>
-    <hr class="hr-custom">
 </header>

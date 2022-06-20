@@ -17,10 +17,25 @@ if ($actual_link === "/15_php_2022/admin/" || $actual_link === "/15_php_2022/adm
         $url_add_manufacturer = "manufacturer/add_manufacturer.php";
     }
 
+    if (str_contains($actual_link, "employee")) {
+        $url_employee = "../employee/index.php";
+        $url_add_employee = "../employee/add_employee.php";
+    } else {
+        $url_employee = "employee/index.php";
+        $url_add_employee = "employee/add_employee.php";
+    }
+
+    if (str_contains($actual_link, "customer")) {
+        $url_customer = "../customer/index.php";
+        $url_add_customer = "../customer/add_customer.php";
+    } else {
+        $url_customer = "customer/index.php";
+        $url_add_customer = "customer/add_customer.php";
+    }
+
     $src_assets = "";
 } else {
     if (str_contains($actual_link, "product")) {
-        echo 'contain';
         $url_product = "index.php";
         $url_add_product = "add_product.php";
     } else {
@@ -29,7 +44,6 @@ if ($actual_link === "/15_php_2022/admin/" || $actual_link === "/15_php_2022/adm
     }
 
     if (str_contains($actual_link, "manufacturer")) {
-        echo 'contain';
         $url_manufacturer = "index.php";
         $url_add_manufacturer = "add_manufacturer.php";
     } else {
@@ -37,14 +51,27 @@ if ($actual_link === "/15_php_2022/admin/" || $actual_link === "/15_php_2022/adm
         $url_add_manufacturer = "../manufacturer/add_manufacturer.php";
     }
 
+    if (str_contains($actual_link, "employee")) {
+        $url_employee = "index.php";
+        $url_add_employee = "add_employee.php";
+    } else {
+        $url_employee = "../employee/index.php";
+        $url_add_employee = "../employee/add_employee.php";
+    }
+
+    if (str_contains($actual_link, "customer")) {
+        $url_customer = "index.php";
+        $url_add_customer = "add_customer.php";
+    } else {
+        $url_customer = "../customer/index.php";
+        $url_add_customer = "../customer/add_customer.php";
+    }
+
 
     $src_assets = "../";
 }
-
-
 ?>
 <ul class="metismenu side-nav">
-    <li class="side-nav-title side-nav-item">Trang chủ</li>
     <li class="side-nav-item">
         <a href="javascript: void(0);" class="side-nav-link">
             <i class="uil-store"></i>
@@ -83,10 +110,10 @@ if ($actual_link === "/15_php_2022/admin/" || $actual_link === "/15_php_2022/adm
         </a>
         <ul class="side-nav-second-level" aria-expanded="false">
             <li>
-                <a href="apps-ecommerce-products.html">Danh sách nhân viên</a>
+                <a href="<?php echo $url_employee ?>">Danh sách nhân viên</a>
             </li>
             <li>
-                <a href="apps-ecommerce-products-details.html">Thêm mới nhân viên</a>
+                <a href="<?php echo $url_add_employee ?>">Thêm mới nhân viên</a>
             </li>
         </ul>
     </li>
@@ -98,7 +125,7 @@ if ($actual_link === "/15_php_2022/admin/" || $actual_link === "/15_php_2022/adm
         </a>
         <ul class="side-nav-second-level" aria-expanded="false">
             <li>
-                <a href="customer">Danh sách khách hàng</a>
+                <a href="<?php echo $url_customer ?>">Danh sách khách hàng</a>
             </li>
         </ul>
     </li>

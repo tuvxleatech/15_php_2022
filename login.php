@@ -20,6 +20,10 @@ session_start();
           <p class="text-danger"><?php echo $_SESSION['login_failed'];
                                   unset($_SESSION['login_failed']); ?></p>
         <?php } ?>
+        <?php if (isset($_SESSION['require_login'])) { ?>
+          <p class="text-danger"><?php echo $_SESSION['require_login'];
+                                  unset($_SESSION['require_login']); ?></p>
+        <?php } ?>
       </div>
     </div>
   </div>

@@ -1,4 +1,5 @@
 <?php
+require('services/check_user_login.php');
 include("services/connect.php");
 ?>
 <!doctype html>
@@ -10,7 +11,6 @@ include("services/connect.php");
 
 <body>
     <?php
-    session_start();
     include("services/connect.php");
     ?>
     <!-- header start -->
@@ -60,7 +60,7 @@ include("services/connect.php");
                                                     <td class="
                                                     <?php if ($item['status'] === 'Đang xử lý') {
                                                         echo 'text-warning';
-                                                    } else if ($item['status'] === 'Thành công') {
+                                                    } else if ($item['status'] === 'Thành công' || $item['status'] === 'Đã duyệt') {
                                                         echo 'text-success';
                                                     } else if ($item['status'] === 'Đã hủy') {
                                                         echo 'text-danger';

@@ -1,3 +1,16 @@
+<?php
+require('services/check_user_login.php');
+if (isset($_SESSION['user'])) {
+    $user = $_SESSION['user'];
+}
+if (isset($_SESSION['cart'])) {
+    $cart = $_SESSION['cart'];
+} else {
+    header('location:index.php');
+}
+
+$total_money = 0;
+?>
 <!doctype html>
 <html class="no-js" lang="en">
 
@@ -11,11 +24,6 @@
         <![endif]-->
     <!-- header start -->
     <?php include('user/components/header.php') ?>
-    <?php
-    if (isset($_SESSION['user'])) {
-        $user = $_SESSION['user'];
-    }
-    ?>
     <!-- header end -->
     <div class="container">
         <h2>Thông tin thanh toán</h2>
@@ -126,12 +134,6 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php
-                                    $total_money = 0;
-                                    if (isset($_SESSION['cart'])) {
-                                        $cart = $_SESSION['cart'];
-                                    }
-                                    ?>
                                     <?php foreach ($cart as $item) { ?>
                                         <?php $total_money += $item['price']  * $item['quantity'] ?>
                                         <tr class="cart_item">

@@ -1,3 +1,6 @@
+<?php
+require('services/check_user_login.php');
+?>
 <!DOCTYPE html>
 <html class="no-js" lang="zxx">
 

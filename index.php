@@ -88,6 +88,13 @@ if (isset($_GET['page'])) {
                                             <h4><?= $r['name'] ?></h4>
                                             <div style=" text-decoration: line-through;"><?= number_format($r['price']) ?><span style="text-decoration: underline;"><sup>đ</sup></span></div>
                                             <div style="color:red;font-weight: bold;font-size: 18px;"><?= number_format($r['price'] * (1 - $r['discount'] / 100)) ?><span style="text-decoration: underline;"><sup>đ</sup></span></div>
+                                            <div class='text-danger'>
+                                                <?php if ($r['quantity'] != 0) { ?>
+                                                    Số lượng: <?= $r['quantity'] ?>
+                                                <?php } else { ?>
+                                                    Sản phẩm hết hàng
+                                                <?php } ?>
+                                            </div>
                                         </a>
                                     </div>
                                 </div>
@@ -171,6 +178,12 @@ if (isset($_GET['page'])) {
                                                     <h4><?= $r2['name'] ?></h4>
                                                     <div style=" text-decoration: line-through;"><?= number_format($r2['price']) ?><span style="text-decoration: underline;"><sup>đ</sup></span></div>
                                                     <div style="color:red;font-weight: bold;font-size: 18px;"><?= number_format($r2['price'] - ($r2['price'] * $r2['discount'] / 100))  ?><span style="text-decoration: underline;"><sup>đ</sup></span></div>
+                                                    <div class='text-danger'>
+                                                        <?php if ($r['quantity'] != 0) { ?>
+                                                            Số lượng: <?= $r['quantity'] ?>
+                                                        <?php } else { ?>
+                                                            Sản phẩm hết hàng
+                                                        <?php } ?></div>
                                                 </a>
                                             </div>
                                         </div>
@@ -212,6 +225,13 @@ if (isset($_GET['page'])) {
                                                     <h4><?= $r2['name'] ?></h4>
                                                     <div style=" text-decoration: line-through;"><?= number_format($r2['price']) ?><span style="text-decoration: underline;"><sup>đ</sup></span></div>
                                                     <div style="color:red;font-weight: bold;font-size: 18px;"><?= number_format($r2['price'] * (1 - $r2['discount'] / 100)) ?><span style="text-decoration: underline;"><sup>đ</sup></span></div>
+                                                    <div class='text-danger'>
+                                                        <?php if ($r['quantity'] != 0) { ?>
+                                                            Số lượng: <?= $r['quantity'] ?>
+                                                        <?php } else { ?>
+                                                            Sản phẩm hết hàng
+                                                        <?php } ?>
+                                                    </div>
                                                 </a>
                                             </div>
                                         </div>
@@ -255,6 +275,13 @@ if (isset($_GET['page'])) {
                                                     <h4><?= $r2['name'] ?></h4>
                                                     <div style=" text-decoration: line-through;"><?= number_format($r2['price']) ?><span style="text-decoration: underline;"><sup>đ</sup></span></div>
                                                     <div style="color:red;font-weight: bold;font-size: 18px;"><?= number_format($r2['price'] * (1 - $r2['discount'] / 100)) ?><span style="text-decoration: underline;"><sup>đ</sup></span></div>
+                                                    <div class='text-danger'>
+                                                        <?php if ($r['quantity'] != 0) { ?>
+                                                            Số lượng: <?= $r['quantity'] ?>
+                                                        <?php } else { ?>
+                                                            Sản phẩm hết hàng
+                                                        <?php } ?>
+                                                    </div>
                                                 </a>
                                             </div>
                                         </div>
@@ -298,6 +325,13 @@ if (isset($_GET['page'])) {
                                                     <h4><?= $r2['name'] ?></h4>
                                                     <div style=" text-decoration: line-through;"><?= number_format($r2['price']) ?><span style="text-decoration: underline;"><sup>đ</sup></span></div>
                                                     <div style="color:red;font-weight: bold;font-size: 18px;"><?= number_format($r2['price'] * (1 - $r2['discount'] / 100)) ?><span style="text-decoration: underline;"><sup>đ</sup></span></div>
+                                                    <div class='text-danger'>
+                                                        <?php if ($r['quantity'] != 0) { ?>
+                                                            Số lượng: <?= $r['quantity'] ?>
+                                                        <?php } else { ?>
+                                                            Sản phẩm hết hàng
+                                                        <?php } ?>
+                                                    </div>
                                                 </a>
                                             </div>
                                         </div>
@@ -341,6 +375,13 @@ if (isset($_GET['page'])) {
                                                     <h4><?= $r2['name'] ?></h4>
                                                     <div style=" text-decoration: line-through;"><?= number_format($r2['price']) ?><span style="text-decoration: underline;"><sup>đ</sup></span></div>
                                                     <div style="color:red;font-weight: bold;font-size: 18px;"><?= number_format($r2['price'] * (1 - $r2['discount'] / 100)) ?><span style="text-decoration: underline;"><sup>đ</sup></span></div>
+                                                    <div class='text-danger'>
+                                                        <?php if ($r['quantity'] != 0) { ?>
+                                                            Số lượng: <?= $r['quantity'] ?>
+                                                        <?php } else { ?>
+                                                            Sản phẩm hết hàng
+                                                        <?php } ?>
+                                                    </div>
                                                 </a>
                                             </div>
                                         </div>
@@ -423,7 +464,13 @@ if (isset($_GET['page'])) {
                         },
                     })
                     .done(function(response) {
-                        $.notify(response + " vào giỏ hàng", "success");
+                        if (response === 'add_to_cart_failed') {
+                            $.notify('Số lượng trong giỏ hàng đã đạt tối đa', 'error');
+                        } else if (response === 'product_out_of_stock') {
+                            $.notify('Số lượng sản phẩm đã hết !', 'error');
+                        } else {
+                            $.notify(response + " vào giỏ hàng", "success");
+                        }
                     })
             })
 
