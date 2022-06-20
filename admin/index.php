@@ -1,5 +1,16 @@
 <?php
 session_start();
+require("../services/connect.php");
+$sql = "SELECT COUNT(*) as 'total_customer' FROM `users`";
+$sql1 = "SELECT COUNT(*) as 'total_order' FROM `orders`";
+$doanhthusql = "SELECT SUM(orders.total_price)/23306.60000  as 'doanhthu' FROM `orders` WHERE id_status = 1";
+$a = mysqli_query($connect, $sql);
+$b = mysqli_query($connect, $sql1);
+$c = mysqli_query($connect, $doanhthusql);
+$rs = mysqli_fetch_assoc($a);
+$rs1 = mysqli_fetch_assoc($b);
+$rs2 = mysqli_fetch_assoc($c);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -80,7 +91,7 @@ session_start();
                                                 <i class="mdi mdi-account-multiple widget-icon bg-success-lighten text-success"></i>
                                             </div>
                                             <h5 class="text-muted font-weight-normal mt-0" title="Number of Customers">Tổng khách hàng</h5>
-                                            <h3 class="mt-3 mb-3">36,254</h3>
+                                            <h3 class="mt-3 mb-3"><?php echo $rs['total_customer'] ?></h3>
                                             <p class="mb-0 text-muted">
                                                 <span class="text-success mr-2"><i class="mdi mdi-arrow-up-bold"></i> 5.27%</span>
                                                 <span class="text-nowrap">Kể từ tháng trước</span>
@@ -96,7 +107,7 @@ session_start();
                                                 <i class="mdi mdi-cart-plus widget-icon bg-danger-lighten text-danger"></i>
                                             </div>
                                             <h5 class="text-muted font-weight-normal mt-0" title="Number of Orders">Tổng đơn hàng</h5>
-                                            <h3 class="mt-3 mb-3">5,543</h3>
+                                            <h3 class="mt-3 mb-3"><?php echo $rs1['total_order']  ?></h3>
                                             <p class="mb-0 text-muted">
                                                 <span class="text-danger mr-2"><i class="mdi mdi-arrow-down-bold"></i> 1.08%</span>
                                                 <span class="text-nowrap">Kể từ tháng trước</span>
@@ -114,7 +125,7 @@ session_start();
                                                 <i class="mdi mdi-currency-usd widget-icon bg-info-lighten text-info"></i>
                                             </div>
                                             <h5 class="text-muted font-weight-normal mt-0" title="Average Revenue">Doanh thu</h5>
-                                            <h3 class="mt-3 mb-3">$6,254</h3>
+                                            <h3 class="mt-3 mb-3">$<?php if($rs2['doanhthu'] == null) {echo 0;} else{echo $rs2['doanhthu'];}?></h3>
                                             <p class="mb-0 text-muted">
                                                 <span class="text-danger mr-2"><i class="mdi mdi-arrow-down-bold"></i> 7.00%</span>
                                                 <span class="text-nowrap">Kể từ tháng trước</span>
