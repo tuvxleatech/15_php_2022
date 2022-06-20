@@ -1,8 +1,8 @@
 <?php
-require('services/check_user_login.php');
+session_start();
 ?>
 <!DOCTYPE html>
-<html class="no-js" lang="zxx">
+<html class="no-js" lang="en">
 
 <head>
     <?php include('user/components/head.php') ?>
@@ -11,36 +11,68 @@ require('services/check_user_login.php');
 <body>
     <!-- header start -->
     <?php include('user/components/header.php') ?>
-    <!-- header end -->
-    <div class="about-story pt-95 pb-100">
+    <div class="breadcrumb-area">
         <div class="container">
+            <div class="breadcrumb-content text-center">
+                <h2 class="text-dark">Chỉnh sửa thông tin</h2>
+                <?php if (isset($_SESSION['error_register'])) { ?>
+                    <p class="text-danger"><?php echo $_SESSION['error_register'];
+                                            unset($_SESSION['error_register']);  ?></p>
+                <?php } ?>
+            </div>
+        </div>
+    </div>
+    <!-- change profile-area start -->
+    <?php
+    $user_name = $_SESSION['user']['name'];
+    $user_email = $_SESSION['user']['email'];
+    $user_address = $_SESSION['user']['address'];
+    $user_phonenumber = $_SESSION['user']['phone'];
+    $user_gender = $_SESSION['user']['gender'];
+    ?>
+
+    <div class="register-area ptb-100">
+        <div class="container-fluid">
             <div class="row">
-                <div class="col-lg-6">
-                    <div class="story-img">
-                        <img style="width: 200px" class="avatar" src="https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png" alt="" />
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="story-details pl-50">
-                        <div class="story-details-top">
-                            <h2><span>Thông tin khách hàng</span></h2>
-                            <h4>Họ và tên: <?php echo $_SESSION['user']['name'] ?></h4>
-                            <h4>Email: <?php echo $_SESSION['user']['email'] ?></h4>
-                            <h4>Địa chỉ: <?php echo $_SESSION['user']['address'] ?></h4>
-                            <h4>Số điện thoại: <?php echo $_SESSION['user']['phone'] ?></h4>
-                            <h4>Giới tính: <?php echo $_SESSION['user']['gender'] ?></h4>
+                <div class="col-md-12 col-12 col-lg-12 col-xl-6 ml-auto mr-auto">
+                    <div class="login">
+                        <div class="login-form-container">
+                            <div class="login-form">
+                                <form action="process_change_profile.php" method="post" enctype="multipart/form-data">
+                                    <label for="">Họ và tên</label>
+                                    <input name="name" type="text" value="<?= $user_name ?>" require />
+                                    <label for="">Email</label>
+                                    <input name="email" type="email" value="<?= $user_email ?>" readonly="readonly" />
+                                    <label for="">Địa chỉ</label>
+                                    <input name="address" type="text" value="<?= $user_address ?>" />
+                                    <label for="">Số điện thoại</label>
+                                    <input name="phonenumber" type="text" value="<?= $user_phonenumber ?>" />
+                                    <label for="">Giới tính</label>
+                                    <input name="gender" type="text" value="<?= $user_gender ?>" />
+                                    <label for="">Ảnh đại diện</label>
+                                    <input type="file" name="fileToUpload" require> <br>
+                                    <div class="button-box">
+                                </form>
+                                <button type="submit" class="default-btn floatright">Lưu thông tin</button>
+
+                            </div>
+
                         </div>
-                        <a href="index.php">
-                            <button type="button" class="btn btn-primary">Trở lại trang chủ</button>
-                        </a>
-                        <a href="change_user_profile.php">
-                            <button type="button" class="btn btn-secondary">Chỉnh sửa thông tin</button>
-                        </a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-5 ml-auto">
+            <div class="cart-page-total">
+                <a href="index.php">Trở về trang chủ</a>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <!-- register-area end -->
     <?php include('user/components/footer.php') ?>
     <!-- modal -->
     <div class="modal fade" id="exampleCompare" tabindex="-1" role="dialog" aria-hidden="true">
