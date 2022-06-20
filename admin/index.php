@@ -127,7 +127,7 @@ $rs2 = mysqli_fetch_assoc($c);
                                             <h5 class="text-muted font-weight-normal mt-0" title="Average Revenue">Doanh thu</h5>
                                             <h3 class="mt-3 mb-3">$<?php if($rs2['doanhthu'] == null) {echo 0;} else{echo $rs2['doanhthu'];}?></h3>
                                             <p class="mb-0 text-muted">
-                                                <span class="text-danger mr-2"><i class="mdi mdi-arrow-down-bold"></i> 7.00%</span>
+                                                <span class="text-danger mr-2"><i class="mdi mdi-arrow-up-bold"></i> 7.00%</span>
                                                 <span class="text-nowrap">Kể từ tháng trước</span>
                                             </p>
                                         </div> <!-- end card-body-->

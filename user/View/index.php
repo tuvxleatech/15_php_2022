@@ -60,7 +60,7 @@ include("../../services/connect.php");
                                 <div class="product-wrapper" style="text-align: center;">
                                     <div class="product-img">
                                         <a href="product-detail.php?id=<?= $r['id'] ?>" style="display:block;">
-                                            <img style="width:70%; height:70%;" src="<?= $r['image'] ?>" alt="">
+                                            <img style="width:70%; height:70%;" src="<?php echo $r['image'] ?>" alt="">
                                         </a>
                                         <span><?= -$r['discount'] ?>%</span>
                                         <div class="product-action">
