@@ -34,6 +34,7 @@ if ($actual_link === "/15_php_2022/admin/" || $actual_link === "/15_php_2022/adm
     }
 
     $src_assets = "";
+    $src_logout = "";
 } else {
     if (str_contains($actual_link, "product")) {
         $url_product = "index.php";
@@ -69,6 +70,7 @@ if ($actual_link === "/15_php_2022/admin/" || $actual_link === "/15_php_2022/adm
 
 
     $src_assets = "../";
+    $src_logout = "../";
 }
 ?>
 <ul class="metismenu side-nav">
@@ -140,5 +142,10 @@ if ($actual_link === "/15_php_2022/admin/" || $actual_link === "/15_php_2022/adm
                 <a href="order">Danh sách đơn hàng</a>
             </li>
         </ul>
+    </li>
+    <li class="side-nav-item">
+        <a href="<?php echo $src_logout ?>logout.php" class="side-nav-link">
+            <span>Đăng xuất</span>
+        </a>
     </li>
 </ul>

@@ -1,5 +1,5 @@
 <?php
-session_start();
+require('../services/check_admin_login.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
