@@ -134,16 +134,17 @@ require("../../services/connect.php");
                                     }
                                 });
                         }
-
-                        <?php
-                        if ($_SESSION['success'] == "Thêm thành công") { ?>
-                            swal("Success", "Thêm sản phẩm thành công", "success");
-                        <?php
-                        } else if ($_SESSION['success'] == "Sửa thành công") {
-                        ?>
-                            swal("Success", "Sửa sản phẩm thành công", "success");
-                        <?php }
-                        unset($_SESSION['success']); ?>
+                        <?php if (isset($_SESSION['success'])) { ?>
+                            <?php
+                            if ($_SESSION['success'] == "Thêm thành công") { ?>
+                                swal("Success", "Thêm sản phẩm thành công", "success");
+                            <?php
+                            } else if ($_SESSION['success'] == "Sửa thành công") {
+                            ?>
+                                swal("Success", "Sửa sản phẩm thành công", "success");
+                            <?php }
+                            unset($_SESSION['success']); ?>
+                        <?php } ?>
                     </script>
                 </div>
                 <!-- container -->
