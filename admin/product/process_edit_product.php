@@ -18,9 +18,8 @@
     $sql="UPDATE products 
           SET name = '$tenSP',price = '$gia',discount = '$giamgia' ,quantity = '$soluong',image ='$anh',description = '$mota',id_category = '$maDM',id_manufacturer = '$maNSX'
           WHERE id = $id";
-	$rs2 = mysqli_query($connect,$sql);
-    if($rs2){
-        $_SESSION['success'] = "Sửa thành công";
-        header("location:../../admin/product");
-    }  
-?>
+$rs2 = mysqli_query($connect, $sql);
+if ($rs2) {
+    $_SESSION['success'] = "Sửa thành công";
+    header("location:product");
+}
