@@ -275,105 +275,43 @@ require('../services/connect.php');
 
 
                     <div class="row">
-                        <div class="col-xl-6 col-lg-12 order-lg-2 order-xl-1">
+                        <div class="col-xl-12 col-lg-12 order-lg-2 order-xl-1">
                             <div class="card">
                                 <div class="card-body">
                                     <h4 class="header-title mt-2">SẢN PHẨM BÁN CHẠY NHẤT</h4>
-
+                                    <?php
+                                    $sql = "select id_product, sum(order_product.quantity) as 'tong_so',
+                                    products.name as 'product_name' ,
+                                    products.price as 'product_price'
+                                    from order_product 
+                                    INNER JOIN products on order_product.id_product = products.id 
+                                    GROUP BY order_product.id_product ORDER by sum(order_product.quantity) DESC ";
+                                    $result = mysqli_query($connect, $sql);
+                                    ?>
                                     <div class="table-responsive">
                                         <table class="table table-centered table-nowrap table-hover mb-0">
                                             <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <h5 class="font-14 my-1 font-weight-normal">ASOS Ridley High Waist</h5>
-                                                        <span class="text-muted font-13">07 April 2018</span>
-                                                    </td>
-                                                    <td>
-                                                        <h5 class="font-14 my-1 font-weight-normal">$79.49</h5>
-                                                        <span class="text-muted font-13">Price</span>
-                                                    </td>
-                                                    <td>
-                                                        <h5 class="font-14 my-1 font-weight-normal">82</h5>
-                                                        <span class="text-muted font-13">Quantity</span>
-                                                    </td>
-                                                    <td>
-                                                        <h5 class="font-14 my-1 font-weight-normal">$6,518.18</h5>
-                                                        <span class="text-muted font-13">Amount</span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <h5 class="font-14 my-1 font-weight-normal">Marco Lightweight Shirt</h5>
-                                                        <span class="text-muted font-13">25 March 2018</span>
-                                                    </td>
-                                                    <td>
-                                                        <h5 class="font-14 my-1 font-weight-normal">$128.50</h5>
-                                                        <span class="text-muted font-13">Price</span>
-                                                    </td>
-                                                    <td>
-                                                        <h5 class="font-14 my-1 font-weight-normal">37</h5>
-                                                        <span class="text-muted font-13">Quantity</span>
-                                                    </td>
-                                                    <td>
-                                                        <h5 class="font-14 my-1 font-weight-normal">$4,754.50</h5>
-                                                        <span class="text-muted font-13">Amount</span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <h5 class="font-14 my-1 font-weight-normal">Half Sleeve Shirt</h5>
-                                                        <span class="text-muted font-13">17 March 2018</span>
-                                                    </td>
-                                                    <td>
-                                                        <h5 class="font-14 my-1 font-weight-normal">$39.99</h5>
-                                                        <span class="text-muted font-13">Price</span>
-                                                    </td>
-                                                    <td>
-                                                        <h5 class="font-14 my-1 font-weight-normal">64</h5>
-                                                        <span class="text-muted font-13">Quantity</span>
-                                                    </td>
-                                                    <td>
-                                                        <h5 class="font-14 my-1 font-weight-normal">$2,559.36</h5>
-                                                        <span class="text-muted font-13">Amount</span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <h5 class="font-14 my-1 font-weight-normal">Lightweight Jacket</h5>
-                                                        <span class="text-muted font-13">12 March 2018</span>
-                                                    </td>
-                                                    <td>
-                                                        <h5 class="font-14 my-1 font-weight-normal">$20.00</h5>
-                                                        <span class="text-muted font-13">Price</span>
-                                                    </td>
-                                                    <td>
-                                                        <h5 class="font-14 my-1 font-weight-normal">184</h5>
-                                                        <span class="text-muted font-13">Quantity</span>
-                                                    </td>
-                                                    <td>
-                                                        <h5 class="font-14 my-1 font-weight-normal">$3,680.00</h5>
-                                                        <span class="text-muted font-13">Amount</span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <h5 class="font-14 my-1 font-weight-normal">Marco Shoes</h5>
-                                                        <span class="text-muted font-13">05 March 2018</span>
-                                                    </td>
-                                                    <td>
-                                                        <h5 class="font-14 my-1 font-weight-normal">$28.49</h5>
-                                                        <span class="text-muted font-13">Price</span>
-                                                    </td>
-                                                    <td>
-                                                        <h5 class="font-14 my-1 font-weight-normal">69</h5>
-                                                        <span class="text-muted font-13">Quantity</span>
-                                                    </td>
-                                                    <td>
-                                                        <h5 class="font-14 my-1 font-weight-normal">$1,965.81</h5>
-                                                        <span class="text-muted font-13">Amount</span>
-                                                    </td>
-                                                </tr>
-
+                                                <?php
+                                                foreach ($result as $item) :
+                                                ?>
+                                                    <tr>
+                                                        <td>
+                                                            <h5 class="font-14 my-1 font-weight-normal"><?= $item['product_name'] ?></h5>
+                                                        </td>
+                                                        <td>
+                                                            <h5 class="font-14 my-1 font-weight-normal"><?php echo number_format($item['product_price']) ?>VND</h5>
+                                                            <span class="text-muted font-13">Giá tiền</span>
+                                                        </td>
+                                                        <td>
+                                                            <h5 class="font-14 my-1 font-weight-normal"><?php echo $item['tong_so'] ?></h5>
+                                                            <span class="text-muted font-13">Số lượng</span>
+                                                        </td>
+                                                        <td>
+                                                            <h5 class="font-14 my-1 font-weight-normal"><?php echo number_format($item['product_price'] * $item['tong_so']) ?></h5>
+                                                            <span class="text-muted font-13">Tổng giá</span>
+                                                        </td>
+                                                    </tr>
+                                                <?php endforeach; ?>
                                             </tbody>
                                         </table>
                                     </div> <!-- end table-responsive-->

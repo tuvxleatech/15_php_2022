@@ -189,7 +189,7 @@ if (!isset($_SESSION)) {
             </div>
         </div>
     </div>
-    <?php if (!isset($_SESSION['user'])) { ?>
+    <?php if (!isset($_SESSION['user']) || !isset($_SESSION['admin'])) { ?>
         <div class="header-bottom-furniture wrapper-padding-2 border-top-3">
             <div class="container-fluid">
                 <div class="furniture-bottom-wrapper">

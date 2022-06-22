@@ -69,8 +69,8 @@ if ($actual_link === "/15_php_2022/admin/" || $actual_link === "/15_php_2022/adm
                         <div class="notify-icon bg-primary">
                             <i class="mdi mdi-comment-account-outline"></i>
                         </div>
-                        <p class="notify-details">Caleb Flakelar commented on Admin
-                            <small class="text-muted">1 min ago</small>
+                        <p class="notify-details">Caleb Flakelar đã nhận xét về Admin
+                            <small class="text-muted">1 phút truóc</small>
                         </p>
                     </a>
 
@@ -79,8 +79,8 @@ if ($actual_link === "/15_php_2022/admin/" || $actual_link === "/15_php_2022/adm
                         <div class="notify-icon bg-info">
                             <i class="mdi mdi-account-plus"></i>
                         </div>
-                        <p class="notify-details">New user registered.
-                            <small class="text-muted">5 hours ago</small>
+                        <p class="notify-details">Người dùng mới đã đăng ký.
+                            <small class="text-muted">5 giờ trước</small>
                         </p>
                     </a>
 
@@ -89,19 +89,9 @@ if ($actual_link === "/15_php_2022/admin/" || $actual_link === "/15_php_2022/adm
                         <div class="notify-icon">
                             <img src="<?php echo $src_assets ?>assets/images/users/avatar-2.jpg" class="img-fluid rounded-circle" alt="" />
                         </div>
-                        <p class="notify-details">Cristina Pride</p>
+                        <p class="notify-details">Xuân Hoàng</p>
                         <p class="text-muted mb-0 user-msg">
-                            <small>Hi, How are you? What about our next meeting</small>
-                        </p>
-                    </a>
-
-                    <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                        <div class="notify-icon bg-primary">
-                            <i class="mdi mdi-comment-account-outline"></i>
-                        </div>
-                        <p class="notify-details">Caleb Flakelar commented on Admin
-                            <small class="text-muted">4 days ago</small>
+                            <small>Chào! Bạn khỏe không? Còn cuộc họp tiếp theo của chúng ta thì sao</small>
                         </p>
                     </a>
 
@@ -110,9 +100,9 @@ if ($actual_link === "/15_php_2022/admin/" || $actual_link === "/15_php_2022/adm
                         <div class="notify-icon">
                             <img src="<?php echo $src_assets ?>assets/images/users/avatar-4.jpg" class="img-fluid rounded-circle" alt="" />
                         </div>
-                        <p class="notify-details">Karen Robinson</p>
+                        <p class="notify-details">Duy Khương</p>
                         <p class="text-muted mb-0 user-msg">
-                            <small>Wow ! this admin looks good and awesome design</small>
+                            <small>Ồ ! quản trị viên này có vẻ tốt và thiết kế tuyệt vời</small>
                         </p>
                     </a>
 
@@ -121,9 +111,9 @@ if ($actual_link === "/15_php_2022/admin/" || $actual_link === "/15_php_2022/adm
                         <div class="notify-icon bg-info">
                             <i class="mdi mdi-heart"></i>
                         </div>
-                        <p class="notify-details">Carlos Crouch liked
+                        <p class="notify-details">Văn Hùng thích
                             <b>Admin</b>
-                            <small class="text-muted">13 days ago</small>
+                            <small class="text-muted">13 ngày trước</small>
                         </p>
                     </a>
                 </div>
@@ -237,7 +227,7 @@ if ($actual_link === "/15_php_2022/admin/" || $actual_link === "/15_php_2022/adm
                 </a>
 
                 <!-- item-->
-                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                <a href="../logout.php" class="dropdown-item notify-item">
                     <i class="mdi mdi-logout mr-1"></i>
                     <span>Đăng xuất</span>
                 </a>

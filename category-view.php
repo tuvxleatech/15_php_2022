@@ -1,30 +1,11 @@
 <?php
-include("../../services/connect.php");
+include("services/connect.php");
 ?>
 <!doctype html>
 <html class="no-js" lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>ABC SHOP</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
-
-    <!-- all css here -->
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/magnific-popup.css">
-    <link rel="stylesheet" href="assets/css/animate.css">
-    <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="assets/css/themify-icons.css">
-    <link rel="stylesheet" href="assets/css/pe-icon-7-stroke.css">
-    <link rel="stylesheet" href="assets/css/meanmenu.min.css">
-    <link rel="stylesheet" href="assets/css/bundle.css">
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/responsive.css">
-    <script src="assets/js/vendor/modernizr-2.8.3.min.js"></script>
+    <?php include('user/components/head.php') ?>
 </head>
 
 <body>
@@ -53,7 +34,7 @@ include("../../services/connect.php");
                                     <div class="product-wrapper" style="text-align: center;">
                                         <div class="product-img">
                                             <a href="#" style="display:block;">
-                                                <img style="width:90%; height:90%;" src="<?= $r3['image'] ?>" alt="">
+                                                <img style="width:90%; height:90%;" src="public/images/<?= $r3['image'] ?>" alt="">
                                             </a>
                                             <span><?= -$r3['discount'] ?>%</span>
                                             <div class="product-action">
@@ -130,84 +111,7 @@ include("../../services/connect.php");
         </div>
     </div>
     <!-- insta feed end -->
-    <footer class="footer-area">
-        <div class="footer-top-area bg-img pt-105 pb-65" data-overlay="9">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xl-4 col-md-3">
-                        <div class="footer-widget mb-40">
-                            <h3 class="footer-widget-title">Custom Service</h3>
-                            <div class="footer-widget-content">
-                                <ul>
-                                    <li><a href="cart.html">Cart</a></li>
-                                    <li><a href="register.html">My Account</a></li>
-                                    <li><a href="login.html">Login</a></li>
-                                    <li><a href="register.html">Register</a></li>
-                                    <li><a href="#">Support</a></li>
-                                    <li><a href="#">Track</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-md-3">
-                        <div class="footer-widget mb-40">
-                            <h3 class="footer-widget-title">Categories</h3>
-                            <div class="footer-widget-content">
-                                <ul>
-                                    <li><a href="shop.html">Dress</a></li>
-                                    <li><a href="shop.html">Shoes</a></li>
-                                    <li><a href="shop.html">Shirt</a></li>
-                                    <li><a href="shop.html">Baby Product</a></li>
-                                    <li><a href="shop.html">Mans Product</a></li>
-                                    <li><a href="shop.html">Leather</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-md-6">
-                        <div class="footer-widget mb-40">
-                            <h3 class="footer-widget-title">Contact</h3>
-                            <div class="footer-newsletter">
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is dummy.</p>
-                                <div id="mc_embed_signup" class="subscribe-form pr-40">
-                                    <form action="http://devitems.us11.list-manage.com/subscribe/post?u=6bbb9b6f5827bd842d9640c82&amp;id=05d85f18ef" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-                                        <div id="mc_embed_signup_scroll" class="mc-form">
-                                            <input type="email" value="" name="EMAIL" class="email" placeholder="Enter Your E-mail" required>
-                                            <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-                                            <div class="mc-news" aria-hidden="true">
-                                                <input type="text" name="b_6bbb9b6f5827bd842d9640c82_05d85f18ef" tabindex="-1" value="">
-                                            </div>
-                                            <div class="clear">
-                                                <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button">
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="footer-contact">
-                                    <p><span><i class="ti-location-pin"></i></span> 77 Seventh avenue USA 12555. </p>
-                                    <p><span><i class=" ti-headphone-alt "></i></span> +88 (015) 609735 or +88 (012) 112266</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="footer-bottom black-bg ptb-20">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12 text-center">
-                        <div class="copyright">
-                            <p>
-                                Copyright ©
-                                <a href="https://hastech.company/">HasTech</a> 2018 . All Right Reserved.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
+    <?php include('user/components/footer.php') ?>
     <!-- modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -220,25 +124,25 @@ include("../../services/connect.php");
                         <div class="quick-view-learg-img">
                             <div class="quick-view-tab-content tab-content">
                                 <div class="tab-pane active show fade" id="modal1" role="tabpanel">
-                                    <img src="assets/img/quick-view/l1.jpg" alt="">
+                                    <img src="user/assets/img/quick-view/l1.jpg" alt="">
                                 </div>
                                 <div class="tab-pane fade" id="modal2" role="tabpanel">
-                                    <img src="assets/img/quick-view/l2.jpg" alt="">
+                                    <img src="user/assets/img/quick-view/l2.jpg" alt="">
                                 </div>
                                 <div class="tab-pane fade" id="modal3" role="tabpanel">
-                                    <img src="assets/img/quick-view/l3.jpg" alt="">
+                                    <img src="user/assets/img/quick-view/l3.jpg" alt="">
                                 </div>
                             </div>
                         </div>
                         <div class="quick-view-list nav" role="tablist">
                             <a class="active" href="#modal1" data-toggle="tab" role="tab" aria-selected="true" aria-controls="home1">
-                                <img src="assets/img/quick-view/s1.jpg" alt="">
+                                <img src="user/assets/img/quick-view/s1.jpg" alt="">
                             </a>
                             <a href="#modal2" data-toggle="tab" role="tab" aria-selected="false" aria-controls="home2">
-                                <img src="assets/img/quick-view/s2.jpg" alt="">
+                                <img src="user/assets/img/quick-view/s2.jpg" alt="">
                             </a>
                             <a href="#modal3" data-toggle="tab" role="tab" aria-selected="false" aria-controls="home3">
-                                <img src="assets/img/quick-view/s3.jpg" alt="">
+                                <img src="user/assets/img/quick-view/s3.jpg" alt="">
                             </a>
                         </div>
                     </div>
@@ -299,18 +203,7 @@ include("../../services/connect.php");
         </div>
     </div>
     <!-- all js here -->
-    <script src="assets/js/vendor/jquery-1.12.0.min.js"></script>
-    <script src="assets/js/popper.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-    <script src="assets/js/jquery.magnific-popup.min.js"></script>
-    <script src="assets/js/isotope.pkgd.min.js"></script>
-    <script src="assets/js/imagesloaded.pkgd.min.js"></script>
-    <script src="assets/js/jquery.counterup.min.js"></script>
-    <script src="assets/js/waypoints.min.js"></script>
-    <script src="assets/js/ajax-mail.js"></script>
-    <script src="assets/js/owl.carousel.min.js"></script>
-    <script src="assets/js/plugins.js"></script>
-    <script src="assets/js/main.js"></script>
+    <?php include('user/components/link_footer.php') ?>
 </body>
 
 </html>
