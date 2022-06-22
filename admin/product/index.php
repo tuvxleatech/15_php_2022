@@ -112,7 +112,6 @@ require("../../services/connect.php");
                                         </td>
                                         <td>
                                             <button class="btn btn-danger" onclick="xoa(<?= $r['id'] ?>)">Xóa</button>
-
                                         </td>
                                     </tr>
                                 <?php
@@ -145,6 +144,9 @@ require("../../services/connect.php");
                             <?php }
                             unset($_SESSION['success']); ?>
                         <?php } ?>
+                        <?php if (isset($_SESSION['erorr_delete_product'])) { ?>
+                                swal("error", <?php  echo $_SESSION['erorr_delete_product'];?>, "error");
+                        <?php } unset($_SESSION['erorr_delete_product']); ?>
                     </script>
                 </div>
                 <!-- container -->

@@ -19,6 +19,6 @@
     $rs1 = mysqli_query($connect,$sql); 
     if($rs1){
         $_SESSION['success'] = "Thêm thành công";
-       header("location:../../admin/product");
+       header("location:index.php");
     }    
 ?>
