@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 20, 2022 at 10:32 AM
+-- Generation Time: Jun 22, 2022 at 04:29 AM
 -- Server version: 10.4.22-MariaDB
--- PHP Version: 8.1.2
+-- PHP Version: 8.0.13
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -80,7 +80,7 @@ CREATE TABLE `orders` (
   `phone_receiver` varchar(255) NOT NULL,
   `address_receiver` varchar(255) NOT NULL,
   `notes` text NOT NULL,
-  `id_status` int(11) NOT NULL,
+  `status` varchar(255) NOT NULL,
   `total_price` int(11) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -88,7 +88,6 @@ CREATE TABLE `orders` (
 --
 -- Dumping data for table `orders`
 --
-
 
 INSERT INTO `orders` (`id`, `id_user`, `name_receiver`, `phone_receiver`, `address_receiver`, `notes`, `status`, `total_price`, `created_at`) VALUES
 (14, 2, 'Nguyễn Xuân Hoàng', '123', 'ha noi', '', 'Đã hủy', 50000000, '2022-06-19 01:34:07'),
@@ -106,7 +105,6 @@ INSERT INTO `orders` (`id`, `id_user`, `name_receiver`, `phone_receiver`, `addre
 (26, 27, 'Nguyễn Xuân Hoàng', '1', '1', '', 'Đang xử lý', 10000000, '2022-06-20 03:47:11'),
 (27, 27, 'Nguyễn Xuân Hoàng', '1', '1', '', 'Đang xử lý', 10000000, '2022-06-20 03:47:37'),
 (28, 27, 'Nguyễn Xuân Hoàng', '1', '1', '', 'Đang xử lý', 10000000, '2022-06-20 03:47:52');
-
 
 -- --------------------------------------------------------
 
@@ -259,26 +257,6 @@ INSERT INTO `role` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `status`
---
-
-CREATE TABLE `status` (
-  `id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `status`
---
-
-INSERT INTO `status` (`id`, `name`) VALUES
-(0, 'Đang xử lý'),
-(1, 'Đã duyệt'),
-(2, 'Đã xóa');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `users`
 --
 
@@ -306,7 +284,6 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `address`, `phone`, `gen
 (25, 'Hoang Nguyen Xuan', '1@gmail.com', '1', '', '', '', '', 2),
 (27, 'Nguyễn Xuân Hoàng', 'admin@gmail.com', '1', '', '', '', '', 1);
 
-
 --
 -- Indexes for dumped tables
 --
@@ -330,7 +307,6 @@ ALTER TABLE `orders`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_user` (`id_user`);
 
-
 --
 -- Indexes for table `order_product`
 --
@@ -350,12 +326,6 @@ ALTER TABLE `products`
 -- Indexes for table `role`
 --
 ALTER TABLE `role`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `status`
---
-ALTER TABLE `status`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -414,11 +384,14 @@ ALTER TABLE `users`
 -- Constraints for table `orders`
 --
 ALTER TABLE `orders`
+  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`);
 
+--
+-- Constraints for table `order_product`
+--
 ALTER TABLE `order_product`
   ADD CONSTRAINT `order_product_ibfk_1` FOREIGN KEY (`id_order`) REFERENCES `orders` (`id`),
   ADD CONSTRAINT `order_product_ibfk_2` FOREIGN KEY (`id_product`) REFERENCES `products` (`id`);
-
 
 --
 -- Constraints for table `products`
