@@ -21,5 +21,5 @@
 $rs2 = mysqli_query($connect, $sql);
 if ($rs2) {
     $_SESSION['success'] = "Sửa thành công";
-    header("location:product");
+    header("location:index.php");
 }
