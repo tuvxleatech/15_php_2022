@@ -11,7 +11,7 @@ if ($actual_link === "/15_php_2022/admin/" || $actual_link === "/15_php_2022/adm
 <!-- LOGO -->
 <a href="<?php echo $url_logo ?>" class="logo text-center logo-light">
     <span class="logo-lg">
-        <img src="<?php echo $src_assets ?>assets/images/logo.png" alt="" height="16">
+        <img src="<?php echo $src_assets ?>assets/images/logo-new.png" alt="" width="151" height="45">
     </span>
     <span class="logo-sm">
         <img src="assets/images/logo_sm.png" alt="" height="16">
