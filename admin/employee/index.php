@@ -93,7 +93,7 @@ $result = mysqli_query($connect, $sql);
                                                 <?php echo $each['gender'] ?>
                                             </td>
                                             <td>
-                                                <?php echo $each['image'] ?>
+
                                             </td>
                                             <td>
                                                 <a href="./edit_customer.php?id=<?php echo $each['id'] ?>" class="btn btn-outline-warning">Sửa</a>
@@ -107,7 +107,7 @@ $result = mysqli_query($connect, $sql);
 
                                 </tbody>
                             </table>
-                            <form action="../customer/delete_customer.php" method="POST" id="delete">
+                            <form action="delete_customer.php" method="POST" id="delete">
                                 <input type="hidden" name="id" id="idCustomer">
                             </form>
                         </div>

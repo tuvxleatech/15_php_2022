@@ -83,7 +83,7 @@ $result = mysqli_query($connect, $sql);
                                             <td><?php echo $each['address'] ?></td>
 
                                             <td class="table-user">
-                                                <img src="../assets/images/users/avatar-2.jpg" alt="table-user" class="mr-2 rounded-circle" />
+                                                <img src="../../public/images/<?php echo $each['image'] ?>" alt="table-user" />
                                             </td>
                                             <td class="table-action">
                                                 <a href="./edit_manufacturer.php?id=<?php echo $each['id'] ?>" class="action-icon text-warning">

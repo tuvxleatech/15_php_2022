@@ -2,8 +2,8 @@
 if (!isset($_SESSION)) {
     session_start();
 }
-?>
 
+?>
 <header>
     <div class="header-area">
         <div class="header-left-sidebar">
@@ -52,8 +52,8 @@ if (!isset($_SESSION)) {
                     </a>
                 </div>
                 <div class="header-search">
-                    <form action="#">
-                        <input placeholder="Tìm kiểm sản phẩm" type="text">
+                    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="get">
+                        <input placeholder="Tìm kiểm sản phẩm" type="text" name="name">
                         <button>
                             <i class="ti-search"></i>
                         </button>

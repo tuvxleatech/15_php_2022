@@ -8,29 +8,12 @@ if (isset($_GET["id"])) {
     $rs = mysqli_fetch_assoc($a);
 }
 
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="utf-8" />
-    <title>Tất cả nhà sản xuất</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
-    <meta content="Coderthemes" name="author" />
-    <!-- App favicon -->
-    <link rel="shortcut icon" href="../assets/images/favicon.ico">
-
-    <!-- third party css -->
-    <link href="../assets/css/vendor/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
-    <!-- third party css end -->
-
-    <!-- App css -->
-    <link href="../../assets/css/icons.min.css" rel="stylesheet" type="text/css" />
-    <link href="../../assets/css/app-creative.min.css" rel="stylesheet" type="text/css" id="light-style" />
-    <link href="../../assets/css/app-creative-dark.min.css" rel="stylesheet" type="text/css" id="dark-style" />
-
+    <?php include('../components/head.php') ?>
 </head>
 
 <body class="loading" data-layout-config='{"leftSideBarTheme":"dark","layoutBoxed":false, "leftSidebarCondensed":false, "leftSidebarScrollable":false,"darkMode":false, "showRightSidebarOnStart": true}'>
@@ -40,109 +23,12 @@ if (isset($_GET["id"])) {
         <div class="left-side-menu">
 
             <!-- LOGO -->
-            <a href="index.php" class="logo text-center logo-light">
-                <span class="logo-lg">
-                    <img src="../../assets/images/logo.png" alt="" height="16">
-                </span>
-                <span class="logo-sm">
-                    <img src="../../assets/images/logo_sm.png" alt="" height="16">
-                </span>
-            </a>
-
-            <!-- LOGO -->
-            <a href="index.php" class="logo text-center logo-dark">
-                <span class="logo-lg">
-                    <img src="../../assets/images/logo-dark.png" alt="" height="16">
-                </span>
-                <span class="logo-sm">
-                    <img src="../../assets/images/logo_sm_dark.png" alt="" height="16">
-                </span>
-            </a>
+            <?php include('../components/logo.php') ?>
 
             <div class="h-100" id="left-side-menu-container" data-simplebar>
 
                 <!--- Sidemenu -->
-                <ul class="metismenu side-nav">
-
-                    <li class="side-nav-title side-nav-item">Trang chủ</li>
-
-                    <li class="side-nav-item">
-                        <a href="javascript: void(0);" class="side-nav-link">
-                            <i class="uil-store"></i>
-                            <span> Quản lý sản phẩm </span>
-                            <span class="menu-arrow"></span>
-                        </a>
-                        <ul class="side-nav-second-level" aria-expanded="false">
-                            <li>
-                                <a href="index.php">Tất cả sản phẩm</a>
-                            </li>
-                            <li>
-                                <a href="add_product.php">Thêm sản phẩm mới</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="side-nav-item">
-                        <a href="javascript: void(0);" class="side-nav-link">
-                            <i class="uil-store"></i>
-                            <span> Quản lý nhà sản xuất </span>
-                            <span class="menu-arrow"></span>
-                        </a>
-                        <ul class="side-nav-second-level" aria-expanded="false">
-                            <li>
-                                <a href="./manufacturer">Tất cả nhà sản xuất</a>
-                            </li>
-                            <li>
-                                <a href="./manufacturer/add_manufacturer.php">Thêm nhà sản xuất mới</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="side-nav-item">
-                        <a href="javascript: void(0);" class="side-nav-link">
-                            <i class="uil-store"></i>
-                            <span> Quản lý nhân viên </span>
-                            <span class="menu-arrow"></span>
-                        </a>
-                        <ul class="side-nav-second-level" aria-expanded="false">
-                            <li>
-                                <a href="apps-ecommerce-products.html">Products</a>
-                            </li>
-                            <li>
-                                <a href="apps-ecommerce-products-details.html">Products Details</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="side-nav-item">
-                        <a href="javascript: void(0);" class="side-nav-link">
-                            <i class="uil-store"></i>
-                            <span> Quản lý khách hàng </span>
-                            <span class="menu-arrow"></span>
-                        </a>
-                        <ul class="side-nav-second-level" aria-expanded="false">
-                            <li>
-                                <a href="apps-ecommerce-products.html">Products</a>
-                            </li>
-                            <li>
-                                <a href="apps-ecommerce-products-details.html">Products Details</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="side-nav-item">
-                        <a href="javascript: void(0);" class="side-nav-link">
-                            <i class="uil-store"></i>
-                            <span> Quản lý đơn hàng </span>
-                            <span class="menu-arrow"></span>
-                        </a>
-                        <ul class="side-nav-second-level" aria-expanded="false">
-                            <li>
-                                <a href="apps-ecommerce-products.html">Products</a>
-                            </li>
-                            <li>
-                                <a href="apps-ecommerce-products-details.html">Products Details</a>
-                            </li>
-                        </ul>
-                    </li>
-
-                </ul>
+                <?php include('../components/sidemenu.php') ?>
                 <div class="clearfix"></div>
 
             </div>
@@ -172,29 +58,29 @@ if (isset($_GET["id"])) {
                         </li>
                         <li class="dropdown notification-list topbar-dropdown">
                             <a class="nav-link dropdown-toggle arrow-none" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                                <img src="../../assets/images/flags/us.jpg" alt="user-image" class="mr-0 mr-sm-1" height="12">
+                                <img src="../assets/images/flags/us.jpg" alt="user-image" class="mr-0 mr-sm-1" height="12">
                                 <span class="align-middle d-none d-sm-inline-block">English</span> <i class="mdi mdi-chevron-down d-none d-sm-inline-block align-middle"></i>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated topbar-dropdown-menu">
 
                                 <!-- item-->
                                 <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <img src="../../assets/images/flags/germany.jpg" alt="user-image" class="mr-1" height="12"> <span class="align-middle">German</span>
+                                    <img src="../assets/images/flags/germany.jpg" alt="user-image" class="mr-1" height="12"> <span class="align-middle">German</span>
                                 </a>
 
                                 <!-- item-->
                                 <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <img src="../../assets/images/flags/italy.jpg" alt="user-image" class="mr-1" height="12"> <span class="align-middle">Italian</span>
+                                    <img src="../assets/images/flags/italy.jpg" alt="user-image" class="mr-1" height="12"> <span class="align-middle">Italian</span>
                                 </a>
 
                                 <!-- item-->
                                 <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <img src="../../assets/images/flags/spain.jpg" alt="user-image" class="mr-1" height="12"> <span class="align-middle">Spanish</span>
+                                    <img src="../assets/images/flags/spain.jpg" alt="user-image" class="mr-1" height="12"> <span class="align-middle">Spanish</span>
                                 </a>
 
                                 <!-- item-->
                                 <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <img src="../../assets/images/flags/russia.jpg" alt="user-image" class="mr-1" height="12"> <span class="align-middle">Russian</span>
+                                    <img src="../assets/images/flags/russia.jpg" alt="user-image" class="mr-1" height="12"> <span class="align-middle">Russian</span>
                                 </a>
 
                             </div>
@@ -242,7 +128,7 @@ if (isset($_GET["id"])) {
                                     <!-- item-->
                                     <a href="javascript:void(0);" class="dropdown-item notify-item">
                                         <div class="notify-icon">
-                                            <img src="../../assets/images/users/avatar-2.jpg" class="img-fluid rounded-circle" alt="" />
+                                            <img src="../assets/images/users/avatar-2.jpg" class="img-fluid rounded-circle" alt="" />
                                         </div>
                                         <p class="notify-details">Cristina Pride</p>
                                         <p class="text-muted mb-0 user-msg">
@@ -263,7 +149,7 @@ if (isset($_GET["id"])) {
                                     <!-- item-->
                                     <a href="javascript:void(0);" class="dropdown-item notify-item">
                                         <div class="notify-icon">
-                                            <img src="../../assets/images/users/avatar-4.jpg" class="img-fluid rounded-circle" alt="" />
+                                            <img src="../assets/images/users/avatar-4.jpg" class="img-fluid rounded-circle" alt="" />
                                         </div>
                                         <p class="notify-details">Karen Robinson</p>
                                         <p class="text-muted mb-0 user-msg">
@@ -301,19 +187,19 @@ if (isset($_GET["id"])) {
                                     <div class="row no-gutters">
                                         <div class="col">
                                             <a class="dropdown-icon-item" href="#">
-                                                <img src="../../assets/images/brands/slack.png" alt="slack">
+                                                <img src="../assets/images/brands/slack.png" alt="slack">
                                                 <span>Slack</span>
                                             </a>
                                         </div>
                                         <div class="col">
                                             <a class="dropdown-icon-item" href="#">
-                                                <img src="../../assets/images/brands/github.png" alt="Github">
+                                                <img src="../assets/images/brands/github.png" alt="Github">
                                                 <span>GitHub</span>
                                             </a>
                                         </div>
                                         <div class="col">
                                             <a class="dropdown-icon-item" href="#">
-                                                <img src="../../assets/images/brands/dribbble.png" alt="dribbble">
+                                                <img src="../assets/images/brands/dribbble.png" alt="dribbble">
                                                 <span>Dribbble</span>
                                             </a>
                                         </div>
@@ -322,19 +208,19 @@ if (isset($_GET["id"])) {
                                     <div class="row no-gutters">
                                         <div class="col">
                                             <a class="dropdown-icon-item" href="#">
-                                                <img src="../../assets/images/brands/bitbucket.png" alt="bitbucket">
+                                                <img src="../assets/images/brands/bitbucket.png" alt="bitbucket">
                                                 <span>Bitbucket</span>
                                             </a>
                                         </div>
                                         <div class="col">
                                             <a class="dropdown-icon-item" href="#">
-                                                <img src="../../assets/images/brands/dropbox.png" alt="dropbox">
+                                                <img src="../assets/images/brands/dropbox.png" alt="dropbox">
                                                 <span>Dropbox</span>
                                             </a>
                                         </div>
                                         <div class="col">
                                             <a class="dropdown-icon-item" href="#">
-                                                <img src="../../assets/images/brands/g-suite.png" alt="G Suite">
+                                                <img src="../assets/images/brands/g-suite.png" alt="G Suite">
                                                 <span>G Suite</span>
                                             </a>
                                         </div>
@@ -354,7 +240,7 @@ if (isset($_GET["id"])) {
                         <li class="dropdown notification-list">
                             <a class="nav-link dropdown-toggle nav-user arrow-none mr-0" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                                 <span class="account-user-avatar">
-                                    <img src="../../assets/images/users/avatar-1.jpg" alt="user-image" class="rounded-circle">
+                                    <img src="../assets/images/users/avatar-1.jpg" alt="user-image" class="rounded-circle">
                                 </span>
                                 <span>
                                     <span class="account-user-name">Nguyen Xuan Hoang</span>
@@ -434,7 +320,7 @@ if (isset($_GET["id"])) {
                     <div class="row justify-content-center">
                         <div class="col-xl-10 col-lg-10 ">
 
-                            <form action="../customer/edit_process.php" method="post" >
+                            <form action="../customer/edit_process.php" method="post">
                                 <table class="table table-striped table-centered mb-0">
                                     <tr>
                                         <th>Mã Khách hàng</th>
@@ -485,7 +371,7 @@ if (isset($_GET["id"])) {
 
                 </div>
 
-               
+
                 <!-- container -->
 
             </div>
@@ -545,17 +431,7 @@ if (isset($_GET["id"])) {
     <!-- /Right-bar -->
 
     <!-- bundle -->
-    <script src="../../assets/js/vendor.min.js"></script>
-    <script src="../../assets/js/app.min.js"></script>
-
-    <!-- third party js -->
-    <script src="../../assets/js/vendor/apexcharts.min.js"></script>
-    <script src="../../assets/js/vendor/jquery-jvectormap-1.2.2.min.js"></script>
-    <script src="../../assets/js/vendor/jquery-jvectormap-world-mill-en.js"></script>
-    <!-- third party js ends -->
-
-    <!-- demo app -->
-    <script src="../../assets/js/pages/demo.dashboard.js"></script>
+    <?php include('../components/link_footer.php') ?>
     <!-- end demo js-->
 </body>
 

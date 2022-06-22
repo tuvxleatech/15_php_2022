@@ -59,7 +59,7 @@ $title = "Thêm sản phẩm mới";
                             <form action="process_add_product.php" method="post" enctype="multipart/form-data">
                                 <table class="table table-striped table-centered mb-0">
                                     <tr>
-                                        <th>Tên danh mục</th>
+                                        <th>Tên nhà sản xuất</th>
                                         <td>
                                             <input type="text" name="name">
                                         </td>
@@ -82,7 +82,7 @@ $title = "Thêm sản phẩm mới";
                                     </tr>
                                     <tr>
                                         <th>Hành Động</th>
-                                        <td><button type="submit">Thêm</button></td>
+                                        <td><button type="submit" class="btn btn-primary">Thêm</button></td>
                                     </tr>
                                 </table>
                             </form>

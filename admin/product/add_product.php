@@ -59,7 +59,7 @@ $title = "Thêm sản phẩm mới";
                             <form action="process_add_product.php" method="post" enctype="multipart/form-data">
                                 <table class="table table-striped table-centered mb-0">
                                     <tr>
-                                        <th>Mã Danh Mục</th>
+                                        <th>Danh Mục</th>
                                         <td>
                                             <select name="id_category">
                                                 <?php
@@ -68,7 +68,7 @@ $title = "Thêm sản phẩm mới";
                                                 $rs = mysqli_query($connect, $sql);
                                                 while ($r = mysqli_fetch_assoc($rs)) {
                                                 ?>
-                                                    <option value="<?= $r['id'] ?>"><?= $r['id'] ?></option>
+                                                    <option value="<?= $r['id'] ?>"><?= $r['name'] ?></option>
                                                 <?php
                                                 }
                                                 ?>
@@ -76,7 +76,7 @@ $title = "Thêm sản phẩm mới";
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th>Mã Nhà Sản Xuất</th>
+                                        <th>Nhà Sản Xuất</th>
                                         <td>
                                             <select name="id_manufacturer">
                                                 <?php
@@ -85,7 +85,7 @@ $title = "Thêm sản phẩm mới";
                                                 $rs2 = mysqli_query($connect, $sql2);
                                                 while ($r2 = mysqli_fetch_assoc($rs2)) {
                                                 ?>
-                                                    <option value="<?= $r2['id'] ?>"><?= $r2['id'] ?></option>
+                                                    <option value="<?= $r2['id'] ?>"><?= $r2['name'] ?></option>
                                                 <?php
                                                 }
                                                 ?>
@@ -98,7 +98,7 @@ $title = "Thêm sản phẩm mới";
                                     </tr>
                                     <tr>
                                         <th>Giá</th>
-                                        <td><input type="text" name="price"></td>
+                                        <td><input type="number" name="price" required min="1000" max="1000000000" step="1000"></td>
                                     </tr>
                                     <tr>
                                         <th>Giảm giá</th>
@@ -113,7 +113,7 @@ $title = "Thêm sản phẩm mới";
                                     </tr>
                                     <tr>
                                         <th>Số Lượng</th>
-                                        <td><input type="text" name="quantity"></td>
+                                        <td><input type="number" name="quantity" required min="1" max="10000" step="1"></td>
                                     </tr>
 
                                     <tr>
@@ -126,7 +126,7 @@ $title = "Thêm sản phẩm mới";
                                     </tr>
                                     <tr>
                                         <th>Hành Động</th>
-                                        <td><button type="submit">Thêm</button></td>
+                                        <td><button type="submit" class="btn btn-primary">Thêm</button></td>
                                     </tr>
                                 </table>
                             </form>

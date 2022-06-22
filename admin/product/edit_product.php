@@ -344,7 +344,7 @@
                                                 ?>
                                                     <option <?php if ($r2['id'] == $r['id_category']) {
                                                                 echo ("selected");
-                                                            } ?> value="<?= $r2['id'] ?>"><?= $r2['id'] ?></option>
+                                                            } ?> value="<?= $r2['id'] ?>"><?= $r2['name'] ?></option>
                                                 <?php
                                                 }
                                                 ?>
@@ -362,7 +362,7 @@
                                                 ?>
                                                     <option <?php if ($r3['id'] == $r['id_manufacturer']) {
                                                                 echo ("selected");
-                                                            } ?> value="<?= $r3['id'] ?>"><?= $r3['id'] ?></option>
+                                                            } ?> value="<?= $r3['id'] ?>"><?= $r3['name'] ?></option>
                                                 <?php
                                                 }
                                                 ?>
@@ -411,7 +411,7 @@
 
                                     <tr>
                                         <th>Hành động</th>
-                                        <td><button type="submit">Sửa</button></td>
+                                        <td><button type="submit" class="btn btn-warning">Sửa</button></td>
                                     </tr>
                                     <input type="hidden" name="id" value="<?= $r['id'] ?>">
                                 </table>

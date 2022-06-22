@@ -70,7 +70,6 @@ $result = mysqli_query($connect, $sql);
                                         <th>Giới tính</th>
                                         <th>Ảnh đại diện</th>
                                         <th>Sửa</th>
-                                        <th>Xóa</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -94,10 +93,7 @@ $result = mysqli_query($connect, $sql);
                                                 <?php echo $each['image'] ?>
                                             </td>
                                             <td>
-                                                <a href="./edit_customer.php?id=<?php echo $each['id'] ?>" class="btn btn-outline-warning">Repair</a>
-                                            </td>
-                                            <td>
-                                                <button onclick="remove(<?php echo $each['id'] ?>)" class="btn btn-outline-danger">Delete</button>
+                                                <a href="./edit_customer.php?id=<?php echo $each['id'] ?>" class="btn btn-outline-warning">Chỉnh sửa</a>
                                             </td>
                                         </tr>
 
@@ -111,31 +107,6 @@ $result = mysqli_query($connect, $sql);
                         </div>
                     </div>
                 </div>
-                <script>
-                    function remove(id) {
-                        document.getElementById('idCustomer').value = id;
-                        var form = document.getElementById('delete');
-
-                        swal({
-                                title: "Bạn chắc chắn?",
-                                text: "Khi đã xóa, bạn sẽ không thể lấy lại được bản ghi!",
-                                icon: "warning",
-                                buttons: true,
-                                dangerMode: true,
-                            })
-                            .then((willDelete) => {
-                                if (willDelete) {
-                                    form.submit();
-                                    swal("Bạn đã xóa một bản ghi! " + id, {
-                                        icon: "success",
-                                    });
-
-                                } else {
-                                    swal("Bản ghi an toàn!");
-                                }
-                            });
-                    }
-                </script>
                 <!-- container -->
                 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
                 <script>
