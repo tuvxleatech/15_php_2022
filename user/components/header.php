@@ -92,7 +92,7 @@ if (!isset($_SESSION)) {
                                     <li><a href="blog-details-sidebar.html">blog details 2</a></li>
                                 </ul>
                             </li>
-                            <li><a href="contact.html">contact</a></li>
+                            <li><a href="about.php">Giới thiệu</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -181,7 +181,7 @@ if (!isset($_SESSION)) {
                                         <li><a href="blog-details-sidebar.html">blog details 2</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="contact.html"> Contact </a></li>
+                                <li><a href="about.php">Giới thiệu</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -189,7 +189,7 @@ if (!isset($_SESSION)) {
             </div>
         </div>
     </div>
-    <?php if (!isset($_SESSION['user']) || !isset($_SESSION['admin'])) { ?>
+    <?php if (!isset($_SESSION['user'])) { ?>
         <div class="header-bottom-furniture wrapper-padding-2 border-top-3">
             <div class="container-fluid">
                 <div class="furniture-bottom-wrapper">

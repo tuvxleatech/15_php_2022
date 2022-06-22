@@ -70,13 +70,15 @@ include("services/connect.php");
                                                     </td>
                                                     <?php if ($item['status'] === 'Đang xử lý') {                                                     ?>
                                                         <td>
-                                                            <a class="cart-btn text-danger" href="cancel_order.php?id=<?php echo $item['id'] ?>">Hủy đơn</a>
+                                                            <!-- <a class="cart-btn text-danger" href="cancel_order.php?id=<?php echo $item['id'] ?>">Hủy đơn</a> -->
+                                                            <a class="cart-btn text-danger" href="javascript:void(0);" onclick="remove(<?php echo $item['id'] ?>)">Hủy đơn</a>
                                                         </td>
                                                     <?php } ?>
                                                 </tr>
                                             <?php endforeach ?>
                                             <tr>
-                                                <td colspan="4"><strong>Tổng tiền</strong></td>
+                                                <td colspan=" 4"><strong>Tổng tiền</strong>
+                                                </td>
                                                 <td><b id="tongTien"><?= number_format($total) ?></b></td>
                                             </tr>
                                         </tbody>
@@ -95,7 +97,9 @@ include("services/connect.php");
                                 </div>
                             </div>
                         </form>
-
+                        <form action="cancel_order.php" method="POST" id="form_delete">
+                            <input type="hidden" name="id" id="id_delete">
+                        </form>
 
                     </div>
                 </div>
@@ -105,8 +109,31 @@ include("services/connect.php");
         <!-- all js here -->
         <?php include('user/components/link_footer.php') ?>
     </body>
-    <?php
-    include('user/components/footer.php');
-    ?>
+    <?php include('user/components/footer.php'); ?>
+    <script>
+        function remove(id) {
+            console.log(id)
+            $("#id_delete").val(id);
+            const form = $('#form_delete');
+
+            swal({
+                    title: "Bạn chắc chắn?",
+                    text: "Khi đã xóa, bạn sẽ không thể lấy lại được bản ghi!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        $('#form_delete').submit();
+                        swal("Bạn đã xóa một bản ghi! " + id, {
+                            icon: "success",
+                        });
+                    } else {
+                        swal("Bản ghi an toàn!");
+                    }
+                });
+        }
+    </script>
 
 </html>

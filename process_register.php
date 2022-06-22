@@ -13,13 +13,15 @@ if (strlen($password) < 8) {
 } else {
     $mdPass = md5($password);
     $sql = "INSERT INTO `users`(`name`, `email`, `password`, `id_role`) VALUES ('$name', '$email', '$mdPass',$id_role)";
-
     $result = mysqli_query($connect, $sql);
 
-    if (mysqli_num_rows($result) == 1) {
-        header('location:index.php');
-    } else {
+    if ($result === false) {
         $_SESSION['error_register'] = 'Email đã được đăng kí, vui lòng thử lại !';
         header('location:register.php');
+    } else {
+        $sql = "SELECT * FROM `users` WHERE `email` = '$email' limit 1";
+        $result = mysqli_query($connect, $sql);
+        $_SESSION['user'] = mysqli_fetch_array($result);
+        header('location:index.php');
     }
 }

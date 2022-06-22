@@ -10,6 +10,7 @@ if (isset($_SESSION['user'])) {
     if (empty($_POST['name_receiver']) || empty($_POST['address_receiver']) || empty($_POST['phone_receiver'])) {
         $_SESSION['error_checkout'] = 'Yêu cầu nhập đủ thông tin thanh toán';
         header('location:checkout.php');
+        die();
     }
     $id_user = $_POST['id_user'];
     $name_receiver = $_POST["name_receiver"];
