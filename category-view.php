@@ -21,7 +21,7 @@ include("services/connect.php");
             $r = mysqli_fetch_assoc($rs);
             if (empty($manu_id)) {
             ?>
-                <h4><?= $r['name'] ?> / <a href="index.php">TRANG CHỦ</a></h4>
+                <h4><?= strtoupper($r['name']) ?> / <a href="index.php" style="color: aqua">TRANG CHỦ</a></h4>
                 <div class="tab-content">
                     <div class="tab-pane active show fade" id="home1" role="tabpanel">
                         <div class="custom-row">
@@ -38,16 +38,23 @@ include("services/connect.php");
                                             </a>
                                             <span><?= -$r3['discount'] ?>%</span>
                                             <div class="product-action">
-                                                <a class="animate-left" title="Add To Cart" href="#">
-                                                    <i class="pe-7s-cart"></i>
-                                                </a>
-                                                <a class="animate-right" title="Quick View" data-toggle="modal" data-target="#exampleModal" href="#">
+                                                <?php if (isset($_SESSION['user'])) { ?>
+                                                    <a class="btn-add-to-cart animate-left" title="Add To Cart" data-id="<?php echo $r3['id'] ?>">
+                                                        <i class="pe-7s-cart"></i>
+                                                    </a>
+                                                    </a>
+                                                <?php } else { ?>
+                                                    <a class="animate-left" title="Đăng nhập" href="login.php">
+                                                        <i class=" pe-7s-next"></i>
+                                                    </a>
+                                                <?php } ?>
+                                                <a class="btn-view-detail animate-right" title="Quick View" data-id="<?php echo $r3['id'] ?>" data-toggle="modal" data-target="#exampleModal" href="#">
                                                     <i class="pe-7s-look"></i>
                                                 </a>
                                             </div>
                                         </div>
                                         <div class="product-content">
-                                            <a href="product-details.html" style="display:block;">
+                                            <a href="product-detail.php?id=<?php echo $r3['id'] ?>" style="display:block;">
                                                 <h4><?= $r3['name'] ?></h4>
                                                 <div style=" text-decoration: line-through;"><?= number_format($r3['price']) ?><span style="text-decoration: underline;"><sup>đ</sup></span></div>
                                                 <div style="color:red;font-weight: bold;font-size: 18px;"><?= number_format($r3['price'] * (1 - $r3['discount'] / 100)) ?><span style="text-decoration: underline;"><sup>đ</sup></span></div>
@@ -67,7 +74,7 @@ include("services/connect.php");
                 $rs2  = mysqli_query($connect, $sql2);
                 $r2 = mysqli_fetch_assoc($rs2);
             ?>
-                <h4><?= $r['name'] ?> : <?= $r2['name'] ?> / <a href="index.php">TRANG CHỦ</a></h4>
+                <h4><?= (strtoupper($r['name'])) ?> : <?= strtoupper($r2['name']) ?> / <a href="index.php" style="color: aqua">TRANG CHỦ</a></h4>
                 <div class="tab-content">
                     <div class="tab-pane active show fade" id="home1" role="tabpanel">
                         <div class="custom-row">
@@ -80,20 +87,27 @@ include("services/connect.php");
                                     <div class="product-wrapper" style="text-align: center;">
                                         <div class="product-img">
                                             <a href="#" style="display:block;">
-                                                <img style="width:90%; height:90%;" src="<?= $r3['image'] ?>" alt="">
+                                                <img style="width:90%; height:90%;" src="public/images/<?= $r3['image'] ?>" alt="">
                                             </a>
                                             <span><?= -$r3['discount'] ?>%</span>
                                             <div class="product-action">
-                                                <a class="animate-left" title="Add To Cart" href="#">
-                                                    <i class="pe-7s-cart"></i>
-                                                </a>
-                                                <a class="animate-right" title="Quick View" data-toggle="modal" data-target="#exampleModal" href="#">
+                                                <?php if (isset($_SESSION['user'])) { ?>
+                                                    <a class="btn-add-to-cart animate-left" title="Add To Cart" data-id="<?php echo $r3['id'] ?>">
+                                                        <i class="pe-7s-cart"></i>
+                                                    </a>
+                                                    </a>
+                                                <?php } else { ?>
+                                                    <a class="animate-left" title="Đăng nhập" href="login.php">
+                                                        <i class=" pe-7s-next"></i>
+                                                    </a>
+                                                <?php } ?>
+                                                <a class="btn-view-detail animate-right" title="Quick View" data-id="<?php echo $r3['id'] ?>" data-toggle="modal" data-target="#exampleModal" href="#">
                                                     <i class="pe-7s-look"></i>
                                                 </a>
                                             </div>
                                         </div>
                                         <div class="product-content">
-                                            <a href="product-details.html" style="display:block;">
+                                            <a href="product-detail.php?id=<?php echo $r3['id'] ?>" style="display:block;">
                                                 <h4><?= $r3['name'] ?></h4>
                                                 <div style=" text-decoration: line-through;"><?= number_format($r3['price']) ?><span style="text-decoration: underline;"><sup>đ</sup></span></div>
                                                 <div style="color:red;font-weight: bold;font-size: 18px;"><?= number_format($r3['price'] * (1 - $r3['discount'] / 100)) ?><span style="text-decoration: underline;"><sup>đ</sup></span></div>
@@ -113,97 +127,70 @@ include("services/connect.php");
     <!-- insta feed end -->
     <?php include('user/components/footer.php') ?>
     <!-- modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span class="pe-7s-close" aria-hidden="true"></span>
-        </button>
-        <div class="modal-dialog modal-quickview-width" role="document">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <div class="qwick-view-left">
-                        <div class="quick-view-learg-img">
-                            <div class="quick-view-tab-content tab-content">
-                                <div class="tab-pane active show fade" id="modal1" role="tabpanel">
-                                    <img src="user/assets/img/quick-view/l1.jpg" alt="">
-                                </div>
-                                <div class="tab-pane fade" id="modal2" role="tabpanel">
-                                    <img src="user/assets/img/quick-view/l2.jpg" alt="">
-                                </div>
-                                <div class="tab-pane fade" id="modal3" role="tabpanel">
-                                    <img src="user/assets/img/quick-view/l3.jpg" alt="">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="quick-view-list nav" role="tablist">
-                            <a class="active" href="#modal1" data-toggle="tab" role="tab" aria-selected="true" aria-controls="home1">
-                                <img src="user/assets/img/quick-view/s1.jpg" alt="">
-                            </a>
-                            <a href="#modal2" data-toggle="tab" role="tab" aria-selected="false" aria-controls="home2">
-                                <img src="user/assets/img/quick-view/s2.jpg" alt="">
-                            </a>
-                            <a href="#modal3" data-toggle="tab" role="tab" aria-selected="false" aria-controls="home3">
-                                <img src="user/assets/img/quick-view/s3.jpg" alt="">
-                            </a>
-                        </div>
-                    </div>
-                    <div class="qwick-view-right">
-                        <div class="qwick-view-content">
-                            <h3>Handcrafted Supper Mug</h3>
-                            <div class="price">
-                                <span class="new">$90.00</span>
-                                <span class="old">$120.00 </span>
-                            </div>
-                            <div class="rating-number">
-                                <div class="quick-view-rating">
-                                    <i class="pe-7s-star"></i>
-                                    <i class="pe-7s-star"></i>
-                                    <i class="pe-7s-star"></i>
-                                    <i class="pe-7s-star"></i>
-                                    <i class="pe-7s-star"></i>
-                                </div>
-                                <div class="quick-view-number">
-                                    <span>2 Ratting (S)</span>
-                                </div>
-                            </div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adip elit, sed do tempor incididun ut labore et dolore magna aliqua. Ut enim ad mi , quis nostrud veniam exercitation .</p>
-                            <div class="quick-view-select">
-                                <div class="select-option-part">
-                                    <label>Size*</label>
-                                    <select class="select">
-                                        <option value="">- Please Select -</option>
-                                        <option value="">900</option>
-                                        <option value="">700</option>
-                                    </select>
-                                </div>
-                                <div class="select-option-part">
-                                    <label>Color*</label>
-                                    <select class="select">
-                                        <option value="">- Please Select -</option>
-                                        <option value="">orange</option>
-                                        <option value="">pink</option>
-                                        <option value="">yellow</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="quickview-plus-minus">
-                                <div class="cart-plus-minus">
-                                    <input type="text" value="02" name="qtybutton" class="cart-plus-minus-box">
-                                </div>
-                                <div class="quickview-btn-cart">
-                                    <a class="btn-hover-black" href="#">add to cart</a>
-                                </div>
-                                <div class="quickview-btn-wishlist">
-                                    <a class="btn-hover" href="#"><i class="pe-7s-like"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <?php include('user/components/modal_product.php') ?>
     <!-- all js here -->
     <?php include('user/components/link_footer.php') ?>
+    <script>
+        function convertNumberToCurrency(number) {
+            const result = number.toLocaleString('it-IT', {
+                style: 'currency',
+                currency: 'VND'
+            })
+            return result;
+
+        }
+        $(document).ready(function() {
+            // thêm sản phẩm vào giỏ hàng
+            $(".btn-add-to-cart").click(function() {
+                let id = $(this).data('id');
+                $.ajax({
+                        url: 'add_to_cart.php',
+                        type: 'GET',
+                        data: {
+                            id
+                        },
+                    })
+                    .done(function(response) {
+                        if (response === 'add_to_cart_failed') {
+                            $.notify('Số lượng trong giỏ hàng đã đạt tối đa', 'error');
+                        } else if (response === 'product_out_of_stock') {
+                            $.notify('Số lượng sản phẩm đã hết !', 'error');
+                        } else {
+                            $.notify(response + " vào giỏ hàng", "success");
+                        }
+                    })
+            })
+
+            // show modal chi tiết sản phẩm
+            $(".btn-view-detail").click(function() {
+
+                let id = $(this).data('id');
+                $.ajax({
+                        url: 'view_detail_modal.php',
+                        type: 'GET',
+                        data: {
+                            id
+                        },
+                    })
+                    .done(function(response) {
+                        const product = JSON.parse(response)
+                        console.log(product['name'])
+                        $(".title-modal").text(product['name']);
+                        $(".modal-quantity").text(`Số lượng: ${product['quantity']}`);
+                        $(".title-price-old").text(convertNumberToCurrency(product['price']));
+                        $(".title-price-new").text(convertNumberToCurrency(product['price'] - (product['price'] * product['discount'] / 100)));
+                        $(".title-desc").text(product['description']);
+                        $(".modal-image").attr("src", `public/images/${product['image']}`);
+                        $(".modal-link").attr("href", `product-detail.php?id=${product['id']}`)
+                    })
+            })
+        })
+
+        <?php if (isset($_SESSION['login_success'])) { ?>
+            $.notify('Đăng nhập thành công !', 'success');
+        <?php unset($_SESSION['login_success']);
+        } ?>
+    </script>
 </body>
 
 </html>
