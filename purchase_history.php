@@ -62,7 +62,7 @@ include("services/connect.php");
                                                         echo 'text-warning';
                                                     } else if ($item['status'] === 'Thành công' || $item['status'] === 'Đã duyệt') {
                                                         echo 'text-success';
-                                                    } else if ($item['status'] === 'Đã hủy') {
+                                                    } else if ($item['status'] === 'Đã hủy' || $item['status'] === 'Đã xóa') {
                                                         echo 'text-danger';
                                                     } ?>"><?= $item['status'] ?></td>
                                                     <td>

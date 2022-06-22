@@ -17,7 +17,11 @@ require('services/check_user_login.php');
             <div class="row">
                 <div class="col-lg-6">
                     <div class="story-img">
-                        <img style="width: 200px" class="avatar" src="https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png" alt="" />
+                        <img style="width: 200px" class="avatar" src="<?php if (empty($_SESSION['user']['image'])) {
+                                                                            echo 'https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png';
+                                                                        } else {
+                                                                            echo $_SESSION['user']['image'];
+                                                                        } ?>" alt="" />
                     </div>
                 </div>
                 <div class="col-lg-6">

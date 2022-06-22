@@ -73,14 +73,14 @@ if (isset($_GET['page'])) {
                                                 <a class="btn-add-to-cart animate-left" title="Add To Cart" data-id="<?php echo $r['id'] ?>">
                                                     <i class="pe-7s-cart"></i>
                                                 </a>
-                                                <a class="btn-view-detail animate-right" title="Quick View" data-id="<?php echo $r['id'] ?>" data-toggle="modal" data-target="#exampleModal" href="#">
-                                                    <i class="pe-7s-look"></i>
-                                                </a>
                                             <?php } else { ?>
                                                 <a class="animate-left" title="Đăng nhập" href="login.php">
                                                     <i class=" pe-7s-next"></i>
                                                 </a>
                                             <?php } ?>
+                                            <a class="btn-view-detail animate-right" title="Quick View" data-id="<?php echo $r['id'] ?>" data-toggle="modal" data-target="#exampleModal" href="#">
+                                                <i class="pe-7s-look"></i>
+                                            </a>
                                         </div>
                                     </div>
                                     <div class="product-content">
@@ -163,14 +163,14 @@ if (isset($_GET['page'])) {
                                                         <a class="btn-add-to-cart animate-left" title="Add To Cart" data-id="<?php echo $r2['id'] ?>">
                                                             <i class="pe-7s-cart"></i>
                                                         </a>
-                                                        <a class="btn-view-detail animate-right" title="Quick View" data-id="<?php echo $r2['id'] ?>" data-toggle="modal" data-target="#exampleModal" href="#">
-                                                            <i class="pe-7s-look"></i>
-                                                        </a>
                                                     <?php } else { ?>
                                                         <a class="animate-left" title="Đăng nhập" href="login.php">
                                                             <i class=" pe-7s-next"></i>
                                                         </a>
                                                     <?php } ?>
+                                                    <a class="btn-view-detail animate-right" title="Quick View" data-id="<?php echo $r2['id'] ?>" data-toggle="modal" data-target="#exampleModal" href="#">
+                                                        <i class="pe-7s-look"></i>
+                                                    </a>
                                                 </div>
                                             </div>
                                             <div class="product-content">
@@ -207,17 +207,17 @@ if (isset($_GET['page'])) {
                                                 <span><?= -$r2['discount'] ?>%</span>
                                                 <div class="product-action">
                                                     <?php if (isset($_SESSION['user'])) { ?>
-                                                        <a class="btn-add-to-cart animate-left" title="Add To Cart" data-id="<?php echo $r['id'] ?>">
+                                                        <a class="btn-add-to-cart animate-left" title="Add To Cart" data-id="<?php echo $r2['id'] ?>">
                                                             <i class="pe-7s-cart"></i>
-                                                        </a>
-                                                        <a class="btn-view-detail animate-right" title="Quick View" data-id="<?php echo $r['id'] ?>" data-toggle="modal" data-target="#exampleModal" href="#">
-                                                            <i class="pe-7s-look"></i>
                                                         </a>
                                                     <?php } else { ?>
                                                         <a class="animate-left" title="Đăng nhập" href="login.php">
                                                             <i class=" pe-7s-next"></i>
                                                         </a>
                                                     <?php } ?>
+                                                    <a class="btn-view-detail animate-right" title="Quick View" data-id="<?php echo $r2['id'] ?>" data-toggle="modal" data-target="#exampleModal" href="#">
+                                                        <i class="pe-7s-look"></i>
+                                                    </a>
                                                 </div>
                                             </div>
                                             <div class="product-content">
@@ -257,17 +257,17 @@ if (isset($_GET['page'])) {
                                                 <span><?= -$r2['discount'] ?>%</span>
                                                 <div class="product-action">
                                                     <?php if (isset($_SESSION['user'])) { ?>
-                                                        <a class="btn-add-to-cart animate-left" title="Add To Cart" data-id="<?php echo $r['id'] ?>">
+                                                        <a class="btn-add-to-cart animate-left" title="Add To Cart" data-id="<?php echo $r2['id'] ?>">
                                                             <i class="pe-7s-cart"></i>
-                                                        </a>
-                                                        <a class="btn-view-detail animate-right" title="Quick View" data-id="<?php echo $r['id'] ?>" data-toggle="modal" data-target="#exampleModal" href="#">
-                                                            <i class="pe-7s-look"></i>
                                                         </a>
                                                     <?php } else { ?>
                                                         <a class="animate-left" title="Đăng nhập" href="login.php">
                                                             <i class=" pe-7s-next"></i>
                                                         </a>
                                                     <?php } ?>
+                                                    <a class="btn-view-detail animate-right" title="Quick View" data-id="<?php echo $r2['id'] ?>" data-toggle="modal" data-target="#exampleModal" href="#">
+                                                        <i class="pe-7s-look"></i>
+                                                    </a>
                                                 </div>
                                             </div>
                                             <div class="product-content">
@@ -307,17 +307,17 @@ if (isset($_GET['page'])) {
                                                 <span><?= -$r2['discount'] ?>%</span>
                                                 <div class="product-action">
                                                     <?php if (isset($_SESSION['user'])) { ?>
-                                                        <a class="btn-add-to-cart animate-left" title="Add To Cart" data-id="<?php echo $r['id'] ?>">
+                                                        <a class="btn-add-to-cart animate-left" title="Add To Cart" data-id="<?php echo $r2['id'] ?>">
                                                             <i class="pe-7s-cart"></i>
-                                                        </a>
-                                                        <a class="btn-view-detail animate-right" title="Quick View" data-id="<?php echo $r['id'] ?>" data-toggle="modal" data-target="#exampleModal" href="#">
-                                                            <i class="pe-7s-look"></i>
                                                         </a>
                                                     <?php } else { ?>
                                                         <a class="animate-left" title="Đăng nhập" href="login.php">
                                                             <i class=" pe-7s-next"></i>
                                                         </a>
                                                     <?php } ?>
+                                                    <a class="btn-view-detail animate-right" title="Quick View" data-id="<?php echo $r2['id'] ?>" data-toggle="modal" data-target="#exampleModal" href="#">
+                                                        <i class="pe-7s-look"></i>
+                                                    </a>
                                                 </div>
                                             </div>
                                             <div class="product-content">
@@ -357,17 +357,18 @@ if (isset($_GET['page'])) {
                                                 <span><?= -$r2['discount'] ?>%</span>
                                                 <div class="product-action">
                                                     <?php if (isset($_SESSION['user'])) { ?>
-                                                        <a class="btn-add-to-cart animate-left" title="Add To Cart" data-id="<?php echo $r['id'] ?>">
+                                                        <a class="btn-add-to-cart animate-left" title="Add To Cart" data-id="<?php echo $r2['id'] ?>">
                                                             <i class="pe-7s-cart"></i>
                                                         </a>
-                                                        <a class="btn-view-detail animate-right" title="Quick View" data-id="<?php echo $r['id'] ?>" data-toggle="modal" data-target="#exampleModal" href="#">
-                                                            <i class="pe-7s-look"></i>
                                                         </a>
                                                     <?php } else { ?>
                                                         <a class="animate-left" title="Đăng nhập" href="login.php">
                                                             <i class=" pe-7s-next"></i>
                                                         </a>
                                                     <?php } ?>
+                                                    <a class="btn-view-detail animate-right" title="Quick View" data-id="<?php echo $r2['id'] ?>" data-toggle="modal" data-target="#exampleModal" href="#">
+                                                        <i class="pe-7s-look"></i>
+                                                    </a>
                                                 </div>
                                             </div>
                                             <div class="product-content">

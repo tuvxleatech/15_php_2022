@@ -61,8 +61,8 @@ require("../../services/connect.php");
                             <thead>
                                 <tr>
                                     <th>STT</th>
-                                    <th>Mã Danh Mục</th>
-                                    <th>Mã Nhà Sản Xuất</th>
+                                    <th>Nhà Sản Xuất</th>
+                                    <th> Danh Mục</th>
                                     <th>Tên Sản Phẩm</th>
                                     <th>Hình Ảnh</th>
                                     <th>Giá</th>
@@ -74,7 +74,9 @@ require("../../services/connect.php");
                             </thead>
                             <tbody>
                                 <?php
-                                $sql = "SELECT * FROM products";
+                                $sql = "SELECT *,products.name as product_name,products.image as product_image, manufacturers.name as manufacturer_name ,categories.name as category_name FROM products 
+                                INNER JOIN `manufacturers` ON products.id_manufacturer = manufacturers.id
+                                INNER JOIN `categories` ON products.id_category = categories.id";
                                 $rs = mysqli_query($connect, $sql);
                                 $count = 0;
                                 while ($r = mysqli_fetch_assoc($rs)) {
@@ -82,10 +84,10 @@ require("../../services/connect.php");
                                 ?>
                                     <tr>
                                         <td><?= $count ?></td>
-                                        <td><?= $r['id_category'] ?></td>
-                                        <td><?= $r['id_manufacturer'] ?></td>
-                                        <td><?= $r['name'] ?></td>
-                                        <td><img src="<?= $r['image'] ?>" alt="" style="width: 100px"></td>
+                                        <td><?= $r['manufacturer_name'] ?></td>
+                                        <td><?= $r['category_name'] ?></td>
+                                        <td style="max-width:200px"><?= $r['product_name'] ?></td>
+                                        <td><img src="../../public/images/<?= $r['product_image'] ?>" alt="" style="width: 100px"></td>
                                         <td><?= number_format($r['price']) ?></td>
                                         <td><?= $r['discount'] ?>%</td>
                                         <td><?= $r['quantity'] ?></td>

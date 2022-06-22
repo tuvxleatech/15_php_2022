@@ -32,10 +32,10 @@ if ($actual_link === "/15_php_2022/admin/" || $actual_link === "/15_php_2022/adm
         $url_customer = "customer/index.php";
         $url_add_customer = "customer/add_customer.php";
     }
-    if(str_contains($actual_link, 'order')){
+    if (str_contains($actual_link, 'order')) {
         $url_order = "../order/index.php";
-    }else{
-        $url_order = "/order/index.php";
+    } else {
+        $url_order = "order/index.php";
     }
 
     $src_assets = "";
@@ -73,7 +73,7 @@ if ($actual_link === "/15_php_2022/admin/" || $actual_link === "/15_php_2022/adm
         $url_add_customer = "../customer/add_customer.php";
     }
     if (str_contains($actual_link, "order")) {
-        $url_order = "15_php_2022/index.php";
+        $url_order = "index.php";
     } else {
         $url_order = "../order/index.php";
     }

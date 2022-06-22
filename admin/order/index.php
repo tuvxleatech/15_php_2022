@@ -2,17 +2,15 @@
 session_start();
 require("../../services/connect.php");
 $sql = "SELECT orders.id, orders.name_receiver, orders.phone_receiver,orders.address_receiver,
-orders.total_price, status.name, orders.created_at FROM  orders INNER JOIN status ON orders.id_status = status.id 
-EXCEPT (SELECT  orders.id, orders.name_receiver, orders.phone_receiver,orders.address_receiver,
-orders.total_price, status.name, orders.created_at from orders INNER JOIN status ON orders.id_status = status.id where id_status = '2');";
+orders.total_price,orders.status, orders.created_at FROM  orders ";
 $result = mysqli_query($connect, $sql);
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <?php include('../components/head.php') ?>
-
 </head>
 
 <body class="loading" data-layout-config='{"leftSideBarTheme":"dark","layoutBoxed":false, "leftSidebarCondensed":false, "leftSidebarScrollable":false,"darkMode":false, "showRightSidebarOnStart": true}'>
@@ -60,58 +58,72 @@ $result = mysqli_query($connect, $sql);
 
                     <!-- end page title -->
                     <div class="row justify-content-center">
-                        <div class="col-xl-10 col-lg-10 ">
-                            <table class="table table-striped table-centered mb-0">
-                                <thead>
-                                    <tr>
-                                        <th>STT</th>
-                                        <th>Tên người nhận </th>
-                                        <th>Số điện thoại người nhận</th>
-                                        <th>Địa chỉ người nhận</th>
-                                        <th>Tổng giá</th>
-                                        <th>Trạng thái</th>
-                                        <th>Ngày tạo đơn</th>
-                                        <th>Duyệt đơn</th>
-                                        <th>Xóa</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    $count = 0;
-                                    foreach ($result as $item) {
-                                        $id = $item["id"];
-                                        $count++; ?>
+                        <?php if (mysqli_num_rows($result) > 0) { ?>
+                            <div class="col-xl-10 col-lg-10 ">
+                                <table class="table table-striped table-centered mb-0">
+                                    <thead>
                                         <tr>
-                                            <td><?= $count ?></td>
-                                            <td><?= $item['name_receiver'] ?></td>
-                                            <td><?= $item['phone_receiver'] ?></td>
-                                            <td><?= $item['address_receiver'] ?></td>
-                                            <td><?= $item['total_price'] ?></td>
-                                            <td><?= $item['name'] ?></td>
-                                            <td><?= $item['created_at'] ?></td>
-                                            <td>
-                                                <?php if ($item['name'] === "Đang xử lý") { ?>
-                                                    <a href="../../admin/order/accept_process.php?id=<?= $item["id"] ?>" class="btn btn-outline-success">Duyệt</a>
-                                                <?php
-                                                } else if ($item['name'] === "Đã duyệt") { ?>
-                                                    <a href="../../admin/order/cancel_order.php?id=<?= $item["id"] ?>" class="btn btn-outline-success">Hủy</a>
-                                                <?php } ?>
-                                            </td>
-                                            <td>
-                                                <button class="btn btn-outline-danger" onclick="remove(<?php echo $item['id'] ?>)">Xóa</button>
-                                            </td>
-
+                                            <th>STT</th>
+                                            <th>Tên người nhận </th>
+                                            <th>Số điện thoại người nhận</th>
+                                            <th>Địa chỉ người nhận</th>
+                                            <th>Tổng giá</th>
+                                            <th>Trạng thái</th>
+                                            <th>Ngày tạo đơn</th>
+                                            <th>Duyệt đơn</th>
+                                            <th>Xóa</th>
                                         </tr>
-                                    <?php
-                                    }
-                                    ?>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        $count = 0;
+                                        foreach ($result as $item) {
+                                            $id = $item["id"];
+                                            $count++;
+                                        ?>
+                                            <?php if ($item['status'] !== 'Đã xóa') { ?>
+                                                <tr>
+                                                    <td><?= $count ?></td>
+                                                    <td><?= $item['name_receiver'] ?></td>
+                                                    <td><?= $item['phone_receiver'] ?></td>
+                                                    <td><?= $item['address_receiver'] ?></td>
+                                                    <td><?= number_format($item['total_price']) ?></td>
+                                                    <td>
+                                                        <?php if ($item['status'] === 'Đang xử lý') { ?>
+                                                            <span class="text-warning"> <?= $item['status'] ?></span>
+                                                        <?php } else if ($item['status'] === 'Đã hủy') { ?>
+                                                            <span class="text-danger"><?= $item['status'] ?></span>
+                                                        <?php } else if ($item['status'] === 'Đã duyệt') { ?>
+                                                            <span class="text-success"><?= $item['status'] ?></span>
+                                                        <?php } ?>
+                                                    </td>
+                                                    <td><?= $item['created_at'] ?></td>
+                                                    <td>
+                                                        <?php if ($item['status'] === "Đang xử lý") { ?>
+                                                            <a href="../../admin/order/accept_process.php?id=<?= $item["id"] ?>" class="btn btn-outline-success">Duyệt</a>
+                                                        <?php
+                                                        } else if ($item['status'] === "Đã duyệt") { ?>
+                                                            <a href="../../admin/order/cancel_order.php?id=<?= $item["id"] ?>" class="btn btn-outline-success">Hủy</a>
+                                                        <?php } ?>
+                                                    </td>
+                                                    <td>
+                                                        <button class="btn btn-outline-danger" onclick="remove(<?php echo $item['id'] ?>)">Xóa</button>
+                                                    </td>
 
-                                </tbody>
-                            </table>
-                            <form action="../order/delete_order.php" method="POST" id="delete">
-                                <input type="hidden" name="id" id="id">
-                            </form>
-                        </div>
+                                                </tr>
+                                            <?php } ?>
+                                        <?php } ?>
+
+                                    </tbody>
+                                </table>
+                                <form action="../order/delete_order.php" method="POST" id="delete">
+                                    <input type="hidden" name="id" id="id">
+                                </form>
+                            </div>
+                        <?php } else { ?>
+                            <h4>Thông tin trống</h4>
+                        <?php } ?>
+
                     </div>
                 </div>
                 <script>

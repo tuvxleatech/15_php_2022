@@ -350,7 +350,13 @@ $related_products = mysqli_query($connect, $sql);
             },
           })
           .done(function(response) {
-            $.notify(response + " vào giỏ hàng", "success");
+            if (response === 'add_to_cart_failed') {
+              $.notify('Số lượng trong giỏ hàng đã đạt tối đa', 'error');
+            } else if (response === 'product_out_of_stock') {
+              $.notify('Số lượng sản phẩm đã hết !', 'error');
+            } else {
+              $.notify(response + " vào giỏ hàng", "success");
+            }
           })
       })
 
