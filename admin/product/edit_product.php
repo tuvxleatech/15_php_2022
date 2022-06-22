@@ -371,13 +371,13 @@
                                     </tr>
                                     <tr>
                                         <th>Tên Sản Phẩm</th>
-                                        <td><input type="text" name="name" value="<?= $r['name'] ?>"></td>
+                                        <td><input required type="text" name="name" value="<?= $r['name'] ?>"></td>
                                     </tr>
                                     <tr>
                                         <th>Hình Ảnh</th>
                                         <td>
-                                            <img src="<?= $r['image'] ?>" alt="ảnh minh họa" style="width: 100px">
-                                            <input type="file" name="img">
+                                            <img src="../../public/images/<?=$r['image'] ?>" alt="ảnh minh họa" style="width: 100px">
+                                            <input required type="file" name="img">
                                         </td>
                                     </tr>
                                     <tr>
@@ -406,7 +406,7 @@
                                     </tr>
                                     <tr>
                                         <th>Mô Tả</th>
-                                        <td><textarea name="description" rows="5" cols="60"><?= $r['description'] ?></textarea></td>
+                                        <td><textarea required name="description" rows="5" cols="60"><?= $r['description'] ?></textarea></td>
                                     </tr>
 
                                     <tr>

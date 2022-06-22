@@ -74,9 +74,7 @@ require("../../services/connect.php");
                             </thead>
                             <tbody>
                                 <?php
-                                $sql = "SELECT *,products.name as product_name,products.image as product_image, manufacturers.name as manufacturer_name ,categories.name as category_name FROM products 
-                                INNER JOIN `manufacturers` ON products.id_manufacturer = manufacturers.id
-                                INNER JOIN `categories` ON products.id_category = categories.id";
+                                $sql = "SELECT * FROM products";         
                                 $rs = mysqli_query($connect, $sql);
                                 $count = 0;
                                 while ($r = mysqli_fetch_assoc($rs)) {
@@ -84,15 +82,31 @@ require("../../services/connect.php");
                                 ?>
                                     <tr>
                                         <td><?= $count ?></td>
-                                        <td><?= $r['manufacturer_name'] ?></td>
-                                        <td><?= $r['category_name'] ?></td>
-                                        <td style="max-width:200px"><?= $r['product_name'] ?></td>
-                                        <td><img src="../../public/images/<?= $r['product_image'] ?>" alt="" style="width: 100px"></td>
+                                        <td>
+                                            <?php
+                                                $resul = $r['id_manufacturer'];
+                                                $sql2 = "SELECT * FROM manufacturers WHERE id = '$resul'";         
+                                                $rs2 = mysqli_query($connect, $sql2);
+                                                $r2 = mysqli_fetch_assoc($rs2)
+                                            ?>
+                                            <?=$r2['name']?>
+                                        </td>
+                                        <td>
+                                            <?php
+                                                $resul2 = $r['id_category'];
+                                                $sql3 = "SELECT * FROM categories WHERE id = '$resul2'";         
+                                                $rs3 = mysqli_query($connect, $sql3);
+                                                $r3 = mysqli_fetch_assoc($rs3)
+                                            ?>
+                                            <?=$r3['name']?>    
+                                        </td>
+                                        <td style="max-width:200px"><?= $r['name'] ?></td>
+                                        <td><img src="../../public/images/<?= $r['image'] ?>" alt="" style="width: 100px"></td>
                                         <td><?= number_format($r['price']) ?></td>
                                         <td><?= $r['discount'] ?>%</td>
                                         <td><?= $r['quantity'] ?></td>
                                         <td>
-                                            <a href="edit_product.php?id=<?= $r['id'] ?>">
+                                            <a href="edit_product.php?id=<?=$r['id']?>">
                                                 <button class="btn btn-warning" style="margin-top:2px;">Sửa</button>
                                             </a>
                                         </td>
@@ -112,38 +126,14 @@ require("../../services/connect.php");
                         </form>
                     </div>
                     <script>
-                        function xoa(id) {
-                            document.getElementById('id').value = id;
-                            var form = document.getElementById('xoa');
-                            swal({
-                                    title: "Bạn chắc chắn?",
-                                    text: "Khi đã xóa, bạn sẽ không thể lấy lại được bản ghi!",
-                                    icon: "warning",
-                                    buttons: true,
-                                    dangerMode: true,
-                                })
-                                .then((willDelete) => {
-                                    if (willDelete) {
-                                        form.submit();
-                                        swal("Bạn đã xóa một bản ghi! " + id, {
-                                            icon: "success",
-                                        });
-
-                                    } else {
-                                        swal("Bản ghi an toàn!");
-                                    }
-                                });
+                        function xoa(id){
+                            var cf = confirm("Bạn có thực sự muốn xóa không!");
+                            if(cf){
+                                var f = document.getElementById('xoa');
+                                document.getElementById('id').value = id;
+                                f.submit();
+                            }
                         }
-
-                        <?php
-                        if ($_SESSION['success'] == "Thêm thành công") { ?>
-                            swal("Success", "Thêm sản phẩm thành công", "success");
-                        <?php
-                        } else if ($_SESSION['success'] == "Sửa thành công") {
-                        ?>
-                            swal("Success", "Sửa sản phẩm thành công", "success");
-
-                        <?php } ?>
                     </script>
                 </div>
                 <!-- container -->

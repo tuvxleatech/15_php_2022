@@ -94,7 +94,7 @@ $title = "Thêm sản phẩm mới";
                                     </tr>
                                     <tr>
                                         <th>Tên Sản Phẩm</th>
-                                        <td> <input type="text" name="product_name" style="width:62%"></td>
+                                        <td> <input required type="text" name="product_name" style="width:62%"></td>
                                     </tr>
                                     <tr>
                                         <th>Giá</th>
@@ -118,11 +118,11 @@ $title = "Thêm sản phẩm mới";
 
                                     <tr>
                                         <th>Hình Ảnh</th>
-                                        <td><input type="file" name="img"></td>
+                                        <td><input required type="file" name="img"></td>
                                     </tr>
                                     <tr>
                                         <th>Mô Tả</th>
-                                        <td><textarea name="description" rows="5" cols="60"></textarea></td>
+                                        <td><textarea required name="description" rows="5" cols="60"></textarea></td>
                                     </tr>
                                     <tr>
                                         <th>Hành Động</th>
