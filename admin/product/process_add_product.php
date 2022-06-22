@@ -8,7 +8,7 @@
     $mota = $_POST['description'];
     $maDM = $_POST['id_category'];
     $maNSX = $_POST['id_manufacturer'];
-    $path = "../../assets/images/products/";
+    $path = "../../public/images/";
 	$file = $path.basename($_FILES['img']['name']);
 	if(!file_exists($file)){
 		$rs = move_uploaded_file($_FILES['img']['tmp_name'], $file);
