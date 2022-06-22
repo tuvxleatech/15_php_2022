@@ -501,7 +501,6 @@ if (isset($_GET['page'])) {
 
         <?php if (isset($_SESSION['login_success'])) { ?>
             $.notify('Đăng nhập thành công !', 'success');
-
         <?php unset($_SESSION['login_success']);
         } ?>
     </script>

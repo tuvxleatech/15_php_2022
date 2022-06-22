@@ -72,20 +72,21 @@ if (!isset($_SESSION)) {
                         </ul>
                     <?php } ?>
                 </div>
-                <div class="header-cart cart-res">
-                    <a class="icon-cart" href="#">
-                        <i class="ti-shopping-cart"></i>
-                        <span class="shop-count pink">0</span>
-                    </a>
-                    <ul class="cart-dropdown">
-                        <li class="cart-btn-wrapper">
-                            <a class="cart-btn btn-hover" href="showcart.php">giỏ hàng</a>
-                            <a class="cart-btn btn-hover" href="checkout.php">thanh toán</a>
-                            <a class="cart-btn btn-hover" href="purchase_history.php">liệt kê đơn hàng</a>
+                <?php if (isset($_SESSION['user'])) { ?>
+                    <div class="header-cart cart-res">
+                        <a class="icon-cart" href="#">
+                            <i class="ti-shopping-cart"></i>
+                        </a>
+                        <ul class="cart-dropdown">
+                            <li class="cart-btn-wrapper">
+                                <a class="cart-btn btn-hover" href="showcart.php">giỏ hàng</a>
+                                <a class="cart-btn btn-hover" href="checkout.php">thanh toán</a>
+                                <a class="cart-btn btn-hover" href="purchase_history.php">liệt kê đơn hàng</a>
 
-                        </li>
-                    </ul>
-                </div>
+                            </li>
+                        </ul>
+                    </div>
+                <?php }  ?>
             </div>
             <div class="mobile-menu-area clearfix d-md-block col-md-12 col-lg-12 col-12 d-lg-none d-xl-none">
                 <div class="mobile-menu">

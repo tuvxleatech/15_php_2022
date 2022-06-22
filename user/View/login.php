@@ -35,11 +35,11 @@ session_start();
                   <input type="email" name="email" placeholder="Email" />
                   <input type="password" name="password" placeholder="Mật khẩu" />
                   <div class="button-box">
-                    <div class="login-toggle-btn">
+                    <!-- <div class="login-toggle-btn">
                       <input type="checkbox" />
                       <label>Ghi nhớ</label>
                       <a href="#">Quên mật khẩu?</a>
-                    </div>
+                    </div> -->
                     <button type="submit" class="default-btn floatright">Đăng nhập</button>
                   </div>
                 </form>
