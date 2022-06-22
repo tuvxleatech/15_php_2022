@@ -142,8 +142,8 @@ require("../../services/connect.php");
                         } else if ($_SESSION['success'] == "Sửa thành công") {
                         ?>
                             swal("Success", "Sửa sản phẩm thành công", "success");
-
-                        <?php } ?>
+                        <?php }
+                        unset($_SESSION['success']); ?>
                     </script>
                 </div>
                 <!-- container -->
@@ -201,21 +201,7 @@ require("../../services/connect.php");
         </div>
     </div>
 
-    <div class="rightbar-overlay"></div>
-    <!-- /Right-bar -->
-
-    <!-- bundle -->
-    <script src="../assets/js/vendor.min.js"></script>
-    <script src="../assets/js/app.min.js"></script>
-
-    <!-- third party js -->
-    <script src="../assets/js/vendor/apexcharts.min.js"></script>
-    <script src="../assets/js/vendor/jquery-jvectormap-1.2.2.min.js"></script>
-    <script src="../assets/js/vendor/jquery-jvectormap-world-mill-en.js"></script>
-    <!-- third party js ends -->
-
-    <!-- demo app -->
-    <script src="../assets/js/pages/demo.dashboard.js"></script>
+    <?php include('../components/link_footer.php') ?>
     <!-- end demo js-->
 </body>
 
